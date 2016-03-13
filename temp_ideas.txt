@@ -1,0 +1,18 @@
+richiedere altezza, peso, eta, ... (nei clienti registrati chiesto al momento della registrazione?)
+formule matematiche per calcolare metabolismo basale
+formule matematiche per calcolare esattamente le kcal (giornaliere, mensili, ...) richieste per ogni dieta sulla base di metabolismo basale, ore di sport, ...
+richiedere eventuali malattie (croniche, pregresse, ...), intolleranze o qualunque forma di incompatibilità con certi cibi (tenerne conto per la dieta)
+
+possibili servizi accessori:
+- registrare i cibi mangiati
+- conteggio kcal assunte
+- countdown e avviso prossimo pasto
+- consigli generali su alimentazione da seguire
+- varie tipologie di dieta (dieta a zone, dieta a punti, dieta a kcal, ...)
+
+sulla base degli alimenti della dieta, possibilità di comporre piatti (intesi come insieme di alimenti, kcal totali = somma kcal alimenti)
+
+possibile distinzione: gli utenti normali ricevono una dieta e non possono cambiare i piatti / utenti premium possono cambiare i piatti se non soddisfatti
+--> repository/factory per fornitura piatti e relative kcal, ricavare piatti da ingredienti, piatto sostitutivo, piatto con stesse kcal, ...
+
+come si classificano gli alimenti in una dieta? (carboidrati/vitamine/ecc..  oppure grano/frutta/verdura/pasta/carne/pesce/...)
