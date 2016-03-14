@@ -1,2 +1,0 @@
-L'azienda *** ha deciso di sviluppare un'applicazione per pubblicizzare i propri prodotti dietistici.
-Gli utenti che si registrano possono inserire i loro dati (sesso, età, peso, altezza ...) e calcolareil proprio peso forma e apporto nutrizionale ideale in base alla formula di ***, per gli utenti premium è possibile selezionare altre formule per il calcolo di questi parametri, in futuro ulteriori formule saranno rese disponibili.
