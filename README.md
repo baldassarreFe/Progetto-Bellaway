@@ -1,2 +1,1 @@
 ## Progetto-Bellaway
-# Fero imbarazzante
