@@ -1,5 +1,5 @@
 ﻿using BeautifulWeight.Kitchen;
-using BeautifulWeight.DietCalculator;
+using BeautifulWeight.DietCalculators;
 using System;
 using System.Collections.Generic;
 using System.Linq;

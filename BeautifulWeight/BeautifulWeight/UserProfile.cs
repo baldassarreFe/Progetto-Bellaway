@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BeautifulWeight.DietCalculators;
+using BeautifulWeight.Kitchen;
+using BeautifulWeight.Menu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,14 @@ namespace BeautifulWeight.Users
         private Goal _goal;
         private WeeklyMenu _diet;
         private PersonalDetails _details;
+
+        public UserProfile(List<Ingredient> preferences, Goal goal, WeeklyMenu diet, PersonalDetails details)
+        {
+            _preferences = preferences;
+            _goal = goal;
+            _diet = diet;
+            _details = details;
+        }
 
         public List<Ingredient> Preferences
         {

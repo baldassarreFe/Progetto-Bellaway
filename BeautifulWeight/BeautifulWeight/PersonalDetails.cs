@@ -6,15 +6,28 @@ namespace BeautifulWeight.Users
     {
         private string _name;
         private string _surname;
-        private System.DateTime _birthdate;
+        private DateTime _birthdate;
         private int _weight;
         private int _height;
         private Sex _sex;
         private int _workHours;
         private Load _workLoad;
         private int _sportHours;
-        private Load sportLoad;
+        private Load _sportLoad;
 
+        public PersonalDetails(string name, string surname, DateTime birthdate, int weight, int height, Sex sex, int workHours, Load workLoad, int sportHours, Load sportLoad)
+        {
+            _name = name;
+            _surname = surname;
+            _birthdate = birthdate;
+            _weight = weight;
+            _height = height;
+            _sex = sex;
+            _workHours = workHours;
+            _workLoad = workLoad;
+            _sportHours = sportHours;
+            _sportLoad = sportLoad;
+        }
         public string Name
         {
             get
@@ -123,12 +136,12 @@ namespace BeautifulWeight.Users
         {
             get
             {
-                return sportLoad;
+                return _sportLoad;
             }
 
             set
             {
-                sportLoad = value;
+                _sportLoad = value;
             }
         }
     }

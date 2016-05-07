@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautifulWeight.Persistence;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,13 @@ namespace BeautifulWeight.Kitchen
 {
     class Ingredient
     {
-    private readonly string _name;
+        private readonly string _name;
+        private static Dictionary<String, Ingredient> dictionary;
+
+        public Ingredient(string name)
+        {
+            this._name = name.ToLower();
+        }
 
         public string Name
         {
@@ -16,6 +23,21 @@ namespace BeautifulWeight.Kitchen
             {
                 return _name;
             }
+        }
+
+        public static explicit operator Ingredient(string name)
+        {
+            if (dictionary == null)
+            {
+                MockPersistence persistence = MockPersistence.GetInstance();
+                foreach (Ingredient i in persistence.LoadIngredients())
+                {
+                    dictionary.Add(i.Name, i);
+                }
+            }
+            if (!dictionary.ContainsKey(name.ToLower()))
+                throw new ArgumentException("Ingredient not found");
+            return dictionary[name.ToLower()];
         }
     }
 
@@ -27,6 +49,16 @@ namespace BeautifulWeight.Kitchen
         private readonly double _fats;
         private readonly double _carbohydrates;
         private readonly NonEmptyList<Ingredient> _ingredients;
+
+        public Dish(string name, double calories, double proteins, double fats, double carbohydrates, NonEmptyList<Ingredient> ingredients) 
+        {
+            _name = name;
+            _calories = calories;
+            _proteins = proteins;
+            _fats = fats;
+            _carbohydrates = carbohydrates;
+            _ingredients = ingredients;
+        }
 
         public string Name
         {

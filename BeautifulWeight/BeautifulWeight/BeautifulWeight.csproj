@@ -49,31 +49,30 @@
     <Reference Include="TelerikCommon, Version=2015.2.728.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DietCalculator.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="KcalDiet.cs" />
     <Compile Include="KitchenLoader.cs" />
+    <Compile Include="MockPersistence.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Sex.cs" />
     <Compile Include="Load.cs" />
     <Compile Include="LoginForm.cs">
-	 <Compile Include="Menu.cs" />
-    <Compile Include="Kitchen.cs" />
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Menu.cs" />
+    <Compile Include="Kitchen.cs" />
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PointDiet.cs" />
-    <Compile Include="Program.cs" />
-	<Compile Include="NonEmptyList.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NonEmptyList.cs" />
     <Compile Include="VersionLoader.cs" />
     <Compile Include="UserProfileLoader.cs" />
     <Compile Include="VersionSaver.cs" />
     <Compile Include="UserProfileSaver.cs" />
     <Compile Include="PersonalDetails.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserProfile.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
