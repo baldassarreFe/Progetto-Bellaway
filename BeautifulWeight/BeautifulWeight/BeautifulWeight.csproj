@@ -49,6 +49,7 @@
     <Reference Include="TelerikCommon, Version=2015.2.728.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Feature.cs" />
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
