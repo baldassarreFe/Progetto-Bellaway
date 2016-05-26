@@ -50,31 +50,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DietCalculator.cs" />
-    <Compile Include="Goal.cs" />
-    <Compile Include="KcalDiet.cs" />
-    <Compile Include="KitchenLoader.cs" />
-    <Compile Include="MockPersistence.cs" />
+    <Compile Include="Model\DietCalculator.cs" />
+    <Compile Include="Model\Goal.cs" />
+    <Compile Include="Model\KcalDiet.cs" />
+    <Compile Include="Persistence\KitchenLoader.cs" />
+    <Compile Include="Persistence\MockPersistence.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Sex.cs" />
-    <Compile Include="Load.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Model\Sex.cs" />
+    <Compile Include="Persistence\Load.cs" />
+    <Compile Include="View\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menu.cs" />
-    <Compile Include="Kitchen.cs" />
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Model\Menu.cs" />
+    <Compile Include="Model\Kitchen.cs" />
+    <Compile Include="View\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PointDiet.cs" />
-    <Compile Include="NonEmptyList.cs" />
-    <Compile Include="VersionLoader.cs" />
-    <Compile Include="UserProfileLoader.cs" />
-    <Compile Include="VersionSaver.cs" />
-    <Compile Include="UserProfileSaver.cs" />
-    <Compile Include="PersonalDetails.cs" />
-    <Compile Include="UserProfile.cs" />
-    <EmbeddedResource Include="LoginForm.resx">
+    <Compile Include="Model\PointDiet.cs" />
+    <Compile Include="Utils\NonEmptyList.cs" />
+    <Compile Include="Persistence\VersionLoader.cs" />
+    <Compile Include="Persistence\UserProfileLoader.cs" />
+    <Compile Include="Persistence\VersionSaver.cs" />
+    <Compile Include="Persistence\UserProfileSaver.cs" />
+    <Compile Include="Model\PersonalDetails.cs" />
+    <Compile Include="Model\UserProfile.cs" />
+    <EmbeddedResource Include="View\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -99,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Presenter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
