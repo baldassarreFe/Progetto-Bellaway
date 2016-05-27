@@ -63,10 +63,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Model\Sex.cs" />
     <Compile Include="Model\Load.cs" />
-    <Compile Include="View\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Persistence\Load.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Kitchen.cs" />
     <Compile Include="Model\PointDiet.cs" />
