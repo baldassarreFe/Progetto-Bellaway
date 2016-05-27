@@ -10,9 +10,15 @@ namespace BeautifulWeight.Kitchen
     class Ingredient
     {
         private readonly string _name;
-        private static Dictionary<String, Ingredient> dictionary;
+        private static IList<Ingredient> list;
 
-        public Ingredient(string name)
+        static Ingredient() 
+        {
+            MockPersistence persistence = MockPersistence.GetInstance();
+            list = persistence.LoadIngredients();
+        }
+
+        private Ingredient(string name)
         {
             this._name = name.ToLower();
         }
@@ -25,19 +31,14 @@ namespace BeautifulWeight.Kitchen
             }
         }
 
-        public static explicit operator Ingredient(string name)
+        public static implicit operator Ingredient(string name)
         {
-            if (dictionary == null)
-            {
-                MockPersistence persistence = MockPersistence.GetInstance();
-                foreach (Ingredient i in persistence.LoadIngredients())
-                {
-                    dictionary.Add(i.Name, i);
-                }
+            Ingredient result = list.SingleOrDefault(ing => ing.Name == name);
+            if (result == null) {
+                result = new Ingredient(name);
+                list.Add(result);
             }
-            if (!dictionary.ContainsKey(name.ToLower()))
-                throw new ArgumentException("Ingredient not found");
-            return dictionary[name.ToLower()];
+            return result;
         }
     }
 
@@ -50,7 +51,7 @@ namespace BeautifulWeight.Kitchen
         private readonly double _carbohydrates;
         private readonly NonEmptyList<Ingredient> _ingredients;
 
-        public Dish(string name, double calories, double proteins, double fats, double carbohydrates, NonEmptyList<Ingredient> ingredients) 
+        public Dish(string name, double calories, double proteins, double fats, double carbohydrates, NonEmptyList<Ingredient> ingredients)
         {
             _name = name;
             _calories = calories;

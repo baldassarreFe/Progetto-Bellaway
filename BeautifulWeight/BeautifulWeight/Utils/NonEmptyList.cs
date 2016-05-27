@@ -4,18 +4,30 @@ using System.Collections.Generic;
 
 namespace BeautifulWeight.Kitchen
 {
-    class NonEmptyList<T> : IList<T>, ICollection<T>, IEnumerable<T>
+    class NonEmptyList<T> : IList<T>
     {
+        private List<T> _list;
+
+        public NonEmptyList(T firstElement)
+        {
+            if (firstElement == null)
+            {
+                throw new ArgumentException("First element cannot be null");
+            }
+            _list = new List<T>();
+            _list.Add(firstElement);
+        }
+
         public T this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                return ((IList<T>)_list)[index];
             }
 
             set
             {
-                throw new NotImplementedException();
+                ((IList<T>)_list)[index] = value;
             }
         }
 
@@ -23,7 +35,7 @@ namespace BeautifulWeight.Kitchen
         {
             get
             {
-                throw new NotImplementedException();
+                return ((IList<T>)_list).Count;
             }
         }
 
@@ -31,58 +43,65 @@ namespace BeautifulWeight.Kitchen
         {
             get
             {
-                throw new NotImplementedException();
+                return ((IList<T>)_list).IsReadOnly;
             }
         }
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            ((IList<T>)_list).Add(item);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            ((IList<T>)_list).Clear();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return ((IList<T>)_list).Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            ((IList<T>)_list).CopyTo(array, arrayIndex);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IList<T>)_list).GetEnumerator();
         }
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            return ((IList<T>)_list).IndexOf(item);
         }
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            ((IList<T>)_list).Insert(index, item);
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            if (_list.Count == 1)
+                throw new InvalidOperationException("Cannot remove last element from this list");
+            else
+                return ((IList<T>)_list).Remove(item);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if (_list.Count == 1)
+                throw new InvalidOperationException("Cannot remove last element from this list");
+            else
+                ((IList<T>)_list).RemoveAt(index);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IList<T>)_list).GetEnumerator();
         }
     }
+
 }

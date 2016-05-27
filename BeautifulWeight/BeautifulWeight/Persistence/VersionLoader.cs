@@ -8,6 +8,6 @@ namespace BeautifulWeight.Persistence
 {
     interface VersionLoader
     {
-        Version LoadVersion();
+       Versions.Version LoadVersion();
     }
 }

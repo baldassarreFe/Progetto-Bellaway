@@ -9,7 +9,7 @@ namespace BeautifulWeight.Persistence
 {
     interface KitchenLoader
     {
-        ISet<Ingredient> LoadIngredients();
+        IList<Ingredient> LoadIngredients();
         ISet<Dish> LoadDishes();
     }
 }
