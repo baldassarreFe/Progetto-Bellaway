@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BeautifulWeight.Persistence;
+using BeautifulWeight.Versions;
+using BeautifulWeight.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +19,7 @@ namespace BeautifulWeight
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(new BeautifulUI());
         }
     }
 }

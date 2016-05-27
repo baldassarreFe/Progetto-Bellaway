@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.DietCalculators
 {
-    public abstract class DietCalculator
+    public interface DietCalculator
     {
-        public abstract string Description { get; }
-        public abstract WeeklyMenu NewMenu();
-        public abstract Serving GetEquivalent(Serving serving);
+        string Description { get; }
+        WeeklyMenu NewMenu();
+        Serving GetEquivalent(Serving serving);
     }
 
     public static class DietCalculatorLoader

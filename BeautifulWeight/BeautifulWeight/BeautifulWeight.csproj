@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
+    <Compile Include="Persistence\DietLoader.cs" />
+    <Compile Include="Presenter\VersionPresenter.cs" />
     <Compile Include="Persistence\PersistenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\DietCalculator.cs" />
@@ -64,11 +66,9 @@
     <Compile Include="View\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Persistence\Load.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Kitchen.cs" />
-    <Compile Include="View\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Model\PointDiet.cs" />
     <Compile Include="Utils\NonEmptyList.cs" />
     <Compile Include="Persistence\VersionLoader.cs" />
@@ -77,9 +77,12 @@
     <Compile Include="Persistence\UserProfileSaver.cs" />
     <Compile Include="Model\PersonalDetails.cs" />
     <Compile Include="Model\UserProfile.cs" />
-    <EmbeddedResource Include="View\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="View\BeautifulUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BeautifulUI.Designer.cs">
+      <DependentUpon>BeautifulUI.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -90,6 +93,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\BeautifulUI.resx">
+      <DependentUpon>BeautifulUI.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,9 +109,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presenter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

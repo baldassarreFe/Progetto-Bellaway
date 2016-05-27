@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BeautifulWeight.DietCalculators;
 using BeautifulWeight.Kitchen;
 using BeautifulWeight.Users;
 using BeautifulWeight.Versions;
@@ -6,19 +7,19 @@ using DateTime = System.DateTime;
 
 namespace BeautifulWeight.Persistence
 {
-    class MockPersistence : UserProfileLoader, UserProfileSaver, KitchenLoader, VersionLoader, VersionSaver
+    class MockPersistence : UserProfileLoader, UserProfileSaver, KitchenLoader, VersionLoader, VersionSaver, DietLoader
     {
         private static MockPersistence _persistence = new MockPersistence();
         private ISet<UserProfile> _profiles;
         private ISet<Dish> _dishes;
-        private IList<Ingredient> _ingredients;
+        private ISet<Ingredient> _ingredients;
         private Version _version;
 
         private MockPersistence()
         {
             _version = StandardVersion.GetInstance();
 
-            _ingredients = new List<Ingredient>();
+            _ingredients = new HashSet<Ingredient>();
             _ingredients.Add("nasello");
             _ingredients.Add("maiale");
             _ingredients.Add("pasta");
@@ -64,7 +65,6 @@ namespace BeautifulWeight.Persistence
             _ingredients.Add("rapa");
             _ingredients.Add("saggio");
             _ingredients.Add("Scalogno");
-            _ingredients.Add("SIUM SISARUM");
             _ingredients.Add("piselli");
             _ingredients.Add("soia");
             _ingredients.Add("zucca");
@@ -74,8 +74,8 @@ namespace BeautifulWeight.Persistence
             _ingredients.Add("zucche");
             _ingredients.Add("svedese");
             _ingredients.Add("Patata dolce");
-            _ingredients.Add("Mais dolce");
-            _ingredients.Add("pepe Tabasco");
+            _ingredients.Add("Mais");
+            _ingredients.Add("pepe");
             _ingredients.Add("Timo");
             _ingredients.Add("Pomodoro");
             _ingredients.Add("tuberi");
@@ -116,8 +116,6 @@ namespace BeautifulWeight.Persistence
             preferences.Add("maiale");
             preferences.Add("pane");
             _profiles.Add(new UserProfile(preferences,DietCalculators.Goal.WEIGHT_LOSS, null, details));
-
-            // TODO: manca version
         }
 
         public ISet<Dish> LoadDishes()
@@ -130,9 +128,9 @@ namespace BeautifulWeight.Persistence
             return _persistence;            
         }
 
-        public IList<Ingredient> LoadIngredients()
-        {            
-            return _ingredients;
+        public ISet<Ingredient> LoadIngredients()
+        {
+            return null;
         }
 
         public ISet<UserProfile> LoadProfiles()
@@ -153,6 +151,11 @@ namespace BeautifulWeight.Persistence
         public void SaveVersion()
         {
             // NOP
+        }
+
+        public ISet<DietCalculator> loadDiets()
+        {
+            return null;
         }
     }
 }
