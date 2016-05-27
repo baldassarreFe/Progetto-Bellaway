@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.DietCalculators
 {
-    enum Goal
+    public enum Goal
     {
         WEIGHT_LOSS, MASS_GAIN, MAINTAINANCE, DEFINITION
     }

@@ -18,7 +18,7 @@ namespace BeautifulWeight.Versions
             get
             {
                 if (_version == null)
-                    _version = MockPersistence.GetInstance().LoadVersion();
+                    _version = PersistenceManager.getPersistenceManager<VersionLoader>().LoadVersion();
                 return _version;
             }
 

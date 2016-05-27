@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Users
 {
-    class UserProfile
+    public class UserProfile
     {
         private List<Ingredient> _preferences;
         private Goal _goal;

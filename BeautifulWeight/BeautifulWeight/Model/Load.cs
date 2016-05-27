@@ -1,6 +1,6 @@
 ﻿namespace BeautifulWeight.Users
 {
-    internal enum Load
+    public enum Load
     {
         LIGHTER,
         LIGHT,

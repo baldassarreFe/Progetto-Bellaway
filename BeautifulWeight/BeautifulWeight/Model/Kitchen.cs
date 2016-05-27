@@ -14,7 +14,6 @@ namespace BeautifulWeight.Kitchen
 
         static Ingredient() 
         {
-            MockPersistence persistence = MockPersistence.GetInstance();
             set = new HashSet<Ingredient>();
             // persistence.LoadIngredients();
         }
