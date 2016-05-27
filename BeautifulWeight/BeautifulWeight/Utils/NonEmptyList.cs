@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BeautifulWeight.Kitchen
 {
-    class NonEmptyList<T> : IList<T>
+    public class NonEmptyList<T> : IList<T>
     {
         private List<T> _list;
 
