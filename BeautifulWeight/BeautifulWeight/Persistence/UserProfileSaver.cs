@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Persistence
 {
-    interface UserProfileSaver
+    interface UserProfileSaver : Persistor
     {
         void SaveProfiles();
     }

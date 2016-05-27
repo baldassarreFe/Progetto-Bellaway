@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Menu
 {
-    class Serving
+    public class Serving
     {
         private readonly int _quantity;
         private readonly Dish _dish;
+
+        public Serving(Dish dish, int quantity)
+        {
+            if (dish == null || quantity <= 0)
+                throw new ArgumentException();
+            _dish = dish;
+            _quantity = quantity;
+        }
 
         public int Quantity
         {
@@ -21,7 +29,7 @@ namespace BeautifulWeight.Menu
             }
         }
 
-        internal Dish Dish
+        public Dish Dish
         {
             get
             {
@@ -30,7 +38,7 @@ namespace BeautifulWeight.Menu
         }
     }
 
-    class Meal
+    public class Meal
     {
         private readonly string _name;
         private readonly DateTime _time;
@@ -52,7 +60,7 @@ namespace BeautifulWeight.Menu
             }
         }
 
-        NonEmptyList<Serving> Servings
+        public NonEmptyList<Serving> Servings
         {
             get
             {
@@ -61,7 +69,7 @@ namespace BeautifulWeight.Menu
         }
     }
 
-    class DailyMenu
+    public class DailyMenu
     {
         private readonly DayOfWeek _day;
         private readonly List<Meal> _meals;
@@ -74,7 +82,7 @@ namespace BeautifulWeight.Menu
             }
         }
 
-        internal List<Meal> Meals
+        public List<Meal> Meals
         {
             get
             {
@@ -83,7 +91,7 @@ namespace BeautifulWeight.Menu
         }
     }
 
-    class WeeklyMenu
+    public class WeeklyMenu
     {
         private readonly DailyMenu[] _dailyMenu;
         private readonly DietCalculator _dietCalculator;

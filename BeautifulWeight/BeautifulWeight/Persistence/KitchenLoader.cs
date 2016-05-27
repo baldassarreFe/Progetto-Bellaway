@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Persistence
 {
-    interface KitchenLoader
+    interface KitchenLoader : Persistor
     {
         IList<Ingredient> LoadIngredients();
         ISet<Dish> LoadDishes();

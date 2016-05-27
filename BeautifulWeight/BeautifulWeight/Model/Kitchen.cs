@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Kitchen
 {
-    class Ingredient
+    public class Ingredient
     {
         private readonly string _name;
         private static IList<Ingredient> list;
@@ -31,6 +31,7 @@ namespace BeautifulWeight.Kitchen
             }
         }
 
+        // TODO lo mettiamo internal perchè il gestore di persistenza che li crea è dentro questo assembly?
         public static implicit operator Ingredient(string name)
         {
             Ingredient result = list.SingleOrDefault(ing => ing.Name == name);
@@ -42,7 +43,7 @@ namespace BeautifulWeight.Kitchen
         }
     }
 
-    class Dish
+    public class Dish
     {
         private readonly string _name;
         private readonly double _calories;
@@ -51,7 +52,7 @@ namespace BeautifulWeight.Kitchen
         private readonly double _carbohydrates;
         private readonly NonEmptyList<Ingredient> _ingredients;
 
-        public Dish(string name, double calories, double proteins, double fats, double carbohydrates, NonEmptyList<Ingredient> ingredients)
+        internal Dish(string name, double calories, double proteins, double fats, double carbohydrates, NonEmptyList<Ingredient> ingredients)
         {
             _name = name;
             _calories = calories;

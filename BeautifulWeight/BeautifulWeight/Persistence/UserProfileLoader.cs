@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Persistence
 {
-    interface UserProfileLoader
+    interface UserProfileLoader : Persistor
     {
         ISet<UserProfile> LoadProfiles();
     }
