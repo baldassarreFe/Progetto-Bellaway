@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Persistence
 {
-    interface VersionSaver : Persistor
+    public interface VersionSaver : Persistor
     {
         void SaveVersion();
     }
