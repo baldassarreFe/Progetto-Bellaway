@@ -41,11 +41,18 @@ namespace BeautifulWeight.Presenter
             if (control == null)
                 throw new ArgumentNullException("control");
             _control = control;
+            _control.Click += ClickHandler;
         }
 
         protected void OnModelChanged(object sender, EventArgs e)
         {
             _control.Text = "La versione corrente è: " + _versionManager.CurrentVersion.Description;
+        }
+
+        private void ClickHandler(object sender, EventArgs e)
+        {
+            MessageBox.Show("UPGRADA ZIO");
+            // TODO per bene
         }
     }
 }

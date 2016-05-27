@@ -34,9 +34,9 @@ namespace BeautifulWeight.Kitchen
 
         public static implicit operator Ingredient(string name)
         {
-            Ingredient result = set.SingleOrDefault(ing => ing.Name == name);
+            Ingredient result = set.SingleOrDefault(ing => ing.Name == name.ToLower());
             if (result == null) {
-                result = new Ingredient(name);
+                result = new Ingredient(name.ToLower());
                 set.Add(result);
             }
             return result;

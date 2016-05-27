@@ -17,7 +17,13 @@ namespace BeautifulWeight.View
         public BeautifulUI()
         {
             InitializeComponent();
-            VersionPresenter vpres = new VersionPresenter(_versionStatusStrip);
+
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            VersionPresenter vpres = new VersionPresenter(_versionLabel);
             vpres.VersionManager = VersionManager.GetInstance();
         }
 
