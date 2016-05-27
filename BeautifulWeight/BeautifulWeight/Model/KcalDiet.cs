@@ -14,7 +14,7 @@ namespace BeautifulWeight.DietCalculators
 
         }
 
-        public override string Description
+        public string Description
         {
             get
             {
@@ -22,12 +22,12 @@ namespace BeautifulWeight.DietCalculators
             }
         }
 
-        public override Serving GetEquivalent(Serving serving)
+        public Serving GetEquivalent(Serving serving)
         {
             throw new NotImplementedException();
         }
 
-        public override WeeklyMenu NewMenu()
+        public WeeklyMenu NewMenu()
         {
             throw new NotImplementedException();
         }

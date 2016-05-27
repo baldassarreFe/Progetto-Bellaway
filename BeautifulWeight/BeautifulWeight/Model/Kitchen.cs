@@ -10,12 +10,13 @@ namespace BeautifulWeight.Kitchen
     class Ingredient
     {
         private readonly string _name;
-        private static IList<Ingredient> list;
+        private static ISet<Ingredient> set;
 
         static Ingredient() 
         {
             MockPersistence persistence = MockPersistence.GetInstance();
-            list = persistence.LoadIngredients();
+            set = new HashSet<Ingredient>();
+            // persistence.LoadIngredients();
         }
 
         private Ingredient(string name)
@@ -33,10 +34,10 @@ namespace BeautifulWeight.Kitchen
 
         public static implicit operator Ingredient(string name)
         {
-            Ingredient result = list.SingleOrDefault(ing => ing.Name == name);
+            Ingredient result = set.SingleOrDefault(ing => ing.Name == name);
             if (result == null) {
                 result = new Ingredient(name);
-                list.Add(result);
+                set.Add(result);
             }
             return result;
         }

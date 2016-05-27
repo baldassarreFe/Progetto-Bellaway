@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using BeautifulWeight.Persistence;
 
 namespace BeautifulWeight.Versions
 {
@@ -16,6 +17,8 @@ namespace BeautifulWeight.Versions
         {
             get
             {
+                if (_version == null)
+                    _version = MockPersistence.GetInstance().LoadVersion();
                 return _version;
             }
 
