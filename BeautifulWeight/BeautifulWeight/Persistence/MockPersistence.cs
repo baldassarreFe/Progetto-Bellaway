@@ -7,10 +7,10 @@ using DateTime = System.DateTime;
 
 namespace BeautifulWeight.Persistence
 {
-    class MockPersistence : UserProfileLoader, UserProfileSaver, KitchenLoader, VersionLoader, VersionSaver, DietLoader
+    class MockPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor, DietManager
     {
         private static MockPersistence _persistence = new MockPersistence();
-        private ISet<UserProfile> _profiles;
+        private IList<UserProfile> _profiles;
         private ISet<Dish> _dishes;
         private ISet<Ingredient> _ingredients;
         private Version _version;
@@ -109,13 +109,57 @@ namespace BeautifulWeight.Persistence
             ingredients.Add("patate");
             _dishes.Add(new Dish("Salsiccia al forno con patate", 436, 24.28, 12.67, 0, ingredients));
 
-            _profiles = new HashSet<UserProfile>();
+            _profiles = new List<UserProfile>();
             PersonalDetails details = new PersonalDetails("Pippo", "Labamba", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
             List<Ingredient> preferences = new List<Ingredient>();
             preferences.Add("pasta");
             preferences.Add("maiale");
             preferences.Add("pane");
-            _profiles.Add(new UserProfile(preferences,DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+
+
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
+            preferences = new List<Ingredient>();
+            preferences.Add("pasta");
+            preferences.Add("maiale");
+            preferences.Add("pane");
+            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
         }
 
         public ISet<Dish> LoadDishes()
@@ -125,7 +169,7 @@ namespace BeautifulWeight.Persistence
 
         internal static MockPersistence GetInstance()
         {
-            return _persistence;            
+            return _persistence;
         }
 
         public ISet<Ingredient> LoadIngredients()
@@ -133,7 +177,7 @@ namespace BeautifulWeight.Persistence
             return null;
         }
 
-        public ISet<UserProfile> LoadProfiles()
+        public IList<UserProfile> LoadProfiles()
         {
             return _profiles;
         }

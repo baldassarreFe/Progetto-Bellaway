@@ -1,4 +1,5 @@
 ﻿using BeautifulWeight.Versions;
+using BeautifulWeight.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,42 +12,35 @@ namespace BeautifulWeight.Presenter
     class VersionPresenter
     {
         private VersionManager _versionManager;
-        private readonly Control _control;
+        private readonly BeautifulUI _form;
 
-        public VersionManager VersionManager
+        internal VersionManager VersionManager
         {
-            get { return _versionManager; }
+            get
+            {
+                return _versionManager;
+            }
+
             set
             {
-                if (value != _versionManager)
-                {
-                    if (_versionManager != null)
-                    {
-                        //  Deregistrazione
-                        _versionManager.VersionChanged -= OnModelChanged;
-                    }
-                    _versionManager = value;
-                    if (_versionManager != null)
-                    {
-                        //  Registrazione
-                        _versionManager.VersionChanged += OnModelChanged;
-                        OnModelChanged(_versionManager, EventArgs.Empty);
-                    }
-                }
+                _versionManager = value;
             }
         }
 
-        public VersionPresenter(Control control)
+        public VersionPresenter(BeautifulUI form)
         {
-            if (control == null)
+            if (form == null)
                 throw new ArgumentNullException("control");
-            _control = control;
-            _control.Click += ClickHandler;
+            _form = form;
+            _form.Click += ClickHandler;
+            _versionManager = VersionManager.GetInstance();
+            _versionManager.VersionChanged += OnModelChanged;
+            OnModelChanged(_versionManager, EventArgs.Empty);
         }
 
         protected void OnModelChanged(object sender, EventArgs e)
         {
-            _control.Text = "La versione corrente è: " + _versionManager.CurrentVersion.Description;
+            _form.VersionLabel.Text = _versionManager.CurrentVersion.Description;
         }
 
         private void ClickHandler(object sender, EventArgs e)
