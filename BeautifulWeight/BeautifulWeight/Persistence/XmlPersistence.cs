@@ -21,10 +21,10 @@ namespace BeautifulWeight.Persistence.Xml
             _version = StandardVersion.GetInstance();
 
             _ingredients = new HashSet<Ingredient>();
-            LoadIngredientsFromXml("Ingredients.xml");
+            LoadIngredientsFromXml("Resources/Ingredients.xml");
 
             _dishes = new HashSet<Dish>();
-            LoadDishesFromXml("Dishes.xml");
+            LoadDishesFromXml("Resources/Dishes.xml");
 
             _profiles = new List<UserProfile>();
             PersonalDetails details = new PersonalDetails("Pippo", "Labamba", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);

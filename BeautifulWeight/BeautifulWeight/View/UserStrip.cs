@@ -69,6 +69,5 @@ namespace BeautifulWeight.View
         {
             InitializeComponent();
         }
-  
     }
 }
