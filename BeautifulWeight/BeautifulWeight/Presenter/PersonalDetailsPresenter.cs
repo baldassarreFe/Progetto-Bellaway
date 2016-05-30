@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.Presenter
@@ -33,6 +34,7 @@ namespace BeautifulWeight.Presenter
             _form = ui;
             _bpresenter = pres;
             _bpresenter.UserChanged += UserChangedHandler;
+            _bpresenter.UserRemoved += UserRemovedHandler;
         }
 
 
@@ -81,10 +83,11 @@ namespace BeautifulWeight.Presenter
                 }
 
                 else {
-                    Label value = new Label();
+                    TextBox value = new TextBox();
                     value.Text = "" + pi.GetValue(personalDetails);
                     value.Dock = DockStyle.Fill;
-                    value.TextAlign = ContentAlignment.MiddleCenter;
+                    value.TextAlign = HorizontalAlignment.Center;
+                    value.Enabled = false;
                     value.BorderStyle = BorderStyle.Fixed3D;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
@@ -94,7 +97,6 @@ namespace BeautifulWeight.Presenter
             for (int j = 0; j < detailsPanel.RowCount; j++) {
                 detailsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, percent));
             }
-            _form.Profile.Controls.Add(detailsPanel);
 
             for (int j = 0; j < detailsPanel.ColumnCount; j++)
             {
@@ -108,10 +110,10 @@ namespace BeautifulWeight.Presenter
             buttonPanel.ColumnCount = 2;
             RadButton modifica = new RadButton();
             modifica.Text = "Modifica";
-            // gestire evento?
+            modifica.Click += ModifierHandler;
             RadButton elimina = new RadButton();
             elimina.Text = "Elimina";
-            // gestire evento?
+            elimina.Click += DeleteClickHandler;
 
             modifica.Dock = DockStyle.Fill;
             elimina.Dock = DockStyle.Fill;
@@ -124,6 +126,34 @@ namespace BeautifulWeight.Presenter
                 buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             }
             _form.ProfileMenuPanel.Controls.Add(buttonPanel);
+        }
+
+        private void DeleteClickHandler(object sender, EventArgs e)
+        {
+            _bpresenter.CurrentUser = null;
+        }
+
+        private void UserRemovedHandler(object sender, EventArgs e)
+        {
+            _form.ProfileMenuPanel.Controls.Clear();
+            _form.ProfilePanel.Controls.Clear();
+        }
+
+        private void ModifierHandler(Object sender, EventArgs e)
+        {
+            TableLayoutPanel detailsPanel = (TableLayoutPanel)_form.ProfilePanel.Controls[0];
+            for (int i=0; i<detailsPanel.RowCount; i++)
+            {
+                Control control = detailsPanel.GetControlFromPosition(1, i);
+                if (control.GetType() == typeof(Load))
+                {
+                }
+                else
+                {
+                    control.Enabled = true;
+                }
+               
+            }
         }
     }
 }

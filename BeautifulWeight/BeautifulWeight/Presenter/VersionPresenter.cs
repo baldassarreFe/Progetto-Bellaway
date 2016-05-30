@@ -32,7 +32,7 @@ namespace BeautifulWeight.Presenter
             if (form == null)
                 throw new ArgumentNullException("control");
             _form = form;
-            _form.Click += ClickHandler;
+            _form.VersionLabel.Click += ClickHandler;
             _versionManager = VersionManager.GetInstance();
             _versionManager.VersionChanged += OnModelChanged;
             OnModelChanged(_versionManager, EventArgs.Empty);

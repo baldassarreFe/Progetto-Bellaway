@@ -23,7 +23,7 @@ namespace BeautifulWeight.Presenter
         public event EventHandler UserRemoved;
         public event EventHandler UserAdded;
 
-        
+
         public UserProfile CurrentUser
         {
             get
@@ -33,8 +33,11 @@ namespace BeautifulWeight.Presenter
 
             set
             {
+                if (value == null)
+                    UserRemoved(this, EventArgs.Empty);
                 _currentUser = value;
-                UserChanged(this, EventArgs.Empty);
+                if (value != null)
+                    UserChanged(this, EventArgs.Empty);
             }
         }
 
@@ -48,7 +51,7 @@ namespace BeautifulWeight.Presenter
             _personalDetailsPresenter = new PersonalDetailsPresenter(_form, this);
             _userListPresenter = new UserListPresenter(_form, this);
             _versionPresenter = new VersionPresenter(_form);
-            
+
         }
 
     }

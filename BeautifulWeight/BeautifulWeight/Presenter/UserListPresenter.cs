@@ -31,6 +31,7 @@ namespace BeautifulWeight.Presenter
                 throw new ArgumentNullException("control");
             _form = ui;
             _bpresenter = pres;
+            _bpresenter.UserRemoved += UserRemovedHandler;
 
             repaint();
 
@@ -62,6 +63,7 @@ namespace BeautifulWeight.Presenter
 
         private void repaint()
         {
+            _form.UsersListView.Controls.Clear();
             foreach (UserProfile up in UserProfileManager.AllUsers)
             {
                 UserStrip us = new UserStrip();
@@ -93,5 +95,10 @@ namespace BeautifulWeight.Presenter
             }
         }
 
+        private void UserRemovedHandler(object sender, EventArgs e)
+        {
+            UserProfileManager.Remove(_bpresenter.CurrentUser);
+            repaint();
+        }
     }
 }
