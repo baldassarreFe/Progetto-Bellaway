@@ -21,10 +21,10 @@ namespace BeautifulWeight.Persistence.Xml
             _version = StandardVersion.GetInstance();
 
             _ingredients = new HashSet<Ingredient>();
-            LoadIngredientsFromXml("Ingredients.xml");
+            LoadIngredientsFromXml("Resources/Ingredients.xml");
 
             _dishes = new HashSet<Dish>();
-            LoadDishesFromXml("Dishes.xml");
+            LoadDishesFromXml("Resources/Dishes.xml");
 
             NonEmptyList<Ingredient> ingredients = new NonEmptyList<Ingredient>("pasta");
             ingredients.Add("ragù di carne");

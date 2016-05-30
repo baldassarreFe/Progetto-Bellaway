@@ -52,7 +52,6 @@
     <Compile Include="Model\UserProfileManager.cs" />
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
-    <Compile Include="Persistence\DietLoader.cs" />
     <Compile Include="Persistence\XmlPersistence.cs" />
     <Compile Include="Persistence\DietManager.cs" />
     <Compile Include="Presenter\UserListPresenter.cs" />
@@ -81,12 +80,19 @@
     <Compile Include="View\BeautifulUI.Designer.cs">
       <DependentUpon>BeautifulUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UserStrip2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UserStrip2.Designer.cs">
+      <DependentUpon>UserStrip2.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserStrip.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\UserStrip.Designer.cs">
       <DependentUpon>UserStrip.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UserStripVisualItem.cs" />
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="View\BeautifulUI.resx">
       <DependentUpon>BeautifulUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserStrip2.resx">
+      <DependentUpon>UserStrip2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserStrip.resx">
       <DependentUpon>UserStrip.cs</DependentUpon>
@@ -118,10 +127,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dishes.xml">
+    <Content Include="Resources\Dishes.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Ingredients.xml" />
+    <Content Include="Resources\Ingredients.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user.png" />
