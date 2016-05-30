@@ -19,23 +19,11 @@ namespace BeautifulWeight.Presenter
         private PersonalDetailsPresenter _personalDetailsPresenter;
         private UserListPresenter _userListPresenter;
         private VersionPresenter _versionPresenter;
+        public event EventHandler UserChanged;
+        public event EventHandler UserRemoved;
+        public event EventHandler UserAdded;
 
-        public UserProfileManager UserProfileManager
-        {
-            get
-            {
-                return UserProfileManager.GetInstance();
-            }
-        }
-
-        public VersionManager VersionManager
-        {
-            get
-            {
-                return VersionManager.GetInstance();
-            }
-        }
-
+        
         public UserProfile CurrentUser
         {
             get
@@ -46,7 +34,7 @@ namespace BeautifulWeight.Presenter
             set
             {
                 _currentUser = value;
-                _personalDetailsPresenter.UserChangedHandler(_currentUser);
+                UserChanged(this, EventArgs.Empty);
             }
         }
 
@@ -56,12 +44,12 @@ namespace BeautifulWeight.Presenter
                 throw new ArgumentNullException("control");
             _form = ui;
 
-            //_addUserPresenter = new AddUserPresenter(_form);
-            _personalDetailsPresenter = new PersonalDetailsPresenter(_form);
-            _userListPresenter = new UserListPresenter(_form);
+            //_addUserPresenter = new AddUserPresenter(_form, this);
+            _personalDetailsPresenter = new PersonalDetailsPresenter(_form, this);
+            _userListPresenter = new UserListPresenter(_form, this);
             _versionPresenter = new VersionPresenter(_form);
+            
         }
-
 
     }
 }

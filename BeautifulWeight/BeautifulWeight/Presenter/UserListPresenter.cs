@@ -15,6 +15,7 @@ namespace BeautifulWeight.Presenter
     class UserListPresenter
     {
         private readonly BeautifulUI _form;
+        private BeautifulPresenter _bpresenter;
 
         public UserProfileManager UserProfileManager
         {
@@ -24,11 +25,12 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public UserListPresenter(BeautifulUI ui)
+        public UserListPresenter(BeautifulUI ui, BeautifulPresenter pres)
         {
             if (ui == null)
                 throw new ArgumentNullException("control");
             _form = ui;
+            _bpresenter = pres;
 
             repaint();
 
@@ -52,6 +54,7 @@ namespace BeautifulWeight.Presenter
             selectedUs.ProfileImg.BackColor = Color.Yellow;
             selectedUs.ProfileDetails.BackColor = Color.Yellow;
             UserProfile up = (UserProfile) selectedUs.Tag;
+            _bpresenter.CurrentUser = up;
 
 
             // TODO: chiamare metodi sui presenter di centro e destra
