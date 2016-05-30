@@ -52,6 +52,8 @@
     <Compile Include="Model\UserProfileManager.cs" />
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
+    <Compile Include="Persistence\DietLoader.cs" />
+    <Compile Include="Persistence\XmlPersistence.cs" />
     <Compile Include="Persistence\DietManager.cs" />
     <Compile Include="Presenter\AddUserPresenter.cs" />
     <Compile Include="Presenter\BeautifulPresenter.cs" />
@@ -117,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dishes.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Ingredients.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user.png" />
