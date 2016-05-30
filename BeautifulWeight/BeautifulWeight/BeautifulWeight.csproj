@@ -52,6 +52,7 @@
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
     <Compile Include="Persistence\DietLoader.cs" />
+    <Compile Include="Persistence\XmlPersistence.cs" />
     <Compile Include="Presenter\VersionPresenter.cs" />
     <Compile Include="Persistence\PersistenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,7 +106,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Dishes.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Ingredients.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
