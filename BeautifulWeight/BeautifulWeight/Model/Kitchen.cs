@@ -14,7 +14,6 @@ namespace BeautifulWeight.Kitchen
 
         static Ingredient() 
         {
-            MockPersistence persistence = MockPersistence.GetInstance();
             set = new HashSet<Ingredient>();
             // persistence.LoadIngredients();
         }
@@ -35,9 +34,9 @@ namespace BeautifulWeight.Kitchen
         // TODO lo mettiamo internal perchè il gestore di persistenza che li crea è dentro questo assembly?
         public static implicit operator Ingredient(string name)
         {
-            Ingredient result = set.SingleOrDefault(ing => ing.Name == name);
+            Ingredient result = set.SingleOrDefault(ing => ing.Name == name.ToLower());
             if (result == null) {
-                result = new Ingredient(name);
+                result = new Ingredient(name.ToLower());
                 set.Add(result);
             }
             return result;

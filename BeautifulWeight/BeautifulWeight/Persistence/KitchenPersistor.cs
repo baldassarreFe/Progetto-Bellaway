@@ -1,4 +1,4 @@
-﻿using BeautifulWeight.Users;
+﻿using BeautifulWeight.Kitchen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Persistence
 {
-    public interface UserProfileLoader : Persistor
+    public interface KitchenPersistor : Persistor
     {
-        ISet<UserProfile> LoadProfiles();
+        ISet<Ingredient> LoadIngredients();
+        ISet<Dish> LoadDishes();
     }
 }

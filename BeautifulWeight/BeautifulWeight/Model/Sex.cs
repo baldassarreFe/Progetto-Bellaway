@@ -1,6 +1,6 @@
 ﻿namespace BeautifulWeight.Users
 {
-    internal enum Sex
+    public enum Sex
     {
         MALE,
         FEMALE

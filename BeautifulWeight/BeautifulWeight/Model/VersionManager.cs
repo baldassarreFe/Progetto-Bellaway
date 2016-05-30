@@ -18,7 +18,7 @@ namespace BeautifulWeight.Versions
             get
             {
                 if (_version == null)
-                    _version = MockPersistence.GetInstance().LoadVersion();
+                    _version = PersistenceManager.getPersistenceManager<Persistence.VersionPersistor>().LoadVersion();
                 return _version;
             }
 
@@ -58,8 +58,10 @@ namespace BeautifulWeight.Versions
 
         public void ChangeVersion(Version version, Code code)
         {
-            if (version.IsCodeValid(code))
+            if (version.IsCodeValid(code)) { 
                 CurrentVersion = version;
+                VersionChanged(this, EventArgs.Empty);
+            }
         }
 
         public static VersionManager GetInstance()

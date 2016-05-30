@@ -11,11 +11,11 @@ namespace BeautifilBeautifulWeight.DietCalculators
 {
     public class PointDietCalculator : DietCalculator
     {
-        private readonly KitchenLoader kl;
+        private readonly KitchenPersistor kl;
 
         public PointDietCalculator()
         {
-            kl = PersistenceManager.getPersistenceManager<KitchenLoader>();
+            kl = PersistenceManager.getPersistenceManager<KitchenPersistor>();
         }
 
         public string Description
