@@ -38,6 +38,33 @@ namespace BeautifulWeight.View
             }
         }
 
+
+        public Panel ProfileImg
+        {
+            get
+            {
+                return _profileImg;
+            }
+
+            set
+            {
+                _profileImg = value;
+            }
+        }
+
+        public Panel ProfileDetails
+        {
+            get
+            {
+                return _profileDetails;
+            }
+
+            set
+            {
+                _profileDetails = value;
+            }
+        }
+
         public UserStrip()
         {
             InitializeComponent();

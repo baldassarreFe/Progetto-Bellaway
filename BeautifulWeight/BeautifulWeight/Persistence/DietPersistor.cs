@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BeautifulWeight.Persistence
 {
-    public interface DietManager
+    public interface DietPersistor
     {
         ISet<DietCalculator> loadDiets();
     }
