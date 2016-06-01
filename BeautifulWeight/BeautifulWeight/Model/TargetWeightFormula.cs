@@ -9,6 +9,6 @@ namespace BeautifulWeight.Model
 {
     interface TargetWeightFormula
     {
-        double calculate(Sex sex, int height_cm);
+        double calculate(PersonalDetails pd);
     }
 }

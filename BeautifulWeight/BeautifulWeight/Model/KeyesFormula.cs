@@ -9,11 +9,11 @@ namespace BeautifulWeight.Model
 {
     class KeyesFormula : TargetWeightFormula
     {
-        public double calculate(Sex sex, int height_cm)
+        public double calculate(PersonalDetails pd)
         {
-            double height_m = height_cm * 1.0 / 100;
+            double height_m = pd.Height * 1.0 / 100;
             double factor = Math.Pow(height_m, 2);
-            double mul = (sex == Sex.MALE) ? 22.1 : 20.6;
+            double mul = (pd.Sex == Sex.MALE) ? 22.1 : 20.6;
             return factor * mul;
         }
     }
