@@ -24,9 +24,7 @@ namespace BeautifulWeight.View
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            VersionPresenter vpres = new VersionPresenter(this);
-            vpres.VersionManager = VersionManager.GetInstance();
-            UserListPresenter ulpres = new UserListPresenter(this);
+            BeautifulPresenter presenter = new BeautifulPresenter(this);
         }
 
 
@@ -210,6 +208,17 @@ namespace BeautifulWeight.View
                 _versionLabel = value;
             }
         }
+        public Panel ProfilePanel
+        {
+            get
+            {
+                return _profilePanel;
+            }
 
+            set
+            {
+                _profilePanel = value;
+            }
+        }
     }
 }

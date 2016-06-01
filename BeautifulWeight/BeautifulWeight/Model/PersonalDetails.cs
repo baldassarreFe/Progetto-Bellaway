@@ -106,6 +106,19 @@ namespace BeautifulWeight.Users
             }
         }
 
+        public int WorkHours
+        {
+            get
+            {
+                return _workHours;
+            }
+
+            set
+            {
+                _workHours = value;
+            }
+        }
+
         public Load WorkLoad
         {
             get
@@ -132,7 +145,7 @@ namespace BeautifulWeight.Users
             }
         }
 
-        internal Load SportLoad
+        public Load SportLoad
         {
             get
             {
@@ -144,5 +157,6 @@ namespace BeautifulWeight.Users
                 _sportLoad = value;
             }
         }
+
     }
 }

@@ -13,7 +13,6 @@ namespace BeautifulWeight.Model
 
         private IList<UserProfile> _allUsers;
         private static UserProfileManager _instance;
-        public event EventHandler ModelChanged;
 
         public IEnumerable<UserProfile> AllUsers
         {

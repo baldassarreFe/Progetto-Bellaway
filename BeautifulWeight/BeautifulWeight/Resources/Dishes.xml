@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dishes>
+  <dish name="Pasta al ragù alla bolognese" calories="406" proteins="15.43" fats="3.23" carbohydrates="76.61">
+    <ingredient>pasta</ingredient>
+    <ingredient>ragù di carne</ingredient>
+  </dish>
+  <dish name="Nasello alla cipolla con pomodorini" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
+    <ingredient>nasello</ingredient>
+    <ingredient>cipolla</ingredient>
+    <ingredient>pomodorini</ingredient>
+  </dish>
+  <dish name="Nasello alla cipolla con pomodorini" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
+    <ingredient>carne di maiale</ingredient>
+  </dish>
+  <dish name="Spiedini di gamberi" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
+    <ingredient>gambero</ingredient>
+    <ingredient>pane</ingredient>
+  </dish>
+  <dish name="Spiedini di seppie" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
+    <ingredient>seppia</ingredient>
+    <ingredient>pane</ingredient>
+  </dish>
+  <dish name="Salsiccia al forno con patate" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
+    <ingredient>salsiccia</ingredient>
+    <ingredient>patate</ingredient>
+  </dish>
+</dishes>
