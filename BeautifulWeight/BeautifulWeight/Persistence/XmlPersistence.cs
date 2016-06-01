@@ -73,11 +73,11 @@ namespace BeautifulWeight.Persistence.Xml
             }
         }
 
-        private void LoadDishesFromXml(string filename)
+        private void LoadIngredientsFromXml(string filename)
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(filename);
-            XmlNodeList ingredientNodes = xml.SelectNodes("/dishes/dish");
+            XmlNodeList ingredientNodes = xml.SelectNodes("/ingredients/ingredient");
 
             foreach (XmlElement ingredientNode in ingredientNodes)
             {
@@ -86,11 +86,11 @@ namespace BeautifulWeight.Persistence.Xml
             }
         }
 
-        private void LoadIngredientsFromXml(string filename)
+        private void LoadDishesFromXml(string filename)
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(filename);
-            XmlNodeList dishesNodes = xml.SelectNodes("/ingredients/ingredient");
+            XmlNodeList dishesNodes = xml.SelectNodes("/dishes/dish");
 
             foreach (XmlElement dishNode in dishesNodes)
             {

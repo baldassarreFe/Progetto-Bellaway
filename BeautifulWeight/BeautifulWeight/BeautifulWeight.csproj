@@ -49,6 +49,8 @@
     <Reference Include="TelerikCommon, Version=2015.2.728.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\KeyesFormula.cs" />
+    <Compile Include="Model\TargetWeightFormula.cs" />
     <Compile Include="Model\UserProfileManager.cs" />
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
@@ -83,6 +85,18 @@
     <Compile Include="View\BeautifulUI.Designer.cs">
       <DependentUpon>BeautifulUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MealStrip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MealStrip.Designer.cs">
+      <DependentUpon>MealStrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MenuDayStrip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MenuDayStrip.Designer.cs">
+      <DependentUpon>MenuDayStrip.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserStrip.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -104,9 +118,16 @@
     <EmbeddedResource Include="View\BeautifulUI.resx">
       <DependentUpon>BeautifulUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\MealStrip.resx">
+      <DependentUpon>MealStrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MenuDayStrip.resx">
+      <DependentUpon>MenuDayStrip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\UserStrip.resx">
       <DependentUpon>UserStrip.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Presenter\Presenter.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

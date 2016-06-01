@@ -13,37 +13,43 @@ using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.Presenter
 {
-    class UserListPresenter
+    class UserListPresenter : Presenter
     {
-        private readonly BeautifulUI _form;
         private BeautifulPresenter _bpresenter;
+        private readonly RadListView _listView;
 
-        public UserProfileManager UserProfileManager
+
+        public RadListView UsersListView
         {
             get
             {
-                return UserProfileManager.GetInstance();
+                return _listView;
             }
         }
 
-        public UserListPresenter(BeautifulUI ui, BeautifulPresenter pres)
+        public UserListPresenter(RadListView listView, BeautifulPresenter pres)
         {
-            if (ui == null)
+            if (listView == null)
                 throw new ArgumentNullException("control");
-            _form = ui;
-            _form.UsersListView.VisualItemCreating += UsersListView_VisualItemCreating;
-            _form.UsersListView.VisualItemFormatting += UsersListView_VisualItemFormatting;
-            _form.UsersListView.DataSource = UserProfileManager.AllUsers;
+            _listView = listView;
+            _listView.VisualItemCreating += UsersListView_VisualItemCreating;
+            _listView.VisualItemFormatting += UsersListView_VisualItemFormatting;
+            _listView.SelectedItemChanged += UsersListView_SelectedItemChanged;
+            _listView.DataSource = UserProfileManager.AllUsers;
+            UserProfileManager.UserAdded += UserAddedHandler;
+            UserProfileManager.UserRemoved += UserRemovedHandler;
             _bpresenter = pres;
-            _bpresenter.UserRemoved += UserRemovedHandler;
+        }
 
-            //repaint();
-
+        private void UsersListView_SelectedItemChanged(object sender, EventArgs e)
+        {
+            if (UsersListView.CurrentItem != null)
+                _bpresenter.CurrentUser = (UserProfile)UsersListView.CurrentItem.DataBoundItem;
         }
 
         private void UsersListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
         {
-            if (e.VisualItem.Selected)
+            if (e.VisualItem.Current)
             {
                 e.VisualItem.NumberOfColors = 1;
                 e.VisualItem.BackColor = Color.Orange;
@@ -59,72 +65,25 @@ namespace BeautifulWeight.Presenter
 
         private void UsersListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
         {
-            if (_form.UsersListView.ViewType == ListViewType.ListView)
+            if (UsersListView.ViewType == ListViewType.ListView)
             {
                 e.VisualItem = new UserStripVisualItem2();
             }
         }
 
-        //protected void OnModelChanged(object sender, EventArgs e)
-        //{
-        //    repaint();
-        //}
-
-        //public void ClickHandler(object sender, EventArgs e)
-        //{
-        //    UserStrip selectedUs = (UserStrip) ((Control)sender).Tag;
-        //    foreach (UserStrip us in _form.UsersListView.Controls.OfType<UserStrip>())
-        //    {
-        //        us.BackColor = Color.White;
-        //        us.ProfileImg.BackColor = Color.White;
-        //        us.ProfileDetails.BackColor = Color.White;
-        //    }
-        //    selectedUs.BackColor = Color.Yellow;
-        //    selectedUs.ProfileImg.BackColor = Color.Yellow;
-        //    selectedUs.ProfileDetails.BackColor = Color.Yellow;
-        //    UserProfile up = (UserProfile) selectedUs.Tag;
-
-
-        //    // TODO: chiamare metodi sui presenter di centro e destra
-        //}
-
-        //private void repaint()
-        //{
-        //    foreach (UserProfile up in UserProfileManager.AllUsers)
-        //    {
-        //        UserStrip us = new UserStrip();
-        //        us.Nome = up.Details.Name;
-        //        us.Cognome = up.Details.Surname;
-        //        us.Parent = _form.UsersListView;
-        //        us.AutoSize = true;
-        //        us.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-        //        us.Width = us.Parent.Width;
-
-        //        setClickAndTag(us, us);
-
-        //        us.Tag = up;
-
-        //        int counter = _form.UsersListView.Controls.Count - 1;
-        //        int height = _form.UsersListView.Controls[0].Height;
-        //        us.Location = new Point(0, counter * height);
-        //        _form.UsersListView.Controls.Add(us);
-        //    }
-        //}
-
-        //private void setClickAndTag(Control control, UserStrip us)
-        //{
-        //    foreach (Control c in control.Controls)
-        //    {
-        //        c.Tag = us;
-        //        c.Click += ClickHandler;
-        //        setClickAndTag(c, us);
-        //    }
-        //}
-
-        private void UserRemovedHandler(object sender, EventArgs e)
+        public void UserRemovedHandler(object sender, EventArgs e)
         {
-            UserProfileManager.Remove(_bpresenter.CurrentUser);
-            repaint();
+            UpdateList();
+        }
+
+        public void UserAddedHandler(object sender, EventArgs e)
+        {
+            UpdateList();
+        }
+
+        private void UpdateList()
+        {
+            UsersListView.Refresh();
         }
     }
 }

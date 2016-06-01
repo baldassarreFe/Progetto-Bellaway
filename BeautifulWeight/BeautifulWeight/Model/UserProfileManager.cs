@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Model
 {
-    class UserProfileManager
+    public class UserProfileManager
     {
 
         private IList<UserProfile> _allUsers;
         private static UserProfileManager _instance;
+
+        public event EventHandler UserRemoved;
+        public event EventHandler UserAdded;
 
         public IEnumerable<UserProfile> AllUsers
         {
@@ -33,11 +36,25 @@ namespace BeautifulWeight.Model
         public void Add(UserProfile up)
         {
             _allUsers.Add(up);
+            OnAdded();
         }
 
         public void Remove(UserProfile up)
         {
             _allUsers.Remove(up);
+            OnRemoved();
+        }
+
+        private void OnRemoved()
+        {
+            if (UserRemoved!=null)
+                UserRemoved(this, EventArgs.Empty);
+        }
+
+        private void OnAdded()
+        {
+            if (UserAdded != null)
+                UserAdded(this, EventArgs.Empty);
         }
 
         public static UserProfileManager GetInstance()
