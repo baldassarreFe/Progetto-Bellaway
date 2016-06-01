@@ -121,9 +121,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Dishes.xml">
+    <Content Include="Dishes.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Ingredients.xml" />
+    <Content Include="Resources\Dishes.xml" />
     <Content Include="Resources\Ingredients.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ namespace BeautifulWeight.Presenter
     class UserListPresenter
     {
         private readonly BeautifulUI _form;
+        private BeautifulPresenter _bpresenter;
 
         public UserProfileManager UserProfileManager
         {
@@ -25,7 +26,7 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public UserListPresenter(BeautifulUI ui)
+        public UserListPresenter(BeautifulUI ui, BeautifulPresenter pres)
         {
             if (ui == null)
                 throw new ArgumentNullException("control");
@@ -33,6 +34,8 @@ namespace BeautifulWeight.Presenter
             _form.UsersListView.VisualItemCreating += UsersListView_VisualItemCreating;
             _form.UsersListView.VisualItemFormatting += UsersListView_VisualItemFormatting;
             _form.UsersListView.DataSource = UserProfileManager.AllUsers;
+            _bpresenter = pres;
+            _bpresenter.UserRemoved += UserRemovedHandler;
 
             //repaint();
 
@@ -118,5 +121,10 @@ namespace BeautifulWeight.Presenter
         //    }
         //}
 
+        private void UserRemovedHandler(object sender, EventArgs e)
+        {
+            UserProfileManager.Remove(_bpresenter.CurrentUser);
+            repaint();
+        }
     }
 }
