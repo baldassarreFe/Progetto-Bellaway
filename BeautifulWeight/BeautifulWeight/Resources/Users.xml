@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<users>
+  <user>
+    <personaldetails>
+      <Name>Beppe</Name>
+      <Surname>Maniglia</Surname>
+      <Birthdate>25-08-1960</Birthdate>
+      <Weight>75000</Weight>
+      <Height>180</Height>
+      <Sex>MALE</Sex>
+      <WorkHours>40</WorkHours>
+      <WorkLoad>LIGHT</WorkLoad>
+      <SporHours>1</SporHours>
+      <SportLoad>LIGHT</SportLoad>
+    </personaldetails>
+    <goal>WEIGHT_LOSS</goal>
+    <preferences>
+      <ingredient>pasta</ingredient>
+      <ingredient>maiale</ingredient>
+      <ingredient>pane</ingredient>
+    </preferences>
+    <menu dietCalculator="PointDietCalculator">
+      <day day="monday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+      </day>
+      <day day="tuesday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+          <serving dish="Braciola di maiale" quantity="70"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+        </meal>
+      </day>
+      <day day="wednesday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+        </meal>
+      </day>
+      <day day="thursday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+        </meal>
+      </day>
+      <day day="friday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+        </meal>
+      </day>
+      <day day="sathurday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+        </meal>
+      </day>
+      <day day="sunday">
+        <meal name="colazione" hour="09" minute="00">
+          <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
+        </meal>
+        <meal name="pranzo" hour="12" minute="45">
+          <serving dish="Spiedini di gamberi" quantity="200"></serving>
+        </meal>
+        <meal name="cena" hour="20" minute="30">
+          <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
+        </meal>
+      </day>
+    </menu>
+  </user>
+</users>

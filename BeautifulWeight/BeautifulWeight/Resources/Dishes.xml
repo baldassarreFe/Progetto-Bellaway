@@ -9,7 +9,7 @@
     <ingredient>cipolla</ingredient>
     <ingredient>pomodorini</ingredient>
   </dish>
-  <dish name="Nasello alla cipolla con pomodorini" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
+  <dish name="Braciola di maiale" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">
     <ingredient>carne di maiale</ingredient>
   </dish>
   <dish name="Spiedini di gamberi" calories="234" proteins="17.31" fats="1.52" carbohydrates="23.35">

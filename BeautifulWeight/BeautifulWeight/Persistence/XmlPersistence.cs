@@ -5,6 +5,7 @@ using BeautifulWeight.Users;
 using BeautifulWeight.Versions;
 using DateTime = System.DateTime;
 using System.Xml;
+using BeautifulWeight.Menu;
 
 namespace BeautifulWeight.Persistence.Xml
 {
@@ -21,18 +22,55 @@ namespace BeautifulWeight.Persistence.Xml
             _version = StandardVersion.GetInstance();
 
             _ingredients = new HashSet<Ingredient>();
-            LoadIngredientsFromXml("Resources/Ingredients.xml");
+            LoadIngredientsFromXml("../../Resources/Ingredients.xml");
 
             _dishes = new HashSet<Dish>();
-            LoadDishesFromXml("Resources/Dishes.xml");
+            LoadDishesFromXml("../../Resources/Dishes.xml");
 
             _profiles = new List<UserProfile>();
-            PersonalDetails details = new PersonalDetails("Pippo", "Labamba", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
-            List<Ingredient> preferences = new List<Ingredient>();
-            preferences.Add("pasta");
-            preferences.Add("maiale");
-            preferences.Add("pane");
-            _profiles.Add(new UserProfile(preferences,DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            LoadProfilesFromXml("../../Resources/Users.xml");
+        }
+
+        private void LoadProfilesFromXml(string filename)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load(filename);
+            XmlNodeList usersNodes = xml.SelectNodes("/users/user");
+
+            foreach (XmlElement userNode in usersNodes)
+            {
+                UserProfile up = new UserProfile();
+                PersonalDetails pd = new PersonalDetails();
+                foreach(XmlElement detail in userNode.SelectNodes("/personaldetails/*"))
+                {
+                    var propertyInfo = pd.GetType().GetProperty(detail.LocalName);
+                    if (propertyInfo != null)
+                    {
+                        propertyInfo.SetValue(pd, System.Convert.ChangeType(detail.InnerText, propertyInfo.PropertyType));
+                    }
+                }
+                up.Details = pd;
+
+                up.Goal = (Goal) System.Enum.Parse(typeof(Goal), userNode.SelectSingleNode("/goal").InnerText, true);
+
+                List<Ingredient> preferences = new List<Ingredient>();
+                foreach (XmlElement ingredientNode in userNode.SelectNodes("/preferences/ingredient"))
+                {
+                    preferences.Add(ingredientNode.InnerText);
+                }
+                up.Preferences = preferences;
+
+                WeeklyMenu wm = new WeeklyMenu(userNode.SelectSingleNode("/menu").Attributes["dietCalculator"].InnerText);
+                foreach (XmlElement dayNode in userNode.SelectNodes("/menu/day"))
+                {
+                    preferences.Add(dayNode.InnerText);
+                    DailyMenu dm = wm[(System.DayOfWeek)System.Enum.Parse(typeof(System.DayOfWeek), dayNode.Attributes["day"].InnerText, true)];
+
+                }
+                up.Diet = wm;
+
+                _profiles.Add(up);
+            }
         }
 
         private void LoadDishesFromXml(string filename)
