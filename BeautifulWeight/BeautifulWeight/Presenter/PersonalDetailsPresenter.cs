@@ -18,7 +18,6 @@ namespace BeautifulWeight.Presenter
     {
         private readonly Panel _panel;
         private readonly RadPanel _menuPanel;
-        private BeautifulPresenter _bpresenter;
 
         public Panel ProfilePanel
         {
@@ -36,20 +35,19 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public PersonalDetailsPresenter(Panel profilePanel, RadPanel profileMenuPanel, BeautifulPresenter pres)
+        public PersonalDetailsPresenter(Panel profilePanel, RadPanel profileMenuPanel, SingleProfileModel model) : base(model)
         {
             if (profilePanel == null || profileMenuPanel == null)
                 throw new ArgumentNullException("control");
             _panel = profilePanel;
             _menuPanel = profileMenuPanel;
-            _bpresenter = pres;
-            _bpresenter.CurrentUserChanged += CurrentUserChangedHandler;
+            Model.CurrentUserChanged += CurrentUserChangedHandler;
         }
 
 
         public void CurrentUserChangedHandler(Object sender, EventArgs e)
         {
-            UserProfile current = _bpresenter.CurrentUser;
+            UserProfile current = Model.CurrentUser;
             if (current == null)
             {
                 ClearUser();
@@ -96,6 +94,9 @@ namespace BeautifulWeight.Presenter
                     value.ReadOnly = true;
                     value.Dock = DockStyle.Fill;
                     value.Anchor = AnchorStyles.None;
+                    value.Tag = pi;
+                    value.LostFocus += FieldChangedHandler;
+                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -107,6 +108,9 @@ namespace BeautifulWeight.Presenter
                     value.Format = DateTimePickerFormat.Short;
                     value.Dock = DockStyle.Fill;
                     value.DropDownAlign = LeftRightAlignment.Right;
+                    value.Tag = pi;
+                    value.Leave += FieldChangedHandler;
+                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -119,6 +123,9 @@ namespace BeautifulWeight.Presenter
                     value.Enabled = false;
                     value.Dock = DockStyle.Fill;
                     value.TextAlign = HorizontalAlignment.Center;
+                    value.Tag = pi;
+                    value.Leave += FieldChangedHandler;
+                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -135,6 +142,9 @@ namespace BeautifulWeight.Presenter
                         r.Enabled = false;
                         r.Location = new Point(0, y);
                         y += r.Size.Height;
+                        value.Tag = pi;
+                        value.Leave += FieldChangedHandler;
+                        value.GotFocus += ResetBackColorHandler;
                         value.Controls.Add(r);
                     }
                     value.Dock = DockStyle.Fill;
@@ -148,6 +158,9 @@ namespace BeautifulWeight.Presenter
                     value.TextAlign = HorizontalAlignment.Center;
                     value.Enabled = false;
                     value.BorderStyle = BorderStyle.Fixed3D;
+                    value.Tag = pi;
+                    value.Leave += FieldChangedHandler;
+                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
             }
@@ -189,9 +202,40 @@ namespace BeautifulWeight.Presenter
             MenuPanel.Controls.Add(buttonPanel);
         }
 
+        private void ResetBackColorHandler(object sender, EventArgs e)
+        {
+            RadButton salva = MenuPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Text == "Salva").Single();
+            ((Control)sender).BackColor = Color.White;
+            salva.Enabled = false;
+        }
+
+        private void FieldChangedHandler(object sender, EventArgs e)
+        {
+            RadButton salva = MenuPanel.Controls[0].Controls.OfType<RadButton>().First(b => b.Text == "Salva");
+            Control field = (Control)sender;
+            salva.Enabled = true;
+            PropertyInfo pi = (PropertyInfo)field.Tag;
+            object o;
+            if (field.GetType() == typeof(GroupBox))
+                o = System.Enum.Parse(pi.PropertyType, field.Controls.OfType<RadioButton>()
+                                      .FirstOrDefault(r => r.Checked).Text);
+
+            else
+                o = Convert.ChangeType(field.Text, pi.PropertyType);
+            try
+            {
+                pi.SetValue(Model.CurrentUser.Details, o);
+            }
+            catch (Exception)
+            {
+                salva.Enabled = false;
+                field.BackColor = Color.Red;
+            }
+        }
+
         private void DeleteClickHandler(object sender, EventArgs e)
         {
-            UserProfileManager.Remove(_bpresenter.CurrentUser);
+            Model.DeleteUser();
         }
 
 
@@ -230,7 +274,7 @@ namespace BeautifulWeight.Presenter
             salva.Click += SaveClickHandler;
             RadButton annulla = new RadButton();
             annulla.Text = "Annulla";
-            annulla.Click += RestoreClickHandler;
+            annulla.Click += CancelClickHandler;
 
             salva.Dock = DockStyle.Fill;
             annulla.Dock = DockStyle.Fill;
@@ -244,16 +288,18 @@ namespace BeautifulWeight.Presenter
             }
             MenuPanel.Controls.Clear();
             MenuPanel.Controls.Add(buttonPanel);
+
+            Model.StartModify();
         }
 
         private void SaveClickHandler(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Model.StopModify(true);
         }
 
-        private void RestoreClickHandler(object sender, EventArgs e)
+        private void CancelClickHandler(object sender, EventArgs e)
         {
-            CurrentUserChangedHandler(this, EventArgs.Empty);
+            Model.StopModify(false);
         }
     }
 }

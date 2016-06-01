@@ -16,6 +16,7 @@ namespace BeautifulWeight.Model
 
         public event EventHandler UserRemoved;
         public event EventHandler UserAdded;
+        public event EventHandler UserUpdated;
 
         public IEnumerable<UserProfile> AllUsers
         {
@@ -28,26 +29,30 @@ namespace BeautifulWeight.Model
             }
         }
 
-        public UserProfile NewUser()
-        {
-            return new UserProfile();
-        }
-
         public void Add(UserProfile up)
         {
-            _allUsers.Add(up);
-            OnAdded();
+            if (AllUsers.Contains(up))
+            {
+                _allUsers.Remove(up);
+                _allUsers.Add(up);
+                OnUserUpdated();
+            }
+            else
+            {
+                _allUsers.Add(up);
+                OnAdded();
+            }
         }
 
         public void Remove(UserProfile up)
         {
-            _allUsers.Remove(up);
-            OnRemoved();
+            if (_allUsers.Remove(up))
+                OnRemoved();
         }
 
         private void OnRemoved()
         {
-            if (UserRemoved!=null)
+            if (UserRemoved != null)
                 UserRemoved(this, EventArgs.Empty);
         }
 
@@ -55,6 +60,12 @@ namespace BeautifulWeight.Model
         {
             if (UserAdded != null)
                 UserAdded(this, EventArgs.Empty);
+        }
+
+        private void OnUserUpdated()
+        {
+            if (UserUpdated != null)
+                UserUpdated(this, EventArgs.Empty);
         }
 
         public static UserProfileManager GetInstance()

@@ -4,6 +4,7 @@ using BeautifulWeight.Versions;
 using BeautifulWeight.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,6 @@ namespace BeautifulWeight.Presenter
 {
     class UserListPresenter : Presenter
     {
-        private BeautifulPresenter _bpresenter;
         private readonly RadListView _listView;
 
 
@@ -27,7 +27,7 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public UserListPresenter(RadListView listView, BeautifulPresenter pres)
+        public UserListPresenter(RadListView listView, SingleProfileModel model) : base(model)
         {
             if (listView == null)
                 throw new ArgumentNullException("control");
@@ -35,16 +35,23 @@ namespace BeautifulWeight.Presenter
             _listView.VisualItemCreating += UsersListView_VisualItemCreating;
             _listView.VisualItemFormatting += UsersListView_VisualItemFormatting;
             _listView.SelectedItemChanged += UsersListView_SelectedItemChanged;
-            _listView.DataSource = UserProfileManager.AllUsers;
-            UserProfileManager.UserAdded += UserAddedHandler;
-            UserProfileManager.UserRemoved += UserRemovedHandler;
-            _bpresenter = pres;
+
+            UpdateList();
+
+            Model.UserAdded += UserAddedHandler;
+            Model.UserRemoved += UserRemovedHandler;
+            Model.UserUpdated += UserUpdatedHandler;
+        }
+
+        private void UserUpdatedHandler(object sender, EventArgs e)
+        {
+            UpdateList();
         }
 
         private void UsersListView_SelectedItemChanged(object sender, EventArgs e)
         {
             if (UsersListView.CurrentItem != null)
-                _bpresenter.CurrentUser = (UserProfile)UsersListView.CurrentItem.DataBoundItem;
+                Model.CurrentUser = (UserProfile)UsersListView.CurrentItem.DataBoundItem;
         }
 
         private void UsersListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
@@ -83,7 +90,16 @@ namespace BeautifulWeight.Presenter
 
         private void UpdateList()
         {
-            UsersListView.Refresh();
+            UsersListView.DataSource = null;
+            try
+            {
+                UsersListView.DataSource = Model.AllUsers;
+            }
+            catch (Exception)
+            {
+                // ignore
+            }
+            UsersListView.CurrentItem = null;
         }
     }
 }

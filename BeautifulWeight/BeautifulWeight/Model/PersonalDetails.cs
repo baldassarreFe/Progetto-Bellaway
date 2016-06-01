@@ -37,6 +37,8 @@ namespace BeautifulWeight.Users
 
             set
             {
+                if (value == null || value == "")
+                    throw new ArgumentException();
                 _name = value;
             }
         }
@@ -50,6 +52,8 @@ namespace BeautifulWeight.Users
 
             set
             {
+                if (value == null || value == "")
+                    throw new ArgumentException();
                 _surname = value;
             }
         }
@@ -63,6 +67,10 @@ namespace BeautifulWeight.Users
 
             set
             {
+                DateTime novecento = new DateTime(1900, 1, 1);
+                DateTime now = DateTime.Today;
+                if (value.CompareTo(novecento) < 0 || value.CompareTo(now) > 0)
+                    throw new ArgumentException();
                 _birthdate = value;
             }
         }
@@ -76,6 +84,8 @@ namespace BeautifulWeight.Users
 
             set
             {
+                if (value > 250 || value < 30)
+                    throw new ArgumentException();
                 _weight = value;
             }
         }
@@ -89,6 +99,8 @@ namespace BeautifulWeight.Users
 
             set
             {
+                if (value < 110 || value > 230)
+                    throw new ArgumentException();
                 _height = value;
             }
         }
@@ -115,6 +127,8 @@ namespace BeautifulWeight.Users
 
             set
             {
+                if (value > 24 * 7 || value < 0)
+                    throw new ArgumentException();
                 _workHours = value;
             }
         }
@@ -141,6 +155,8 @@ namespace BeautifulWeight.Users
 
             set
             {
+                if (value > 24 * 7 || value < 0)
+                    throw new ArgumentException();
                 _sportHours = value;
             }
         }
