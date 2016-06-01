@@ -19,10 +19,15 @@ namespace BeautifulWeight.Presenter
         private PersonalDetailsPresenter _personalDetailsPresenter;
         private UserListPresenter _userListPresenter;
         private VersionPresenter _versionPresenter;
-        public event EventHandler UserChanged;
-        public event EventHandler UserRemoved;
-        public event EventHandler UserAdded;
+        public event EventHandler CurrentUserChanged;
 
+        public UserProfileManager UserProfileManager
+        {
+            get
+            {
+                return UserProfileManager.GetInstance();
+            }
+        }
 
         public UserProfile CurrentUser
         {
@@ -33,11 +38,8 @@ namespace BeautifulWeight.Presenter
 
             set
             {
-                if (value == null)
-                    UserRemoved(this, EventArgs.Empty);
                 _currentUser = value;
-                if (value != null)
-                    UserChanged(this, EventArgs.Empty);
+                CurrentUserChanged(this, EventArgs.Empty);
             }
         }
 
@@ -48,9 +50,14 @@ namespace BeautifulWeight.Presenter
             _form = ui;
 
             //_addUserPresenter = new AddUserPresenter(_form, this);
-            _personalDetailsPresenter = new PersonalDetailsPresenter(_form, this);
-            _userListPresenter = new UserListPresenter(_form, this);
-            _versionPresenter = new VersionPresenter(_form);
+            _personalDetailsPresenter = new PersonalDetailsPresenter(_form.ProfilePanel, _form.ProfileMenuPanel, this);
+            _userListPresenter = new UserListPresenter(_form.UsersListView, this);
+            _versionPresenter = new VersionPresenter(_form.VersionLabel);
+
+        }
+
+        public void UserRemovedHandler(object sender, )
+        {
 
         }
 

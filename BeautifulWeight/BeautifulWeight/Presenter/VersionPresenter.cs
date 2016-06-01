@@ -11,36 +11,37 @@ namespace BeautifulWeight.Presenter
 {
     class VersionPresenter
     {
-        private VersionManager _versionManager;
-        private readonly BeautifulUI _form;
+        private readonly Label _label;
 
         internal VersionManager VersionManager
         {
             get
             {
-                return _versionManager;
-            }
-
-            set
-            {
-                _versionManager = value;
+                return VersionManager.GetInstance();
             }
         }
 
-        public VersionPresenter(BeautifulUI form)
+        public Label VersionLabel
         {
-            if (form == null)
+            get
+            {
+                return _label;
+            }
+        }
+
+        public VersionPresenter(Label versionLabel)
+        {
+            if (versionLabel == null)
                 throw new ArgumentNullException("control");
-            _form = form;
-            _form.VersionLabel.Click += ClickHandler;
-            _versionManager = VersionManager.GetInstance();
-            _versionManager.VersionChanged += OnModelChanged;
-            OnModelChanged(_versionManager, EventArgs.Empty);
+            _label = versionLabel;
+            VersionLabel.Click += ClickHandler;
+            VersionManager.VersionChanged += OnModelChanged;
+            OnModelChanged(null, null);
         }
 
         protected void OnModelChanged(object sender, EventArgs e)
         {
-            _form.VersionLabel.Text = _versionManager.CurrentVersion.Description;
+            VersionLabel.Text = VersionManager.CurrentVersion.Description;
         }
 
         private void ClickHandler(object sender, EventArgs e)

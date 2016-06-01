@@ -14,38 +14,55 @@ using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.Presenter
 {
-    class PersonalDetailsPresenter
+    class PersonalDetailsPresenter : Presenter
     {
-        private BeautifulUI _form;
+        private readonly Panel _panel;
+        private readonly RadPanel _menuPanel;
         private BeautifulPresenter _bpresenter;
 
-        public UserProfileManager UserProfileManager
+        public Panel ProfilePanel
         {
             get
             {
-                return UserProfileManager.GetInstance();
+                return _panel;
             }
         }
 
-        public PersonalDetailsPresenter(BeautifulUI ui, BeautifulPresenter pres)
+        public RadPanel MenuPanel
         {
-            if (ui == null)
+            get
+            {
+                return _menuPanel;
+            }
+        }
+
+        public PersonalDetailsPresenter(Panel profilePanel, RadPanel profileMenuPanel, BeautifulPresenter pres)
+        {
+            if (profilePanel == null || profileMenuPanel == null)
                 throw new ArgumentNullException("control");
-            _form = ui;
+            _panel = profilePanel;
+            _menuPanel = profileMenuPanel;
             _bpresenter = pres;
-            _bpresenter.UserChanged += UserChangedHandler;
-            _bpresenter.UserRemoved += UserRemovedHandler;
+            _bpresenter.CurrentUserChanged += CurrentUserChangedHandler;
         }
 
 
-        public void UserChangedHandler(Object sender, EventArgs e)
+        public void CurrentUserChangedHandler(Object sender, EventArgs e)
         {
-            paintUser(_bpresenter.CurrentUser.Details);
+            UserProfile current = _bpresenter.CurrentUser;
+            if (current == null)
+            {
+                ClearUser();
+            }
+            else
+            {
+                PaintUser(current.Details);
+            }
         }
 
-        private void paintUser(PersonalDetails personalDetails)
+        private void PaintUser(PersonalDetails personalDetails)
         {
-            _form.ProfilePanel.Controls.Clear();
+            ProfilePanel.Controls.Clear();
             TableLayoutPanel detailsPanel = new TableLayoutPanel();
             detailsPanel.RowCount = personalDetails.GetType().GetProperties().Length;
             detailsPanel.ColumnCount = 2;
@@ -85,7 +102,7 @@ namespace BeautifulWeight.Presenter
                 else if (pi.PropertyType == typeof(DateTime))
                 {
                     DateTimePicker value = new DateTimePicker();
-                    value.Value = (DateTime) pi.GetValue(personalDetails);
+                    value.Value = (DateTime)pi.GetValue(personalDetails);
                     value.Enabled = false;
                     value.Format = DateTimePickerFormat.Short;
                     value.Dock = DockStyle.Fill;
@@ -117,7 +134,7 @@ namespace BeautifulWeight.Presenter
                             r.Checked = true;
                         r.Enabled = false;
                         r.Location = new Point(0, y);
-                        y += r.Size.Height; 
+                        y += r.Size.Height;
                         value.Controls.Add(r);
                     }
                     value.Dock = DockStyle.Fill;
@@ -146,7 +163,7 @@ namespace BeautifulWeight.Presenter
                 detailsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             }
 
-            _form.ProfilePanel.Controls.Add(detailsPanel);
+            ProfilePanel.Controls.Add(detailsPanel);
 
             TableLayoutPanel buttonPanel = new TableLayoutPanel();
             buttonPanel.RowCount = 1;
@@ -168,25 +185,25 @@ namespace BeautifulWeight.Presenter
             {
                 buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             }
-            _form.ProfileMenuPanel.Controls.Clear();
-            _form.ProfileMenuPanel.Controls.Add(buttonPanel);
+            MenuPanel.Controls.Clear();
+            MenuPanel.Controls.Add(buttonPanel);
         }
 
         private void DeleteClickHandler(object sender, EventArgs e)
         {
-            _bpresenter.CurrentUser = null;
+            UserProfileManager.Remove(_bpresenter.CurrentUser);
         }
 
 
-        private void UserRemovedHandler(object sender, EventArgs e)
+        private void ClearUser()
         {
-            _form.ProfileMenuPanel.Controls.Clear();
-            _form.ProfilePanel.Controls.Clear();
+            ProfilePanel.Controls.Clear();
+            ProfilePanel.Controls.Clear();
         }
 
         private void ModifyClickHandler(Object sender, EventArgs e)
         {
-            TableLayoutPanel detailsPanel = (TableLayoutPanel)_form.ProfilePanel.Controls[0];
+            TableLayoutPanel detailsPanel = (TableLayoutPanel)ProfilePanel.Controls[0];
             for (int i = 0; i < detailsPanel.RowCount; i++)
             {
                 Control control = detailsPanel.GetControlFromPosition(1, i);
@@ -225,8 +242,8 @@ namespace BeautifulWeight.Presenter
             {
                 buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             }
-            _form.ProfileMenuPanel.Controls.Clear();
-            _form.ProfileMenuPanel.Controls.Add(buttonPanel);
+            MenuPanel.Controls.Clear();
+            MenuPanel.Controls.Add(buttonPanel);
         }
 
         private void SaveClickHandler(object sender, EventArgs e)
@@ -236,7 +253,7 @@ namespace BeautifulWeight.Presenter
 
         private void RestoreClickHandler(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CurrentUserChangedHandler(this, EventArgs.Empty);
         }
     }
 }

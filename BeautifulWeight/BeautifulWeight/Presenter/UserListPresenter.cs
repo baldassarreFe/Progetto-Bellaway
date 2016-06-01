@@ -9,96 +9,81 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.Presenter
 {
-    class UserListPresenter
+    class UserListPresenter : Presenter
     {
-        private readonly BeautifulUI _form;
         private BeautifulPresenter _bpresenter;
+        private readonly RadListView _listView;
 
-        public UserProfileManager UserProfileManager
+
+        public RadListView UsersListView
         {
             get
             {
-                return UserProfileManager.GetInstance();
+                return _listView;
             }
         }
 
-        public UserListPresenter(BeautifulUI ui, BeautifulPresenter pres)
+        public UserListPresenter(RadListView listView, BeautifulPresenter pres)
         {
-            if (ui == null)
+            if (listView == null)
                 throw new ArgumentNullException("control");
-            _form = ui;
+            _listView = listView;
+            _listView.VisualItemCreating += UsersListView_VisualItemCreating;
+            _listView.VisualItemFormatting += UsersListView_VisualItemFormatting;
+            _listView.SelectedItemChanged += UsersListView_SelectedItemChanged;
+            _listView.DataSource = UserProfileManager.AllUsers;
+            UserProfileManager.UserAdded += UserAddedHandler;
+            UserProfileManager.UserRemoved += UserRemovedHandler;
             _bpresenter = pres;
-            _bpresenter.UserRemoved += UserRemovedHandler;
-
-            repaint();
-
         }
 
-        protected void OnModelChanged(object sender, EventArgs e)
+        private void UsersListView_SelectedItemChanged(object sender, EventArgs e)
         {
-            repaint();
+            if (UsersListView.CurrentItem != null)
+                _bpresenter.CurrentUser = (UserProfile)UsersListView.CurrentItem.DataBoundItem;
         }
 
-        public void ClickHandler(object sender, EventArgs e)
+        private void UsersListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
         {
-            UserStrip selectedUs = (UserStrip) ((Control)sender).Tag;
-            foreach (UserStrip us in _form.UsersListView.Controls.OfType<UserStrip>())
+            if (e.VisualItem.Current)
             {
-                us.BackColor = Color.White;
-                us.ProfileImg.BackColor = Color.White;
-                us.ProfileDetails.BackColor = Color.White;
+                e.VisualItem.NumberOfColors = 1;
+                e.VisualItem.BackColor = Color.Orange;
+                e.VisualItem.BorderColor = Color.Orange;
             }
-            selectedUs.BackColor = Color.Yellow;
-            selectedUs.ProfileImg.BackColor = Color.Yellow;
-            selectedUs.ProfileDetails.BackColor = Color.Yellow;
-            UserProfile up = (UserProfile) selectedUs.Tag;
-            _bpresenter.CurrentUser = up;
-
-
-            // TODO: chiamare metodi sui presenter di centro e destra
-        }
-
-        private void repaint()
-        {
-            _form.UsersListView.Controls.Clear();
-            foreach (UserProfile up in UserProfileManager.AllUsers)
+            else
             {
-                UserStrip us = new UserStrip();
-                us.Nome = up.Details.Name;
-                us.Cognome = up.Details.Surname;
-                us.Parent = _form.UsersListView;
-                us.AutoSize = true;
-                us.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-                us.Width = us.Parent.Width;
-
-                setClickAndTag(us, us);
-
-                us.Tag = up;
-
-                int counter = _form.UsersListView.Controls.Count - 1;
-                int height = _form.UsersListView.Controls[0].Height;
-                us.Location = new Point(0, counter * height);
-                _form.UsersListView.Controls.Add(us);
+                e.VisualItem.NumberOfColors = 1;
+                e.VisualItem.BackColor = Color.Aqua;
+                e.VisualItem.BorderColor = Color.Aqua;
             }
         }
 
-        private void setClickAndTag(Control control, UserStrip us)
+        private void UsersListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
         {
-            foreach (Control c in control.Controls)
+            if (UsersListView.ViewType == ListViewType.ListView)
             {
-                c.Tag = us;
-                c.Click += ClickHandler;
-                setClickAndTag(c, us);
+                e.VisualItem = new UserStripVisualItem2();
             }
         }
 
-        private void UserRemovedHandler(object sender, EventArgs e)
+        public void UserRemovedHandler(object sender, EventArgs e)
         {
-            UserProfileManager.Remove(_bpresenter.CurrentUser);
-            repaint();
+            UpdateList();
+        }
+
+        public void UserAddedHandler(object sender, EventArgs e)
+        {
+            UpdateList();
+        }
+
+        private void UpdateList()
+        {
+            UsersListView.Refresh();
         }
     }
 }

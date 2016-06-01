@@ -101,20 +101,28 @@ namespace BeautifulWeight.View
             // 
             // 
             this._users.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this._users.Size = new System.Drawing.Size(162, 451);
-            this._users.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(-0.1200632F, 0F);
-            this._users.SizeInfo.SplitterCorrection = new System.Drawing.Size(-76, 0);
+            this._users.Size = new System.Drawing.Size(116, 451);
+            this._users.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(-0.1810155F, 0F);
+            this._users.SizeInfo.SplitterCorrection = new System.Drawing.Size(-122, 0);
             this._users.TabIndex = 0;
             this._users.TabStop = false;
             this._users.Text = "splitPanel1";
             // 
             // _usersListView
             // 
+            this._usersListView.AllowColumnReorder = false;
+            this._usersListView.AllowColumnResize = false;
+            this._usersListView.AllowEdit = false;
+            this._usersListView.AllowRemove = false;
             this._usersListView.AutoScroll = true;
             this._usersListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._usersListView.FullRowSelect = false;
+            this._usersListView.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
+            this._usersListView.ItemSize = new System.Drawing.Size(300, 100);
             this._usersListView.Location = new System.Drawing.Point(0, 0);
             this._usersListView.Name = "_usersListView";
-            this._usersListView.Size = new System.Drawing.Size(162, 415);
+            this._usersListView.ShowColumnHeaders = false;
+            this._usersListView.Size = new System.Drawing.Size(116, 415);
             this._usersListView.TabIndex = 1;
             this._usersListView.Text = "_usersListView";
             // 
@@ -124,7 +132,7 @@ namespace BeautifulWeight.View
             this._usersMenuPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._usersMenuPanel.Location = new System.Drawing.Point(0, 415);
             this._usersMenuPanel.Name = "_usersMenuPanel";
-            this._usersMenuPanel.Size = new System.Drawing.Size(162, 36);
+            this._usersMenuPanel.Size = new System.Drawing.Size(116, 36);
             this._usersMenuPanel.TabIndex = 0;
             // 
             // _aggiungiButton
@@ -132,7 +140,7 @@ namespace BeautifulWeight.View
             this._aggiungiButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this._aggiungiButton.Location = new System.Drawing.Point(0, 0);
             this._aggiungiButton.Name = "_aggiungiButton";
-            this._aggiungiButton.Size = new System.Drawing.Size(162, 36);
+            this._aggiungiButton.Size = new System.Drawing.Size(116, 36);
             this._aggiungiButton.TabIndex = 3;
             this._aggiungiButton.Text = "Aggiungi";
             // 
@@ -140,15 +148,15 @@ namespace BeautifulWeight.View
             // 
             this._profile.Controls.Add(this._profilePanel);
             this._profile.Controls.Add(this._profileMenuPanel);
-            this._profile.Location = new System.Drawing.Point(162, 0);
+            this._profile.Location = new System.Drawing.Point(116, 0);
             this._profile.Name = "_profile";
             // 
             // 
             // 
             this._profile.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this._profile.Size = new System.Drawing.Size(263, 451);
-            this._profile.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.01263821F, 0F);
-            this._profile.SizeInfo.SplitterCorrection = new System.Drawing.Size(8, 0);
+            this._profile.Size = new System.Drawing.Size(309, 451);
+            this._profile.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.07328919F, 0F);
+            this._profile.SizeInfo.SplitterCorrection = new System.Drawing.Size(54, 0);
             this._profile.TabIndex = 1;
             this._profile.TabStop = false;
             this._profile.Text = "splitPanel2";
@@ -158,7 +166,7 @@ namespace BeautifulWeight.View
             this._profilePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._profilePanel.Location = new System.Drawing.Point(0, 0);
             this._profilePanel.Name = "_profilePanel";
-            this._profilePanel.Size = new System.Drawing.Size(263, 415);
+            this._profilePanel.Size = new System.Drawing.Size(309, 415);
             this._profilePanel.TabIndex = 2;
             // 
             // _profileMenuPanel
@@ -166,7 +174,7 @@ namespace BeautifulWeight.View
             this._profileMenuPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._profileMenuPanel.Location = new System.Drawing.Point(0, 415);
             this._profileMenuPanel.Name = "_profileMenuPanel";
-            this._profileMenuPanel.Size = new System.Drawing.Size(263, 36);
+            this._profileMenuPanel.Size = new System.Drawing.Size(309, 36);
             this._profileMenuPanel.TabIndex = 1;
             // 
             // _diet
@@ -181,7 +189,7 @@ namespace BeautifulWeight.View
             // 
             this._diet.RootElement.MinSize = new System.Drawing.Size(0, 0);
             this._diet.Size = new System.Drawing.Size(334, 451);
-            this._diet.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.1074249F, 0F);
+            this._diet.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.1077263F, 0F);
             this._diet.SizeInfo.SplitterCorrection = new System.Drawing.Size(68, 0);
             this._diet.TabIndex = 2;
             this._diet.TabStop = false;
@@ -329,4 +337,3 @@ namespace BeautifulWeight.View
         private RadButton _aggiungiButton;
     }
 }
-
