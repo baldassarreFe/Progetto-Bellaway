@@ -77,5 +77,13 @@ namespace BeautifulWeight.Users
                 _details = value;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(UserProfile))
+                return false;
+            UserProfile up = (UserProfile)obj;
+            return (Details.Name == up.Details.Name && Details.Surname == up.Details.Surname);
+        }
     }
 }

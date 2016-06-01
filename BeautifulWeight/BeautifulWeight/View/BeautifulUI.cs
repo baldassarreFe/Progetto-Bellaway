@@ -24,7 +24,10 @@ namespace BeautifulWeight.View
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            BeautifulPresenter presenter = new BeautifulPresenter(this);
+            SingleProfileModel model = new SingleProfileModel();
+            UserListPresenter ulpresenter = new UserListPresenter(this.UsersListView, model);
+            PersonalDetailsPresenter pdpresenter = new PersonalDetailsPresenter(this.ProfilePanel, this.ProfileMenuPanel, model);
+            VersionPresenter vpresenter = new VersionPresenter(this.VersionLabel);
         }
 
 

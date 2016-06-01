@@ -9,11 +9,18 @@ namespace BeautifulWeight.Presenter
 {
     public abstract class Presenter
     {
-        public UserProfileManager UserProfileManager
+        private readonly SingleProfileModel _model;
+
+        public Presenter(SingleProfileModel model)
+        {
+            this._model = model;
+        }
+
+        public SingleProfileModel Model
         {
             get
             {
-                return UserProfileManager.GetInstance();
+                return _model;
             }
         }
     }
