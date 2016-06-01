@@ -66,10 +66,10 @@ namespace BeautifulWeight.Presenter
                 {
                     RadRating value = new RadRating();
                     value.Items.AddRange(new Telerik.WinControls.RadItem[] { new RatingHeartVisualElement(),
-            new RatingHeartVisualElement(),
-            new RatingHeartVisualElement(),
-            new RatingHeartVisualElement(),
-            new RatingHeartVisualElement()});
+                                                                                new RatingHeartVisualElement(),
+                                                                                new RatingHeartVisualElement(),
+                                                                                new RatingHeartVisualElement(),
+                                                                                new RatingHeartVisualElement()});
 
                     value.SelectionMode = RatingSelectionMode.FullItem;
                     value.Minimum = 0;
@@ -79,6 +79,48 @@ namespace BeautifulWeight.Presenter
                     value.ReadOnly = true;
                     value.Dock = DockStyle.Fill;
                     value.Anchor = AnchorStyles.None;
+                    detailsPanel.Controls.Add(value, 1, i++);
+                }
+
+                else if (pi.PropertyType == typeof(DateTime))
+                {
+                    DateTimePicker value = new DateTimePicker();
+                    value.Value = (DateTime) pi.GetValue(personalDetails);
+                    value.Enabled = false;
+                    value.Format = DateTimePickerFormat.Short;
+                    value.Dock = DockStyle.Fill;
+                    value.DropDownAlign = LeftRightAlignment.Right;
+                    detailsPanel.Controls.Add(value, 1, i++);
+                }
+
+                else if (pi.PropertyType == typeof(int))
+                {
+                    NumericUpDown value = new NumericUpDown();
+                    value.Minimum = 0;
+                    value.Maximum = 1000;
+                    value.Value = (int)pi.GetValue(personalDetails);
+                    value.Enabled = false;
+                    value.Dock = DockStyle.Fill;
+                    value.TextAlign = HorizontalAlignment.Center;
+                    detailsPanel.Controls.Add(value, 1, i++);
+                }
+
+                else if (pi.PropertyType.IsEnum)
+                {
+                    GroupBox value = new GroupBox();
+                    int y = 0;
+                    foreach (object o in Enum.GetValues(pi.PropertyType))
+                    {
+                        RadioButton r = new RadioButton();
+                        r.Text = o.ToString();
+                        if (o.Equals(pi.GetValue(personalDetails)))
+                            r.Checked = true;
+                        r.Enabled = false;
+                        r.Location = new Point(0, y);
+                        y += r.Size.Height; 
+                        value.Controls.Add(r);
+                    }
+                    value.Dock = DockStyle.Fill;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -94,7 +136,8 @@ namespace BeautifulWeight.Presenter
             }
 
             float percent = 100F / detailsPanel.RowCount;
-            for (int j = 0; j < detailsPanel.RowCount; j++) {
+            for (int j = 0; j < detailsPanel.RowCount; j++)
+            {
                 detailsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, percent));
             }
 
@@ -110,7 +153,7 @@ namespace BeautifulWeight.Presenter
             buttonPanel.ColumnCount = 2;
             RadButton modifica = new RadButton();
             modifica.Text = "Modifica";
-            modifica.Click += ModifierHandler;
+            modifica.Click += ModifyClickHandler;
             RadButton elimina = new RadButton();
             elimina.Text = "Elimina";
             elimina.Click += DeleteClickHandler;
@@ -125,6 +168,7 @@ namespace BeautifulWeight.Presenter
             {
                 buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             }
+            _form.ProfileMenuPanel.Controls.Clear();
             _form.ProfileMenuPanel.Controls.Add(buttonPanel);
         }
 
@@ -133,27 +177,66 @@ namespace BeautifulWeight.Presenter
             _bpresenter.CurrentUser = null;
         }
 
+
         private void UserRemovedHandler(object sender, EventArgs e)
         {
             _form.ProfileMenuPanel.Controls.Clear();
             _form.ProfilePanel.Controls.Clear();
         }
 
-        private void ModifierHandler(Object sender, EventArgs e)
+        private void ModifyClickHandler(Object sender, EventArgs e)
         {
             TableLayoutPanel detailsPanel = (TableLayoutPanel)_form.ProfilePanel.Controls[0];
-            for (int i=0; i<detailsPanel.RowCount; i++)
+            for (int i = 0; i < detailsPanel.RowCount; i++)
             {
                 Control control = detailsPanel.GetControlFromPosition(1, i);
-                if (control.GetType() == typeof(Load))
+                if (control.GetType() == typeof(RadRating))
                 {
+                    ((RadRating)control).ReadOnly = false;
+                }
+                else if (control.GetType() == typeof(GroupBox))
+                {
+                    (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
                 }
                 else
                 {
                     control.Enabled = true;
                 }
-               
+
             }
+
+            TableLayoutPanel buttonPanel = new TableLayoutPanel();
+            buttonPanel.RowCount = 1;
+            buttonPanel.ColumnCount = 2;
+            RadButton salva = new RadButton();
+            salva.Text = "Salva";
+            salva.Click += SaveClickHandler;
+            RadButton annulla = new RadButton();
+            annulla.Text = "Annulla";
+            annulla.Click += RestoreClickHandler;
+
+            salva.Dock = DockStyle.Fill;
+            annulla.Dock = DockStyle.Fill;
+            buttonPanel.Controls.Add(salva, 0, 0);
+            buttonPanel.Controls.Add(annulla, 1, 0);
+            buttonPanel.Dock = DockStyle.Fill;
+
+            for (int j = 0; j < buttonPanel.ColumnCount; j++)
+            {
+                buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            }
+            _form.ProfileMenuPanel.Controls.Clear();
+            _form.ProfileMenuPanel.Controls.Add(buttonPanel);
+        }
+
+        private void SaveClickHandler(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RestoreClickHandler(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
