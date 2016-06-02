@@ -10,5 +10,9 @@ namespace BeautifulWeight.Model
     interface TargetWeightFormula
     {
         double calculate(PersonalDetails pd);
+        string Description
+        {
+            get;
+        }
     }
 }

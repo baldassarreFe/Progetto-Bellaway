@@ -191,7 +191,7 @@ namespace BeautifulWeight.Presenter
                 goal.Controls.Add(r);
             }
             goal.Dock = DockStyle.Fill;
-            goal.Tag = up.Goal.GetType();
+            goal.Tag = up.GetType().GetProperty("Goal");
             detailsPanel.Controls.Add(goal, 1, i++);
 
             Label prefLabel = new Label();
@@ -205,15 +205,15 @@ namespace BeautifulWeight.Presenter
             string pref = "";
             foreach (object o in up.Preferences)
             {
-                if (up.Preferences.IndexOf((Kitchen.Ingredient)o) == up.Preferences.Count - 1)
-                    pref += o.ToString() + ".";
-                else pref += o.ToString() + ", ";
+                pref += o.ToString();
+                if (up.Preferences.IndexOf((Kitchen.Ingredient)o) != up.Preferences.Count - 1)
+                    pref+= ", ";
             }
             preferences.Text = pref;
             preferences.Dock = DockStyle.Fill;
             preferences.TextAlign = ContentAlignment.MiddleCenter;
             preferences.BorderStyle = BorderStyle.Fixed3D;
-            preferences.Tag = up.Preferences.GetType();
+            preferences.Tag = up.GetType().GetProperty("Preferences");
             detailsPanel.Controls.Add(preferences, 1, i++);
 
 
@@ -275,7 +275,10 @@ namespace BeautifulWeight.Presenter
                 o = Convert.ChangeType(field.Text, pi.PropertyType);
             try
             {
-                pi.SetValue(Model.CurrentUser.Details, o);
+                if (typeof(PersonalDetails).GetProperties().Contains(pi))
+                    pi.SetValue(Model.CurrentUser.Details, o);
+                else
+                    pi.SetValue(Model.CurrentUser, o);
             }
             catch (Exception)
             {
@@ -310,14 +313,10 @@ namespace BeautifulWeight.Presenter
                 {
                     (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
                 }
-                else if (control.Tag is Type && ((Type)control.Tag).GetInterfaces().Contains(typeof(IList)) && ((Type)control.Tag).IsGenericType)
+                else if (control.Tag is PropertyInfo && ((PropertyInfo)control.Tag).PropertyType.GetInterfaces().Contains(typeof(IList)) && ((PropertyInfo)control.Tag).PropertyType.IsGenericType)
                 {
-                    Button modificaPref = new Button();
-                    modificaPref.Text = "Modifica";
-                    modificaPref.Click += ModificaPreferenzeClickHandler;
-                    modificaPref.Dock = DockStyle.Fill;
-                    detailsPanel.Controls.Remove(control);
-                    detailsPanel.Controls.Add(modificaPref, 1, i);
+                    control.Click += ModificaPreferenzeClickHandler;
+                    control.BackColor = Color.White;
                 }
                 else
                 {
@@ -325,7 +324,6 @@ namespace BeautifulWeight.Presenter
                 }
 
             }
-
             TableLayoutPanel buttonPanel = new TableLayoutPanel();
             buttonPanel.RowCount = 1;
             buttonPanel.ColumnCount = 2;
@@ -367,10 +365,10 @@ namespace BeautifulWeight.Presenter
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                List<Ingredient> newPrefs = new List<Ingredient>(); 
+                List<Ingredient> newPrefs = new List<Ingredient>();
                 foreach (ListViewDataItem element in dialog.PreferencesList.CheckedItems)
                 {
-                    Ingredient i = (Ingredient) element.DataBoundItem;
+                    Ingredient i = (Ingredient)element.DataBoundItem;
                     newPrefs.Add(i);
                 }
                 Model.CurrentUser.Preferences = newPrefs;

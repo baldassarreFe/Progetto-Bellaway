@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautifulWeight.Persistence.Xml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace BeautifulWeight.Persistence
 
         static PersistenceManager() {
             _persistors = new List<Persistor>();
-            _persistors.Add(MockPersistence.GetInstance());
+            _persistors.Add(new XmlPersistence());
         }
 
         public static T getPersistenceManager<T>() where T:Persistor

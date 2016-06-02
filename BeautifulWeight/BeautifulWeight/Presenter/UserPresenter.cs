@@ -85,7 +85,7 @@ namespace BeautifulWeight.Presenter
         {
             if (UsersListView.ViewType == ListViewType.ListView)
             {
-                e.VisualItem = new UserStripVisualItem2();
+                e.VisualItem = new UserStripVisualItem();
             }
         }
 

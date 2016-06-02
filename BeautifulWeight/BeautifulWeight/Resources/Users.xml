@@ -5,7 +5,7 @@
       <Name>Beppe</Name>
       <Surname>Maniglia</Surname>
       <Birthdate>25-08-1960</Birthdate>
-      <Weight>75000</Weight>
+      <Weight>75</Weight>
       <Height>180</Height>
       <Sex>MALE</Sex>
       <WorkHours>40</WorkHours>
@@ -79,7 +79,7 @@
           <serving dish="Salsiccia al forno con patate" quantity="50"></serving>
         </meal>
       </day>
-      <day day="sathurday">
+      <day day="saturday">
         <meal name="colazione" hour="09" minute="00">
           <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
         </meal>

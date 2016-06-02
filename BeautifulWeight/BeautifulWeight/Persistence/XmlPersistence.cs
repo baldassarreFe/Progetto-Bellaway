@@ -9,15 +9,14 @@ using BeautifulWeight.Menu;
 
 namespace BeautifulWeight.Persistence.Xml
 {
-    class XmlPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor, DietPersistor
+    public class XmlPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor
     {
-        private static XmlPersistence _persistence = new XmlPersistence();
         private IList<UserProfile> _profiles;
         private ISet<Dish> _dishes;
         private ISet<Ingredient> _ingredients;
         private Version _version;
 
-        private XmlPersistence()
+        public XmlPersistence()
         {
             _version = StandardVersion.GetInstance();
 
@@ -41,31 +40,64 @@ namespace BeautifulWeight.Persistence.Xml
             {
                 UserProfile up = new UserProfile();
                 PersonalDetails pd = new PersonalDetails();
-                foreach(XmlElement detail in userNode.SelectNodes("/personaldetails/*"))
+                foreach (XmlElement detail in userNode.SelectNodes("personaldetails/*"))
                 {
                     var propertyInfo = pd.GetType().GetProperty(detail.LocalName);
                     if (propertyInfo != null)
                     {
-                        propertyInfo.SetValue(pd, System.Convert.ChangeType(detail.InnerText, propertyInfo.PropertyType));
+                        if (propertyInfo.PropertyType.IsEnum)
+                            propertyInfo.SetValue(pd, System.Enum.Parse(propertyInfo.PropertyType, detail.InnerText, true));
+                        else
+                            propertyInfo.SetValue(pd, System.Convert.ChangeType(detail.InnerText, propertyInfo.PropertyType));
                     }
                 }
                 up.Details = pd;
 
-                up.Goal = (Goal) System.Enum.Parse(typeof(Goal), userNode.SelectSingleNode("/goal").InnerText, true);
+                up.Goal = (Goal)System.Enum.Parse(typeof(Goal), userNode.SelectSingleNode("goal").InnerText, true);
 
                 List<Ingredient> preferences = new List<Ingredient>();
-                foreach (XmlElement ingredientNode in userNode.SelectNodes("/preferences/ingredient"))
+                foreach (XmlElement ingredientNode in userNode.SelectNodes("preferences/ingredient"))
                 {
                     preferences.Add(ingredientNode.InnerText);
                 }
                 up.Preferences = preferences;
 
-                WeeklyMenu wm = new WeeklyMenu(userNode.SelectSingleNode("/menu").Attributes["dietCalculator"].InnerText);
-                foreach (XmlElement dayNode in userNode.SelectNodes("/menu/day"))
+                WeeklyMenu wm = new WeeklyMenu(userNode.SelectSingleNode("menu").Attributes["dietCalculator"].InnerText);
+                foreach (XmlElement dayNode in userNode.SelectNodes("menu/day"))
                 {
-                    preferences.Add(dayNode.InnerText);
                     DailyMenu dm = wm[(System.DayOfWeek)System.Enum.Parse(typeof(System.DayOfWeek), dayNode.Attributes["day"].InnerText, true)];
+                    foreach (XmlElement mealNode in dayNode.SelectNodes("meal"))
+                    {
 
+                        string name = mealNode.Attributes["name"].InnerText;
+                        string hour = mealNode.Attributes["hour"].InnerText;
+                        string minute = mealNode.Attributes["minute"].InnerText;
+                        DateTime time = new DateTime(2000, 1, 1, int.Parse(hour), int.Parse(minute), 0);
+                        List<Serving> servings = new List<Serving>();
+
+                        foreach (XmlElement servingNode in mealNode.SelectNodes("serving"))
+                        {
+                            Dish dish = null;
+                            // una ricerca migliore??
+                            foreach (Dish d in _dishes)
+                            {
+                                if (d.Name == servingNode.Attributes["dish"].InnerText)
+                                {
+                                    dish = d;
+                                    break;
+                                }
+                            }
+                            int quantity = int.Parse(servingNode.Attributes["quantity"].InnerText);
+                            servings.Add(new Serving(dish, quantity));
+                        }
+
+                        NonEmptyList<Serving> nonEmpty = new NonEmptyList<Serving>(servings[0]);
+                        for (int i = 1; i < servings.Count; i++)
+                        {
+                            nonEmpty.Add(servings[i]);
+                        }
+                        dm.Meals.Add(new Meal(name, time, nonEmpty));
+                    }
                 }
                 up.Diet = wm;
 
@@ -100,7 +132,7 @@ namespace BeautifulWeight.Persistence.Xml
                 double proteins = XmlConvert.ToDouble(dishNode.Attributes["proteins"].Value);
                 double fats = XmlConvert.ToDouble(dishNode.Attributes["fats"].Value);
 
-                XmlNodeList ingredientNodes = dishNode.SelectNodes("/ingredient");
+                XmlNodeList ingredientNodes = dishNode.SelectNodes("ingredient");
                 List<Ingredient> ingredients = new List<Ingredient>();
                 foreach (XmlElement ingredientNode in ingredientNodes)
                 {
@@ -122,14 +154,9 @@ namespace BeautifulWeight.Persistence.Xml
             return _dishes;
         }
 
-        internal static XmlPersistence GetInstance()
-        {
-            return _persistence;            
-        }
-
         public ISet<Ingredient> LoadIngredients()
         {
-            return null;
+            return _ingredients;
         }
 
         public IList<UserProfile> LoadProfiles()

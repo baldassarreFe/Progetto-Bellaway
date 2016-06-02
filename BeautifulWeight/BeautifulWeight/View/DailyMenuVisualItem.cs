@@ -12,13 +12,15 @@ using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.View
 {
-    class UserStripVisualItem2 : IconListViewVisualItem
+    class DailyMenuVisualItem : IconListViewVisualItem
     {
-        
+        MealsListView _mealsListView;
 
         protected override void CreateChildElements()
         {
             base.CreateChildElements();
+            _mealsListView = new MealsListView();
+            // this.Children.Add(_mealsListView);
         }
 
         protected override void SynchronizeProperties()
@@ -28,8 +30,8 @@ namespace BeautifulWeight.View
             Image img = Image.FromFile("../../Resources/user.png");
             img = img.GetThumbnailImage(80, 80, null, IntPtr.Zero);
             this.Image = img;
-            this.Text = "<html>      "+ ((PersonalDetails)Data["Details"]).Name+ 
-                "<br/><br/>      " + ((PersonalDetails)Data["Details"]).Surname+"</html>";
+            this.Text = "<html>      " + ((PersonalDetails)Data["Details"]).Name +
+                "<br/><br/>      " + ((PersonalDetails)Data["Details"]).Surname + "</html>";
             this.DrawFill = true;
             this.BackColor = Color.Aqua;
             this.GradientStyle = GradientStyles.Solid;

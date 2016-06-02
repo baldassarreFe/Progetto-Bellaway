@@ -48,6 +48,7 @@ namespace BeautifulWeight.Kitchen
         }
     }
 
+    // si può gestire a flyweight come Ingredient
     public class Dish
     {
         private readonly string _name;

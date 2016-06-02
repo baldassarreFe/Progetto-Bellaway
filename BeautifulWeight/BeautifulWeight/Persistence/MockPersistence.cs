@@ -7,7 +7,7 @@ using DateTime = System.DateTime;
 
 namespace BeautifulWeight.Persistence
 {
-    class MockPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor, DietPersistor
+    class MockPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor
     {
         private static MockPersistence _persistence = new MockPersistence();
         private IList<UserProfile> _profiles;
