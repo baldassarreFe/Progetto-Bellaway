@@ -59,6 +59,12 @@
     <Compile Include="View\DailyMenuListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\MealStrip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MealStrip.Designer.cs">
+      <DependentUpon>MealStrip.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\MealVisualItem.cs" />
     <Compile Include="Presenter\MenuPresenter.cs" />
     <Compile Include="Presenter\PersonalDetailsPresenter.cs" />
@@ -91,6 +97,12 @@
     <Compile Include="View\MealsListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\MenuDayStrip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MenuDayStrip.Designer.cs">
+      <DependentUpon>MenuDayStrip.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserStrip.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +124,12 @@
     </Compile>
     <EmbeddedResource Include="View\BeautifulUI.resx">
       <DependentUpon>BeautifulUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MealStrip.resx">
+      <DependentUpon>MealStrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MenuDayStrip.resx">
+      <DependentUpon>MenuDayStrip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserStrip.resx">
       <DependentUpon>UserStrip.cs</DependentUpon>
