@@ -58,6 +58,7 @@
     <Compile Include="Model\ManagerProvider.cs" />
     <Compile Include="Persistence\XmlPersistence.cs" />
     <Compile Include="Model\SingleProfileModel.cs" />
+    <Compile Include="Utils\IEnumerableExtensione.cs" />
     <Compile Include="View\DailyMenuListView.cs">
       <SubType>Component</SubType>
     </Compile>

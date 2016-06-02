@@ -1,4 +1,5 @@
 ﻿using BeautifulWeight.Menu;
+using BeautifulWeight.Users;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +13,8 @@ namespace BeautifulWeight.DietCalculators
     public interface DietCalculator
     {
         string Description { get; }
-        WeeklyMenu NewMenu();
-        Serving GetEquivalent(Serving serving);
+        WeeklyMenu NewMenu(UserProfile userProfile);
+        Serving GetEquivalent(Serving serving, UserProfile userProfile);
         bool IsCompatibleWith(Goal goal);
     }
 

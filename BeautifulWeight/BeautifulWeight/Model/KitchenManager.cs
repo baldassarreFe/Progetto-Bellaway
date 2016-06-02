@@ -22,5 +22,18 @@ namespace BeautifulWeight.Model
                 return _ingredients;
             }
         }
+
+        private ISet<Dish> _dishes;
+
+        public IEnumerable<Dish> Dishes
+        {
+            get
+            {
+                if (_dishes != null)
+                    return _dishes;
+                _dishes = PersistenceManager.getPersistenceManager<KitchenPersistor>().LoadDishes();
+                return _dishes;
+            }
+        }
     }
 }
