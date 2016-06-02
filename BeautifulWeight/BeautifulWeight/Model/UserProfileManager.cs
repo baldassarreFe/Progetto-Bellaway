@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace BeautifulWeight.Model
 {
-    public class UserProfileManager
+    public class UserProfileManager : Manager
     {
 
         private IList<UserProfile> _allUsers;
-        private static UserProfileManager _instance;
 
         public event EventHandler UserRemoved;
         public event EventHandler UserAdded;
@@ -68,11 +67,5 @@ namespace BeautifulWeight.Model
                 UserUpdated(this, EventArgs.Empty);
         }
 
-        public static UserProfileManager GetInstance()
-        {
-            if (_instance == null)
-                _instance = new UserProfileManager();
-            return _instance;
-        }
     }
 }

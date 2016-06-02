@@ -1,7 +1,10 @@
-﻿using BeautifulWeight.Model;
+﻿using BeautifulWeight.DietCalculators;
+using BeautifulWeight.Kitchen;
+using BeautifulWeight.Model;
 using BeautifulWeight.Users;
 using BeautifulWeight.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -54,17 +57,20 @@ namespace BeautifulWeight.Presenter
             }
             else
             {
-                PaintUser(current.Details);
+                PaintUser(current);
             }
         }
 
-        private void PaintUser(PersonalDetails personalDetails)
+        private void PaintUser(UserProfile up)
         {
+            PersonalDetails personalDetails = up.Details;
             ProfilePanel.Controls.Clear();
             TableLayoutPanel detailsPanel = new TableLayoutPanel();
-            detailsPanel.RowCount = personalDetails.GetType().GetProperties().Length;
+            detailsPanel.RowCount = personalDetails.GetType().GetProperties().Length + 2;
             detailsPanel.ColumnCount = 2;
-            detailsPanel.Dock = DockStyle.Fill;
+            detailsPanel.Dock = DockStyle.Top;
+            detailsPanel.AutoSize = true;
+
 
 
             int i = 0;
@@ -96,7 +102,6 @@ namespace BeautifulWeight.Presenter
                     value.Anchor = AnchorStyles.None;
                     value.Tag = pi;
                     value.LostFocus += FieldChangedHandler;
-                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -110,7 +115,6 @@ namespace BeautifulWeight.Presenter
                     value.DropDownAlign = LeftRightAlignment.Right;
                     value.Tag = pi;
                     value.Leave += FieldChangedHandler;
-                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -125,7 +129,6 @@ namespace BeautifulWeight.Presenter
                     value.TextAlign = HorizontalAlignment.Center;
                     value.Tag = pi;
                     value.Leave += FieldChangedHandler;
-                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -144,10 +147,10 @@ namespace BeautifulWeight.Presenter
                         y += r.Size.Height;
                         value.Tag = pi;
                         value.Leave += FieldChangedHandler;
-                        value.GotFocus += ResetBackColorHandler;
                         value.Controls.Add(r);
                     }
                     value.Dock = DockStyle.Fill;
+                    value.AutoSize = true;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
 
@@ -160,21 +163,72 @@ namespace BeautifulWeight.Presenter
                     value.BorderStyle = BorderStyle.Fixed3D;
                     value.Tag = pi;
                     value.Leave += FieldChangedHandler;
-                    value.GotFocus += ResetBackColorHandler;
                     detailsPanel.Controls.Add(value, 1, i++);
                 }
             }
 
-            float percent = 100F / detailsPanel.RowCount;
-            for (int j = 0; j < detailsPanel.RowCount; j++)
+
+            Label goalLabel = new Label();
+            goalLabel.Text = "Goal";
+            goalLabel.Dock = DockStyle.Fill;
+            goalLabel.TextAlign = ContentAlignment.MiddleCenter;
+            goalLabel.BorderStyle = BorderStyle.Fixed3D;
+            detailsPanel.Controls.Add(goalLabel, 0, i);
+
+            GroupBox goal = new GroupBox();
+            int k = 0;
+            foreach (object o in Enum.GetValues(typeof(Goal)))
             {
-                detailsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, percent));
+                RadioButton r = new RadioButton();
+                r.Text = o.ToString();
+                if (o.Equals(up.Goal))
+                    r.Checked = true;
+                r.Enabled = false;
+                r.Location = new Point(0, k);
+                k += r.Size.Height;
+                goal.Tag = typeof(Goal);
+                goal.Leave += FieldChangedHandler;
+                goal.Controls.Add(r);
             }
+            goal.Dock = DockStyle.Fill;
+            goal.Tag = up.Goal.GetType();
+            detailsPanel.Controls.Add(goal, 1, i++);
+
+            Label prefLabel = new Label();
+            prefLabel.Text = "Preferences";
+            prefLabel.Dock = DockStyle.Fill;
+            prefLabel.TextAlign = ContentAlignment.MiddleCenter;
+            prefLabel.BorderStyle = BorderStyle.Fixed3D;
+            detailsPanel.Controls.Add(prefLabel, 0, i);
+
+            Label preferences = new Label();
+            string pref = "";
+            foreach (object o in up.Preferences)
+            {
+                if (up.Preferences.IndexOf((Kitchen.Ingredient)o) == up.Preferences.Count - 1)
+                    pref += o.ToString() + ".";
+                else pref += o.ToString() + ", ";
+            }
+            preferences.Text = pref;
+            preferences.Dock = DockStyle.Fill;
+            preferences.TextAlign = ContentAlignment.MiddleCenter;
+            preferences.BorderStyle = BorderStyle.Fixed3D;
+            preferences.Tag = up.Preferences.GetType();
+            detailsPanel.Controls.Add(preferences, 1, i++);
+
+
+            //float percent = 100F / detailsPanel.RowCount;
+            //for (int j = 0; j < detailsPanel.RowCount; j++)
+            //{
+            //    detailsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, percent));
+            //}
 
             for (int j = 0; j < detailsPanel.ColumnCount; j++)
             {
                 detailsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             }
+
+
 
             ProfilePanel.Controls.Add(detailsPanel);
 
@@ -202,11 +256,6 @@ namespace BeautifulWeight.Presenter
             MenuPanel.Controls.Add(buttonPanel);
         }
 
-        private void ResetBackColorHandler(object sender, EventArgs e)
-        {
-            RadButton salva = MenuPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Text == "Salva").Single();
-            ((Control)sender).BackColor = Color.White;
-        }
 
         private void FieldChangedHandler(object sender, EventArgs e)
         {
@@ -231,7 +280,7 @@ namespace BeautifulWeight.Presenter
             catch (Exception)
             {
                 salva.Enabled = false;
-                field.BackColor = Color.Red;
+                field.BackColor = Color.Orange;
             }
         }
 
@@ -260,6 +309,15 @@ namespace BeautifulWeight.Presenter
                 else if (control.GetType() == typeof(GroupBox))
                 {
                     (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
+                }
+                else if (control.Tag is Type && ((Type)control.Tag).GetInterfaces().Contains(typeof(IList)) && ((Type)control.Tag).IsGenericType)
+                {
+                    Button modificaPref = new Button();
+                    modificaPref.Text = "Modifica";
+                    modificaPref.Click += ModificaPreferenzeClickHandler;
+                    modificaPref.Dock = DockStyle.Fill;
+                    detailsPanel.Controls.Remove(control);
+                    detailsPanel.Controls.Add(modificaPref, 1, i);
                 }
                 else
                 {
@@ -292,6 +350,31 @@ namespace BeautifulWeight.Presenter
             MenuPanel.Controls.Add(buttonPanel);
 
             Model.StartModify();
+        }
+
+        private void ModificaPreferenzeClickHandler(object sender, EventArgs e)
+        {
+            PreferencesDialog dialog = new PreferencesDialog();
+            dialog.PreferencesList.DataSource = ManagerProvider.getModelManager<KitchenManager>().Ingredients;
+            dialog.PreferencesList.AllowColumnReorder = true;
+            dialog.PreferencesList.FullRowSelect = false;
+
+            foreach (Ingredient i in Model.CurrentUser.Preferences)
+            {
+                dialog.PreferencesList.Items.Where(el => el.DataBoundItem == i).Single().CheckState = Telerik.WinControls.Enumerations.ToggleState.On;
+            }
+            dialog.PreferencesList.SelectedItem = null;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                List<Ingredient> newPrefs = new List<Ingredient>(); 
+                foreach (ListViewDataItem element in dialog.PreferencesList.CheckedItems)
+                {
+                    Ingredient i = (Ingredient) element.DataBoundItem;
+                    newPrefs.Add(i);
+                }
+                Model.CurrentUser.Preferences = newPrefs;
+            }
         }
 
         private void SaveClickHandler(object sender, EventArgs e)

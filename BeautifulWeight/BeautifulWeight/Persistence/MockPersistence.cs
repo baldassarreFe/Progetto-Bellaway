@@ -138,7 +138,7 @@ namespace BeautifulWeight.Persistence
 
         public ISet<Ingredient> LoadIngredients()
         {
-            return null;
+            return _ingredients;
         }
 
         public IList<UserProfile> LoadProfiles()

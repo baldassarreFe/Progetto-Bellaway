@@ -41,6 +41,11 @@ namespace BeautifulWeight.Kitchen
             }
             return result;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public class Dish

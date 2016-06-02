@@ -1,4 +1,5 @@
-﻿using BeautifulWeight.Versions;
+﻿using BeautifulWeight.Model;
+using BeautifulWeight.Versions;
 using BeautifulWeight.View;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace BeautifulWeight.Presenter
         {
             get
             {
-                return VersionManager.GetInstance();
+                return ManagerProvider.getModelManager<VersionManager>();
             }
         }
 

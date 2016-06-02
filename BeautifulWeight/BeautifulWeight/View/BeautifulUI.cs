@@ -25,7 +25,7 @@ namespace BeautifulWeight.View
         {
             base.OnLoad(e);
             SingleProfileModel model = new SingleProfileModel();
-            UserListPresenter ulpresenter = new UserListPresenter(this.UsersListView, model);
+            UserPresenter ulpresenter = new UserPresenter(this.UsersListView, this.AggiungiButton, model);
             PersonalDetailsPresenter pdpresenter = new PersonalDetailsPresenter(this.ProfilePanel, this.ProfileMenuPanel, model);
             VersionPresenter vpresenter = new VersionPresenter(this.VersionLabel);
         }

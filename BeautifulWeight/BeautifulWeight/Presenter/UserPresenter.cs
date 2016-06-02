@@ -14,10 +14,10 @@ using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.Presenter
 {
-    class UserListPresenter : Presenter
+    class UserPresenter : Presenter
     {
         private readonly RadListView _listView;
-
+        private readonly RadButton _addUserButton;
 
         public RadListView UsersListView
         {
@@ -27,14 +27,25 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public UserListPresenter(RadListView listView, SingleProfileModel model) : base(model)
+        public RadButton AddUserButton
+        {
+            get
+            {
+                return _addUserButton;
+            }
+        }
+
+        public UserPresenter(RadListView listView, RadButton addUserButton, SingleProfileModel model) : base(model)
         {
             if (listView == null)
                 throw new ArgumentNullException("control");
             _listView = listView;
             _listView.VisualItemCreating += UsersListView_VisualItemCreating;
             _listView.VisualItemFormatting += UsersListView_VisualItemFormatting;
-            _listView.SelectedItemChanged += UsersListView_SelectedItemChanged;
+            _listView.CurrentItemChanged += UsersListView_CurrentItemChanged;
+
+            _addUserButton = addUserButton;
+            _addUserButton.Click += AddUserHandler;
 
             UpdateList();
 
@@ -48,7 +59,7 @@ namespace BeautifulWeight.Presenter
             UpdateList();
         }
 
-        private void UsersListView_SelectedItemChanged(object sender, EventArgs e)
+        private void UsersListView_CurrentItemChanged(object sender, EventArgs e)
         {
             if (UsersListView.CurrentItem != null)
                 Model.CurrentUser = (UserProfile)UsersListView.CurrentItem.DataBoundItem;
@@ -59,14 +70,14 @@ namespace BeautifulWeight.Presenter
             if (e.VisualItem.Current)
             {
                 e.VisualItem.NumberOfColors = 1;
-                e.VisualItem.BackColor = Color.Orange;
-                e.VisualItem.BorderColor = Color.Orange;
+                e.VisualItem.BackColor = Color.Aqua;
+                e.VisualItem.BorderColor = Color.Aqua;
             }
             else
             {
                 e.VisualItem.NumberOfColors = 1;
-                e.VisualItem.BackColor = Color.Aqua;
-                e.VisualItem.BorderColor = Color.Aqua;
+                e.VisualItem.BackColor = Color.LightBlue;
+                e.VisualItem.BorderColor = Color.LightBlue;
             }
         }
 
@@ -100,6 +111,11 @@ namespace BeautifulWeight.Presenter
                 // ignore
             }
             UsersListView.CurrentItem = null;
+        }
+
+        private void AddUserHandler(object sender, EventArgs e)
+        {
+            Model.NewUser();
         }
     }
 }

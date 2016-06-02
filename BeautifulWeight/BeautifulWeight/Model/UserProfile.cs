@@ -24,7 +24,9 @@ namespace BeautifulWeight.Users
             _details = details;
         }
 
-        public UserProfile() { }
+        public UserProfile() {
+            _details = new PersonalDetails();
+        }
 
         public List<Ingredient> Preferences
         {
@@ -85,5 +87,7 @@ namespace BeautifulWeight.Users
             UserProfile up = (UserProfile)obj;
             return (Details.Name == up.Details.Name && Details.Surname == up.Details.Surname);
         }
+
+        
     }
 }

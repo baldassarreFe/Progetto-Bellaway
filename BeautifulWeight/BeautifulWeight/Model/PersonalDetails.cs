@@ -28,6 +28,12 @@ namespace BeautifulWeight.Users
             _sportHours = sportHours;
             _sportLoad = sportLoad;
         }
+
+        public PersonalDetails()
+        {
+            _birthdate = DateTime.Today;
+        }
+
         public string Name
         {
             get

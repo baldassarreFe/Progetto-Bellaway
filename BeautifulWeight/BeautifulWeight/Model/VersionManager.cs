@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using BeautifulWeight.Persistence;
+using BeautifulWeight.Model;
 
 namespace BeautifulWeight.Versions
 {
-    class VersionManager
+    class VersionManager : Manager
     {
         private IEnumerable<Version> _allVersions;
-        private static VersionManager _instance;
         private Version _version;
         public event EventHandler VersionChanged;
 
@@ -62,13 +62,6 @@ namespace BeautifulWeight.Versions
                 CurrentVersion = version;
                 VersionChanged(this, EventArgs.Empty);
             }
-        }
-
-        public static VersionManager GetInstance()
-        {
-            if (_instance == null)
-                _instance = new VersionManager();
-            return _instance;
         }
 
     }

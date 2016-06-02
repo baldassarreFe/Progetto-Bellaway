@@ -53,7 +53,7 @@ namespace BeautifulWeight.Presenter
 
         public SingleProfileModel()
         {
-            _userProfileManager = UserProfileManager.GetInstance();
+            _userProfileManager = ManagerProvider.getModelManager<UserProfileManager>();
             _userProfileManager.UserAdded += _userProfileManager_UserAdded;
             _userProfileManager.UserRemoved += _userProfileManager_UserRemoved;
             _userProfileManager.UserUpdated += _userProfileManager_UserUpdated;
@@ -78,6 +78,7 @@ namespace BeautifulWeight.Presenter
         {
             if (UserAdded != null)
                 UserAdded(this, EventArgs.Empty);
+            FireCurrentUserChanged();
         }
 
         private void FireCurrentUserChanged()
@@ -113,7 +114,6 @@ namespace BeautifulWeight.Presenter
             }
             _temp = null;
         }
-
 
     }
 }

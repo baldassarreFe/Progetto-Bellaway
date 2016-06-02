@@ -115,6 +115,7 @@ namespace BeautifulWeight.View
             this._usersListView.AllowEdit = false;
             this._usersListView.AllowRemove = false;
             this._usersListView.AutoScroll = true;
+            this._usersListView.CheckOnClickMode = Telerik.WinControls.UI.CheckOnClickMode.FirstClick;
             this._usersListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this._usersListView.FullRowSelect = false;
             this._usersListView.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
