@@ -34,6 +34,16 @@ namespace BeautifilBeautifulWeight.DietCalculators
             // che mi dia il KitchenLoader giusto
         }
 
+        public bool IsCompatibleWith(Goal goal)
+        {
+            switch (goal)
+            {
+                case Goal.DEFINITION: return true;
+                case Goal.MAINTAINANCE: return true;
+                default: return false;
+            }
+        }
+
         public WeeklyMenu NewMenu()
         {
             throw new NotImplementedException();
