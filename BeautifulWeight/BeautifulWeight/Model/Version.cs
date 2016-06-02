@@ -25,7 +25,6 @@ namespace BeautifulWeight.Versions
 
     }
 
-
     class StandardVersion : Version
     {
         private static Version _instance;
@@ -48,11 +47,7 @@ namespace BeautifulWeight.Versions
 
         override public bool Allows(Feature feature)
         {
-            switch (feature)
-            {
-                case Feature.VIEW_NEXT_MEAL: return true;
-                default: return false;
-            }
+            return false;
         }
 
         override public bool IsCodeValid(Code code)
@@ -60,9 +55,6 @@ namespace BeautifulWeight.Versions
             return true;
         }
     }
-
-
-
 
     class PremiumVersion : Version
     {

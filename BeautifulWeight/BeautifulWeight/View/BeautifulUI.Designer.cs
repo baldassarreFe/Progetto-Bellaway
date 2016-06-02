@@ -40,14 +40,14 @@ namespace BeautifulWeight.View
             this._profilePanel = new System.Windows.Forms.Panel();
             this._profileMenuPanel = new Telerik.WinControls.UI.RadPanel();
             this._diet = new Telerik.WinControls.UI.SplitPanel();
-            this._dietListView = new Telerik.WinControls.UI.RadListView();
-            this._dietSelectionMenu = new Telerik.WinControls.UI.RadPanorama();
-            this._dietMenuPanel = new Telerik.WinControls.UI.RadPanel();
+            this._dietButtonsPanel = new Telerik.WinControls.UI.RadPanel();
             this._dietButtons = new System.Windows.Forms.TableLayoutPanel();
             this._newDietButton = new Telerik.WinControls.UI.RadButton();
             this._deleteDietButton = new Telerik.WinControls.UI.RadButton();
             this._versionStatusStrip = new Telerik.WinControls.UI.RadStatusStrip();
             this._versionLabel = new System.Windows.Forms.Label();
+            this._dietPanel = new Telerik.WinControls.UI.RadPanel();
+            this._dietUpperPanel = new Telerik.WinControls.UI.RadPanel();
             ((System.ComponentModel.ISupportInitialize)(this._UISplitContainer)).BeginInit();
             this._UISplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._users)).BeginInit();
@@ -61,15 +61,16 @@ namespace BeautifulWeight.View
             ((System.ComponentModel.ISupportInitialize)(this._profileMenuPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._diet)).BeginInit();
             this._diet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._dietListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dietSelectionMenu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dietMenuPanel)).BeginInit();
-            this._dietMenuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dietButtonsPanel)).BeginInit();
+            this._dietButtonsPanel.SuspendLayout();
             this._dietButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._newDietButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._deleteDietButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._versionStatusStrip)).BeginInit();
             this._versionStatusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dietPanel)).BeginInit();
+            this._dietPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dietUpperPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -180,9 +181,8 @@ namespace BeautifulWeight.View
             // 
             // _diet
             // 
-            this._diet.Controls.Add(this._dietListView);
-            this._diet.Controls.Add(this._dietSelectionMenu);
-            this._diet.Controls.Add(this._dietMenuPanel);
+            this._diet.Controls.Add(this._dietPanel);
+            this._diet.Controls.Add(this._dietButtonsPanel);
             this._diet.Location = new System.Drawing.Point(425, 0);
             this._diet.Name = "_diet";
             // 
@@ -196,32 +196,14 @@ namespace BeautifulWeight.View
             this._diet.TabStop = false;
             this._diet.Text = "splitPanel3";
             // 
-            // _dietListView
+            // _dietButtonsPanel
             // 
-            this._dietListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._dietListView.Location = new System.Drawing.Point(0, 82);
-            this._dietListView.Name = "_dietListView";
-            this._dietListView.Size = new System.Drawing.Size(334, 333);
-            this._dietListView.TabIndex = 3;
-            this._dietListView.Text = "radListView2";
-            // 
-            // _dietSelectionMenu
-            // 
-            this._dietSelectionMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this._dietSelectionMenu.Location = new System.Drawing.Point(0, 0);
-            this._dietSelectionMenu.Name = "_dietSelectionMenu";
-            this._dietSelectionMenu.Size = new System.Drawing.Size(334, 82);
-            this._dietSelectionMenu.TabIndex = 2;
-            this._dietSelectionMenu.Text = "radPanorama1";
-            // 
-            // _dietMenuPanel
-            // 
-            this._dietMenuPanel.Controls.Add(this._dietButtons);
-            this._dietMenuPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._dietMenuPanel.Location = new System.Drawing.Point(0, 415);
-            this._dietMenuPanel.Name = "_dietMenuPanel";
-            this._dietMenuPanel.Size = new System.Drawing.Size(334, 36);
-            this._dietMenuPanel.TabIndex = 1;
+            this._dietButtonsPanel.Controls.Add(this._dietButtons);
+            this._dietButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._dietButtonsPanel.Location = new System.Drawing.Point(0, 415);
+            this._dietButtonsPanel.Name = "_dietButtonsPanel";
+            this._dietButtonsPanel.Size = new System.Drawing.Size(334, 36);
+            this._dietButtonsPanel.TabIndex = 1;
             // 
             // _dietButtons
             // 
@@ -274,6 +256,23 @@ namespace BeautifulWeight.View
             this._versionLabel.TabIndex = 0;
             this._versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // _dietPanel
+            // 
+            this._dietPanel.Controls.Add(this._dietUpperPanel);
+            this._dietPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._dietPanel.Location = new System.Drawing.Point(0, 0);
+            this._dietPanel.Name = "_dietPanel";
+            this._dietPanel.Size = new System.Drawing.Size(334, 415);
+            this._dietPanel.TabIndex = 3;
+            // 
+            // _dietUpperPanel
+            // 
+            this._dietUpperPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this._dietUpperPanel.Location = new System.Drawing.Point(0, 0);
+            this._dietUpperPanel.Name = "_dietUpperPanel";
+            this._dietUpperPanel.Size = new System.Drawing.Size(334, 100);
+            this._dietUpperPanel.TabIndex = 2;
+            // 
             // BeautifulUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,15 +301,16 @@ namespace BeautifulWeight.View
             ((System.ComponentModel.ISupportInitialize)(this._profileMenuPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._diet)).EndInit();
             this._diet.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._dietListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dietSelectionMenu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._dietMenuPanel)).EndInit();
-            this._dietMenuPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._dietButtonsPanel)).EndInit();
+            this._dietButtonsPanel.ResumeLayout(false);
             this._dietButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._newDietButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._deleteDietButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._versionStatusStrip)).EndInit();
             this._versionStatusStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._dietPanel)).EndInit();
+            this._dietPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._dietUpperPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -326,9 +326,7 @@ namespace BeautifulWeight.View
         private Telerik.WinControls.UI.RadListView _usersListView;
         private Telerik.WinControls.UI.RadPanel _usersMenuPanel;
         private Telerik.WinControls.UI.RadPanel _profileMenuPanel;
-        private Telerik.WinControls.UI.RadListView _dietListView;
-        private Telerik.WinControls.UI.RadPanorama _dietSelectionMenu;
-        private Telerik.WinControls.UI.RadPanel _dietMenuPanel;
+        private Telerik.WinControls.UI.RadPanel _dietButtonsPanel;
         private Telerik.WinControls.UI.RadStatusStrip _versionStatusStrip;
         private Label _versionLabel;
         private Panel _profilePanel;
@@ -336,5 +334,7 @@ namespace BeautifulWeight.View
         private RadButton _newDietButton;
         private RadButton _deleteDietButton;
         private RadButton _aggiungiButton;
+        private RadPanel _dietPanel;
+        private RadPanel _dietUpperPanel;
     }
 }

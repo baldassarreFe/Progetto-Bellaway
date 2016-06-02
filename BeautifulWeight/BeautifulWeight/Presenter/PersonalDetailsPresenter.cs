@@ -203,12 +203,13 @@ namespace BeautifulWeight.Presenter
 
             Label preferences = new Label();
             string pref = "";
-            foreach (object o in up.Preferences)
-            {
-                pref += o.ToString();
-                if (up.Preferences.IndexOf((Kitchen.Ingredient)o) != up.Preferences.Count - 1)
-                    pref+= ", ";
-            }
+            pref = (from p in up.Preferences select p.Name).Aggregate((x, y) => x + ", " + y);
+            //foreach (object o in up.Preferences)
+            //{
+            //    pref += o.ToString();
+            //    if (up.Preferences.IndexOf((Kitchen.Ingredient)o) != up.Preferences.Count - 1)
+            //        pref+= ", ";
+            //}
             preferences.Text = pref;
             preferences.Dock = DockStyle.Fill;
             preferences.TextAlign = ContentAlignment.MiddleCenter;

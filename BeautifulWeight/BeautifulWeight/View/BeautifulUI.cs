@@ -28,6 +28,7 @@ namespace BeautifulWeight.View
             UserPresenter ulpresenter = new UserPresenter(this.UsersListView, this.AggiungiButton, model);
             PersonalDetailsPresenter pdpresenter = new PersonalDetailsPresenter(this.ProfilePanel, this.ProfileMenuPanel, model);
             VersionPresenter vpresenter = new VersionPresenter(this.VersionLabel);
+            MenuPresenter mpresenter = new MenuPresenter(this.DietUpperPanel,this.DietPanel,this.DietButtonsPanel,model);
         }
 
 
@@ -109,42 +110,17 @@ namespace BeautifulWeight.View
             }
         }
 
-        public RadListView DietListView
-        {
-            get
-            {
-                return _dietListView;
-            }
-
-            set
-            {
-                _dietListView = value;
-            }
-        }
-
-        public RadPanorama DietSelectionMenu
-        {
-            get
-            {
-                return _dietSelectionMenu;
-            }
-
-            set
-            {
-                _dietSelectionMenu = value;
-            }
-        }
 
         public RadPanel DietMenuPanel
         {
             get
             {
-                return _dietMenuPanel;
+                return _dietButtonsPanel;
             }
 
             set
             {
-                _dietMenuPanel = value;
+                _dietButtonsPanel = value;
             }
         }
 
@@ -221,6 +197,46 @@ namespace BeautifulWeight.View
             set
             {
                 _profilePanel = value;
+            }
+        }
+
+
+        public RadPanel DietUpperPanel
+        {
+            get
+            {
+                return _dietUpperPanel;
+            }
+
+            set
+            {
+                _dietUpperPanel = value;
+            }
+        }
+
+        public RadPanel DietPanel
+        {
+            get
+            {
+                return _dietPanel;
+            }
+
+            set
+            {
+                _dietPanel = value;
+            }
+        }
+
+        public RadPanel DietButtonsPanel
+        {
+            get
+            {
+                return _dietButtonsPanel;
+            }
+
+            set
+            {
+                _dietButtonsPanel = value;
             }
         }
     }

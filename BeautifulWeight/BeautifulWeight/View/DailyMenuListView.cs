@@ -18,7 +18,7 @@ namespace BeautifulWeight.Presenter
             this.FullRowSelect = false;
             this.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AutoHide;
             this.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
-            this.ItemSize = new System.Drawing.Size(80, 120);
+            this.ItemSize = new System.Drawing.Size(400, 200);
             //this.Location = new System.Drawing.Point(0, 0);
             //this.Name = "_usersListView";
             this.ShowColumnHeaders = false;
@@ -28,8 +28,6 @@ namespace BeautifulWeight.Presenter
             this.VisualItemCreating += DailyMenuListView_VisualItemCreating;
             this.VisualItemFormatting += DailyMenuListView_VisualItemFormatting;
             this.CurrentItemChanged += DailyMenuListView_CurrentItemChanged;
-
-            this.DataMember = "Meals"; // ????
         }
 
         private void DailyMenuListView_CurrentItemChanged(object sender, ListViewItemEventArgs e)

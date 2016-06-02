@@ -58,10 +58,16 @@
     <Compile Include="Model\ManagerProvider.cs" />
     <Compile Include="Persistence\XmlPersistence.cs" />
     <Compile Include="Model\SingleProfileModel.cs" />
-    <Compile Include="Presenter\DailyMenuListView.cs">
+    <Compile Include="View\DailyMenuListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Presenter\MealVisualItem.cs" />
+    <Compile Include="View\MealStrip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MealStrip.Designer.cs">
+      <DependentUpon>MealStrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MealVisualItem.cs" />
     <Compile Include="Presenter\MenuPresenter.cs" />
     <Compile Include="Presenter\PersonalDetailsPresenter.cs" />
     <Compile Include="Presenter\UserPresenter.cs" />
