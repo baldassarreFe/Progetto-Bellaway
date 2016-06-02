@@ -9,6 +9,7 @@ namespace BeautifulWeight.Presenter
     {
         public DailyMenusListView()
         {
+            this.CurrentItem = null;
             this.AllowColumnReorder = false;
             this.AllowColumnResize = false;
             this.AllowEdit = false;
@@ -18,7 +19,8 @@ namespace BeautifulWeight.Presenter
             this.FullRowSelect = false;
             this.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AutoHide;
             this.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
-            this.ItemSize = new System.Drawing.Size(900, 300);
+            this.Size = new System.Drawing.Size(400, 220);
+            this.ItemSize = new System.Drawing.Size(400, 220);
             //this.Location = new System.Drawing.Point(0, 0);
             //this.Name = "_usersListView";
             this.ShowColumnHeaders = false;

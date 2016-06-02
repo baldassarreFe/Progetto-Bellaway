@@ -7,6 +7,7 @@ namespace BeautifulWeight.View
     {
         public MealsListView()
         {
+            this.CurrentItem = null;
             this.AllowColumnReorder = false;
             this.AllowColumnResize = false;
             this.AllowEdit = false;
@@ -15,7 +16,7 @@ namespace BeautifulWeight.View
             this.FullRowSelect = false;
             this.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AutoHide;
             this.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
-            this.ItemSize = new System.Drawing.Size(300,100);
+            this.ItemSize = new System.Drawing.Size(350,100);
             this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowColumnHeaders = false;
             this.VisualItemCreating += MealsListView_VisualItemCreating;

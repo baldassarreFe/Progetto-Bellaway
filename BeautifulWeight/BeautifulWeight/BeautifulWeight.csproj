@@ -100,12 +100,6 @@
     <Compile Include="View\PreferencesDialog.Designer.cs">
       <DependentUpon>PreferencesDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserStrip.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\UserStrip.Designer.cs">
-      <DependentUpon>UserStrip.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\DailyMenuVisualItem.cs" />
     <Compile Include="View\UserStripVisualItem.cs" />
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -124,9 +118,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PreferencesDialog.resx">
       <DependentUpon>PreferencesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\UserStrip.resx">
-      <DependentUpon>UserStrip.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Presenter\Presenter.cs" />
     <None Include="Properties\Settings.settings">

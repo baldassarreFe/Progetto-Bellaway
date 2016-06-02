@@ -21,7 +21,7 @@ namespace BeautifulWeight.Presenter
             _descrLabel = new LightVisualElement();
             _servingsListView = new RadListView();
             _servingsListView.FullRowSelect = false;
-            _servingsListView.ItemSize = new Size(40,20);
+            _servingsListView.ItemSize = new Size(200,20);
             _servingsListView.ViewType = ListViewType.ListView;
 
             stackLayoutPanel.Children.Add(_servingsListView.RootElement);

@@ -23,6 +23,7 @@ namespace BeautifulWeight.View
             base.CreateChildElements();
             StackLayoutPanel stackLayoutPanel = new StackLayoutPanel();
             _mealsListView = new MealsListView();
+            _mealsListView.ItemSize = new Size(200, 150);
             _dayLabel = new LightVisualElement();
             stackLayoutPanel.Children.Add(_dayLabel);
             stackLayoutPanel.Children.Add(_mealsListView.RootElement);

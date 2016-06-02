@@ -111,6 +111,12 @@ namespace BeautifulWeight.Presenter
                 // ignore
             }
             UsersListView.CurrentItem = null;
+            if ((ManagerProvider.getModelManager<VersionManager>()).Allows(Feature.ADD_USER) || Model.AllUsers.Count() == 0)
+            {
+                AddUserButton.Enabled = true;
+            }
+            else
+                AddUserButton.Enabled = false;
         }
 
         private void AddUserHandler(object sender, EventArgs e)

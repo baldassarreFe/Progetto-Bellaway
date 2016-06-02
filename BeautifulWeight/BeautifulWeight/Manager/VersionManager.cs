@@ -53,7 +53,7 @@ namespace BeautifulWeight.Versions
 
         public bool Allows(Feature feature)
         {
-            return _version.Allows(feature);
+            return CurrentVersion.Allows(feature);
         }
 
         public void ChangeVersion(Version version, Code code)
