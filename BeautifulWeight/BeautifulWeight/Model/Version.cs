@@ -23,20 +23,21 @@ namespace BeautifulWeight.Versions
             return this._numericId - v._numericId;
         }
 
+        public IEnumerable<Feature> AllowedFeatures
+        {
+            get
+            {
+                return from feature in Enum.GetValues(typeof(Feature)).Cast<Feature>()
+                       where this.Allows(feature)
+                       select feature;
+            }
+        }
     }
 
     class StandardVersion : Version
     {
-        private static Version _instance;
-        private StandardVersion() : base(0) { }
-
-        public static Version GetInstance()
-        {
-            if (_instance == null)
-                _instance = new StandardVersion();
-            return _instance;
-        }
-
+        public StandardVersion() : base(0) { }
+        
         override public string Description
         {
             get
@@ -58,16 +59,8 @@ namespace BeautifulWeight.Versions
 
     class PremiumVersion : Version
     {
-        private static Version _instance;
-        private PremiumVersion() : base(1000) { }
-
-        public static Version GetInstance()
-        {
-            if (_instance == null)
-                _instance = new PremiumVersion();
-            return _instance;
-        }
-
+        public PremiumVersion() : base(1000) { }
+        
         override public string Description
         {
             get

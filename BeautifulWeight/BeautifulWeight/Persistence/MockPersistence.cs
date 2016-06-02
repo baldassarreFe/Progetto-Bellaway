@@ -17,7 +17,7 @@ namespace BeautifulWeight.Persistence
 
         private MockPersistence()
         {
-            _version = StandardVersion.GetInstance();
+            _version = new StandardVersion();
 
             _ingredients = new HashSet<Ingredient>();
             _ingredients.Add("nasello");

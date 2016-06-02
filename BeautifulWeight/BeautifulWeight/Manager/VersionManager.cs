@@ -13,7 +13,7 @@ namespace BeautifulWeight.Versions
         private Version _version;
         public event EventHandler VersionChanged;
 
-        internal Version CurrentVersion
+        public Version CurrentVersion
         {
             get
             {
@@ -30,7 +30,7 @@ namespace BeautifulWeight.Versions
             }
         }
 
-        IEnumerable<Version> AllVersions
+        public IEnumerable<Version> AllVersions
         {
             get
             {
@@ -45,8 +45,8 @@ namespace BeautifulWeight.Versions
                 //}
 
                 _allVersions = from type in Assembly.GetExecutingAssembly().GetTypes()
-                               where typeof(Version).IsAssignableFrom(type)
-                               select (Version)type.GetMethod("GetInstance").Invoke(null, null);
+                               where typeof(Version).IsAssignableFrom(type) && !type.IsAbstract
+                               select (Version) Activator.CreateInstance(type);
                 return _allVersions;
             }
         }
