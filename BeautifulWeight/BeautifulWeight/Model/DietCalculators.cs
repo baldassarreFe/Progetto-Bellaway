@@ -14,8 +14,8 @@ namespace BeautifulWeight.DietCalculators
     public interface DietCalculator
     {
         string Description { get; }
-        WeeklyMenu NewMenu();
-        Serving GetEquivalent(Serving serving);
+        WeeklyMenu NewMenu(UserProfile userProfile);
+        Serving GetEquivalent(Serving serving, UserProfile userProfile);
         bool IsCompatibleWith(Goal goal);
     }
 

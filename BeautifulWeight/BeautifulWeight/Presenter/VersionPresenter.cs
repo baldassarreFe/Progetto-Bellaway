@@ -47,8 +47,8 @@ namespace BeautifulWeight.Presenter
 
         private void ClickHandler(object sender, EventArgs e)
         {
-            MessageBox.Show("UPGRADA ZIO");
-            // TODO per bene
+            VersionDialog dialog = new VersionDialog();
+            dialog.ShowDialog();
         }
     }
 }

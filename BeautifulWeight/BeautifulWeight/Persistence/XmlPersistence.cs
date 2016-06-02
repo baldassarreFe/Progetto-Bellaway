@@ -18,7 +18,8 @@ namespace BeautifulWeight.Persistence.Xml
 
         public XmlPersistence()
         {
-            _version = StandardVersion.GetInstance();
+            //  TODO caricare da xml
+            _version = new StandardVersion();
 
             _ingredients = new HashSet<Ingredient>();
             LoadIngredientsFromXml("../../Resources/Ingredients.xml");
