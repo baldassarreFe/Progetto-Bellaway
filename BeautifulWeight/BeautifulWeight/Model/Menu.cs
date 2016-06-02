@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace BeautifulWeight.Menu
 {
@@ -38,11 +39,18 @@ namespace BeautifulWeight.Menu
         }
     }
 
-    public class Meal
+    public class Meal : IEnumerable<Serving>
     {
         private readonly string _name;
         private readonly DateTime _time;
         private readonly NonEmptyList<Serving> _servings;
+
+        public Meal(string name, DateTime time, NonEmptyList<Serving> servings)
+        {
+            _name = name;
+            _time = time;
+            _servings = servings;
+        }
 
         public string Name
         {
@@ -67,12 +75,32 @@ namespace BeautifulWeight.Menu
                 return _servings;
             }
         }
+
+        public IEnumerator<Serving> GetEnumerator()
+        {
+            return ((IEnumerable<Serving>)Servings).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<Serving>)Servings).GetEnumerator();
+        }
     }
 
-    public class DailyMenu
+    public class DailyMenu : IEnumerable<Meal>
     {
         private readonly DayOfWeek _day;
         private readonly List<Meal> _meals;
+
+        public DailyMenu(DayOfWeek day)
+        {
+            _day = day;
+            _meals = new List<Meal>();
+        }
+
+        public DailyMenu(int day) : this((DayOfWeek) day)
+        {
+        }
 
         public DayOfWeek Day
         {
@@ -89,25 +117,39 @@ namespace BeautifulWeight.Menu
                 return _meals;
             }
         }
+
+        public IEnumerator<Meal> GetEnumerator()
+        {
+            return ((IEnumerable<Meal>)Meals).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<Meal>)Meals).GetEnumerator();
+        }
     }
 
-    public class WeeklyMenu
+    public class WeeklyMenu : IEnumerable<DailyMenu>
     {
-        private readonly DailyMenu[] _dailyMenu;
+        private readonly DailyMenu[] _dailyMenus;
         private readonly String _dietCalculatorType;
 
         public DailyMenu this[DayOfWeek day]
         {
             get
             {
-                return _dailyMenu[(int) day];
+                return _dailyMenus[(int) day];
             }
         }
 
         public WeeklyMenu(string dietCalculatorType)
         {
             _dietCalculatorType = dietCalculatorType;
-            _dailyMenu = new DailyMenu[7];
+            _dailyMenus = new DailyMenu[7];
+            for (int i = 0; i<_dailyMenus.Length; i++)
+            {
+                _dailyMenus[i] = new DailyMenu(i);
+            }
         }
 
         public WeeklyMenu(DietCalculator dietCalculator) : this(dietCalculator.GetType().AssemblyQualifiedName)
@@ -121,6 +163,24 @@ namespace BeautifulWeight.Menu
                 // si può fare di meglio
                 return DietCalculatorLoader.LoadedDietCalculators.FirstOrDefault(dc => dc.GetType().AssemblyQualifiedName == _dietCalculatorType);
             }
+        }
+
+        public IEnumerable<DailyMenu> DailyMenus
+        {
+            get
+            {
+                return _dailyMenus;
+            }
+        }
+
+        public IEnumerator<DailyMenu> GetEnumerator()
+        {
+            return ((IEnumerable<DailyMenu>)DailyMenus).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<DailyMenu>)DailyMenus).GetEnumerator();
         }
     }
 }

@@ -9,7 +9,7 @@ using BeautifulWeight.Menu;
 
 namespace BeautifulWeight.Persistence.Xml
 {
-    class XmlPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor, DietPersistor
+    class XmlPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor
     {
         private static XmlPersistence _persistence = new XmlPersistence();
         private IList<UserProfile> _profiles;
@@ -65,7 +65,38 @@ namespace BeautifulWeight.Persistence.Xml
                 {
                     preferences.Add(dayNode.InnerText);
                     DailyMenu dm = wm[(System.DayOfWeek)System.Enum.Parse(typeof(System.DayOfWeek), dayNode.Attributes["day"].InnerText, true)];
+                    foreach(XmlElement mealNode in dayNode.SelectNodes("/meal"))
+                    {
 
+                        string name = mealNode.Attributes["name"].InnerText;
+                        string hour = mealNode.Attributes["hour"].InnerText;
+                        string minute = mealNode.Attributes["minute"].InnerText;
+                        DateTime time = new DateTime(2000,1,1,int.Parse(hour),int.Parse(minute),0);
+                        List<Serving> servings = new List<Serving>();
+
+                        foreach(XmlElement servingNode in mealNode.SelectNodes("/serving"))
+                        {
+                            Dish dish = null;
+                            // una ricerca migliore??
+                            foreach (Dish d in _dishes)
+                            {
+                                if (d.Name == servingNode.Attributes["quantity"].InnerText)
+                                {
+                                    dish = d;
+                                    break;
+                                }
+                            }
+                            int quantity = int.Parse(servingNode.Attributes["quantity"].InnerText);
+                            servings.Add(new Serving(dish, quantity));
+                        }
+
+                        NonEmptyList<Serving> nonEmpty = new NonEmptyList<Serving>(servings[0]);
+                        for (int i = 1; i < servings.Count; i++)
+                        {
+                            nonEmpty.Add(servings[i]);
+                        }
+                        dm.Meals.Add(new Meal(name, time, nonEmpty));
+                    }
                 }
                 up.Diet = wm;
 

@@ -102,6 +102,11 @@ namespace BeautifulWeight.Kitchen
         {
             return ((IList<T>)_list).GetEnumerator();
         }
+
+        internal void Add(object p)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

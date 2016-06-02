@@ -55,8 +55,12 @@
     <Compile Include="Model\Version.cs" />
     <Compile Include="Model\VersionManager.cs" />
     <Compile Include="Persistence\XmlPersistence.cs" />
-    <Compile Include="Persistence\DietPersistor.cs" />
     <Compile Include="Model\SingleProfileModel.cs" />
+    <Compile Include="Presenter\DailyMenuListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Presenter\MealVisualItem.cs" />
+    <Compile Include="Presenter\MenuPresenter.cs" />
     <Compile Include="Presenter\PersonalDetailsPresenter.cs" />
     <Compile Include="Presenter\UserListPresenter.cs" />
     <Compile Include="Presenter\VersionPresenter.cs" />
@@ -84,13 +88,17 @@
     <Compile Include="View\BeautifulUI.Designer.cs">
       <DependentUpon>BeautifulUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MealsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="View\UserStrip.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\UserStrip.Designer.cs">
       <DependentUpon>UserStrip.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserStripVisualItem2.cs" />
+    <Compile Include="View\DailyMenuVisualItem.cs" />
+    <Compile Include="View\UserStripVisualItem.cs" />
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

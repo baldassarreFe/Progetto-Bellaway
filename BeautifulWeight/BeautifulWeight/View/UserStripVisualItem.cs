@@ -12,7 +12,7 @@ using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.View
 {
-    class UserStripVisualItem2 : IconListViewVisualItem
+    class UserStripVisualItem : IconListViewVisualItem
     {
         
 
