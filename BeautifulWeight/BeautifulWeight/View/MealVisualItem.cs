@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Telerik.WinControls;
+using Telerik.WinControls.Layouts;
 using Telerik.WinControls.UI;
 
 namespace BeautifulWeight.Presenter
 {
-    internal class MealVisualItem : SimpleListViewVisualItem
+    internal class MealVisualItem : IconListViewVisualItem
     {
         private LightVisualElement _descrLabel;
         private RadListView _servingsListView;
@@ -16,10 +17,17 @@ namespace BeautifulWeight.Presenter
         protected override void CreateChildElements()
         {
             base.CreateChildElements();
+            StackLayoutPanel stackLayoutPanel = new StackLayoutPanel();
             _descrLabel = new LightVisualElement();
             _servingsListView = new RadListView();
-            this.Container.Add(_descrLabel);
-            this.Container.Add(_servingsListView);
+            _servingsListView.FullRowSelect = false;
+            _servingsListView.ItemSize = new Size(40,20);
+            _servingsListView.ViewType = ListViewType.ListView;
+
+            stackLayoutPanel.Children.Add(_servingsListView.RootElement);
+            stackLayoutPanel.Children.Add(_descrLabel);
+            stackLayoutPanel.Orientation = Orientation.Vertical;
+            this.Children.Add(stackLayoutPanel);
             this.Padding = new Padding(5);
             this.DrawFill = true;
             this.BackColor = Color.Aqua;
@@ -32,9 +40,10 @@ namespace BeautifulWeight.Presenter
         protected override void SynchronizeProperties()
         {
             base.SynchronizeProperties();
+            this.Text = "";
             DateTime time = (DateTime) Data["Time"];
             this._descrLabel.Text = "<html>" + Data["Name"] +" "+ time.Hour+":"+time.Minute + "</html>";
-            this._servingsListView.DisplayMember = "Dish";
+            this._servingsListView.DisplayMember = "Dish.Name";
             this._servingsListView.DataSource = (IEnumerable<Serving>)Data["Servings"];
         }
 

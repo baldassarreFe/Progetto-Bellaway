@@ -21,10 +21,12 @@ namespace BeautifulWeight.View
         protected override void CreateChildElements()
         {
             base.CreateChildElements();
+            StackLayoutPanel stackLayoutPanel = new StackLayoutPanel();
             _mealsListView = new MealsListView();
             _dayLabel = new LightVisualElement();
-            this.Container.Add(_dayLabel);
-            this.Container.Add(_mealsListView);
+            stackLayoutPanel.Children.Add(_dayLabel);
+            stackLayoutPanel.Children.Add(_mealsListView.RootElement);
+            this.Children.Add(stackLayoutPanel);
             this.Padding = new Padding(5);
             this.DrawFill = true;
             this.BackColor = Color.Aqua;
@@ -37,6 +39,7 @@ namespace BeautifulWeight.View
         protected override void SynchronizeProperties()
         {
             base.SynchronizeProperties();
+            this.Text = "";
             this._mealsListView.DataSource = (IEnumerable<Meal>)Data["Meals"];
             this._dayLabel.Text = ((DayOfWeek) Data["Day"]).ToString();
         }

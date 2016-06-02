@@ -49,13 +49,13 @@
     <Reference Include="TelerikCommon, Version=2015.2.728.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\KeyesFormula.cs" />
-    <Compile Include="Model\KitchenManager.cs" />
-    <Compile Include="Model\TargetWeightFormula.cs" />
-    <Compile Include="Model\UserProfileManager.cs" />
+    <Compile Include="TargetWeight\KeyesFormula.cs" />
+    <Compile Include="Manager\KitchenManager.cs" />
+    <Compile Include="TargetWeight\TargetWeightFormula.cs" />
+    <Compile Include="Manager\UserProfileManager.cs" />
     <Compile Include="Model\Version.cs" />
-    <Compile Include="Model\VersionManager.cs" />
-    <Compile Include="Model\ManagerProvider.cs" />
+    <Compile Include="Manager\VersionManager.cs" />
+    <Compile Include="Manager\ManagerProvider.cs" />
     <Compile Include="Persistence\XmlPersistence.cs" />
     <Compile Include="Model\SingleProfileModel.cs" />
     <Compile Include="View\DailyMenuListView.cs">
@@ -74,17 +74,12 @@
     <Compile Include="Presenter\VersionPresenter.cs" />
     <Compile Include="Persistence\PersistenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\DietCalculator.cs" />
-    <Compile Include="Model\Goal.cs" />
-    <Compile Include="Model\KcalDiet.cs" />
+    <Compile Include="Model\DietCalculators.cs" />
     <Compile Include="Persistence\KitchenPersistor.cs" />
     <Compile Include="Persistence\MockPersistence.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Model\Sex.cs" />
-    <Compile Include="Model\Load.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Kitchen.cs" />
-    <Compile Include="Model\PointDiet.cs" />
     <Compile Include="Utils\NonEmptyList.cs" />
     <Compile Include="Persistence\VersionPersistor.cs" />
     <Compile Include="Persistence\UserProfilePersistor.cs" />
@@ -155,6 +150,7 @@
   <ItemGroup>
     <None Include="Resources\user.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

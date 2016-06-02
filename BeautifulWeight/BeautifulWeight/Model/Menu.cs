@@ -132,7 +132,7 @@ namespace BeautifulWeight.Menu
     public class WeeklyMenu : IEnumerable<DailyMenu>
     {
         private readonly DailyMenu[] _dailyMenus;
-        private readonly String _dietCalculatorType;
+        private readonly string _dietCalculatorType;
 
         public DailyMenu this[DayOfWeek day]
         {

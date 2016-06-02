@@ -62,6 +62,7 @@ namespace BeautifulWeight.Presenter
             {
                 PaintDiet(Model.CurrentUser.Diet);
                 PaintUpperPanel(Model.CurrentUser.Diet);
+                // PaintLowerPanel();
             }
             else
             {
@@ -74,7 +75,10 @@ namespace BeautifulWeight.Presenter
             UpperPanel.Controls.Clear();
             RadLabel radLabel = new RadLabel();
             radLabel.Text = diet.DietCalculator.Description;
+            radLabel.Font = new Font("Arial", 22, FontStyle.Bold);
+            radLabel.TextAlignment = ContentAlignment.MiddleCenter;
             UpperPanel.Controls.Add(radLabel);
+            radLabel.Dock = DockStyle.Fill;
         }
 
         private void PaintDiet(WeeklyMenu diet)
@@ -88,30 +92,7 @@ namespace BeautifulWeight.Presenter
             DietPanel.Controls.Add(dailyMenusListView);
 
             ((System.ComponentModel.ISupportInitialize)DietPanel).EndInit();
-            DietPanel.ResumeLayout(false);
-
-            TableLayoutPanel buttonPanel = new TableLayoutPanel();
-            buttonPanel.RowCount = 1;
-            buttonPanel.ColumnCount = 2;
-            RadButton modifica = new RadButton();
-            modifica.Text = "Modifica";
-            modifica.Click += ModifyClickHandler;
-            RadButton elimina = new RadButton();
-            elimina.Text = "Elimina";
-            elimina.Click += DeleteClickHandler;
-
-            modifica.Dock = DockStyle.Fill;
-            elimina.Dock = DockStyle.Fill;
-            buttonPanel.Controls.Add(modifica, 0, 0);
-            buttonPanel.Controls.Add(elimina, 1, 0);
-            buttonPanel.Dock = DockStyle.Fill;
-
-            for (int j = 0; j < buttonPanel.ColumnCount; j++)
-            {
-                buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-            }
-            ButtonsPanel.Controls.Clear();
-            ButtonsPanel.Controls.Add(buttonPanel);
+            DietPanel.ResumeLayout(true);
         }
 
         private void ResetBackColorHandler(object sender, EventArgs e)

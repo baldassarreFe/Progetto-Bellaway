@@ -90,4 +90,9 @@ namespace BeautifulWeight.Users
 
         
     }
+
+    public enum Goal
+    {
+        WEIGHT_LOSS, MASS_GAIN, MAINTAINANCE, DEFINITION
+    }
 }
