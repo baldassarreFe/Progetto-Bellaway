@@ -2,6 +2,7 @@
 using BeautifulWeight.Kitchen;
 using BeautifulWeight.Model;
 using BeautifulWeight.Users;
+using BeautifulWeight.Versions;
 using BeautifulWeight.View;
 using System;
 using System.Collections;
@@ -203,7 +204,8 @@ namespace BeautifulWeight.Presenter
 
             Label preferences = new Label();
             string pref = "";
-            pref = (from p in up.Preferences select p.Name).Aggregate((x, y) => x + ", " + y);
+            if (up.Preferences.Any())
+                pref = (from p in up.Preferences select p.Name).Aggregate((x, y) => x + ", " + y);
             //foreach (object o in up.Preferences)
             //{
             //    pref += o.ToString();
@@ -312,12 +314,23 @@ namespace BeautifulWeight.Presenter
                 }
                 else if (control.GetType() == typeof(GroupBox))
                 {
-                    (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
+                    if (((PropertyInfo)control.Tag).PropertyType == typeof(Goal))
+                    {
+                        if (ManagerProvider.getModelManager<VersionManager>().Allows(Feature.CHANGE_GOAL))
+                            (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
+                    }
+                    else
+                    {
+                        (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
+                    }
                 }
                 else if (control.Tag is PropertyInfo && ((PropertyInfo)control.Tag).PropertyType.GetInterfaces().Contains(typeof(IList)) && ((PropertyInfo)control.Tag).PropertyType.IsGenericType)
                 {
-                    control.Click += ModificaPreferenzeClickHandler;
-                    control.BackColor = Color.White;
+                    if (ManagerProvider.getModelManager<VersionManager>().Allows(Feature.CHANGE_PREFERENCES))
+                    {
+                        control.Click += ModificaPreferenzeClickHandler;
+                        control.BackColor = Color.White;
+                    }
                 }
                 else
                 {

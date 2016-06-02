@@ -26,6 +26,7 @@ namespace BeautifulWeight.Users
 
         public UserProfile() {
             _details = new PersonalDetails();
+            _preferences = new List<Ingredient>();
         }
 
         public List<Ingredient> Preferences

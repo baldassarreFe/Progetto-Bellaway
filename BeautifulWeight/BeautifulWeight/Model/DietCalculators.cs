@@ -1,4 +1,5 @@
 ﻿using BeautifulWeight.Menu;
+using BeautifulWeight.Users;
 using System;
 using System.Collections.Generic;
 using System.IO;

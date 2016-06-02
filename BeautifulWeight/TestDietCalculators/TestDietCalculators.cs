@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BeautifulWeight.Menu;
 using BeautifulWeight.Persistence;
+using BeautifulWeight.Users;
 
 namespace BeautifilBeautifulWeight.DietCalculators
 {

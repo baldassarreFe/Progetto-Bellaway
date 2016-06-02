@@ -89,6 +89,6 @@ namespace BeautifulWeight.Versions
 
     public enum Feature
     {
-        ADD_USER, CHANGE_GOAL, CHANGE_DIET, CHANGE_SERVING, VIEW_NEXT_MEAL
+        ADD_USER, CHANGE_GOAL, CHANGE_PREFERENCES, CHANGE_SERVING, VIEW_NEXT_MEAL
     }
 }

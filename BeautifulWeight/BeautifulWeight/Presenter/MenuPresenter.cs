@@ -1,6 +1,7 @@
 ﻿using BeautifulWeight.Menu;
 using BeautifulWeight.Model;
 using BeautifulWeight.Users;
+using BeautifulWeight.Versions;
 using BeautifulWeight.View;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ namespace BeautifulWeight.Presenter
             _dietPanel = dietPanel;
             _buttonsPanel = buttonsPanel;
             Model.CurrentUserChanged += CurrentUserChangedHandler;
+            ButtonsPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Name == "_deleteDietButton").Single().Click += DeleteDietClickHandler;
+            ButtonsPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Name == "_newDietButton").Single().Click += NewDietClickHandler;
         }
 
 
@@ -62,11 +65,23 @@ namespace BeautifulWeight.Presenter
             {
                 PaintDiet(Model.CurrentUser.Diet);
                 PaintUpperPanel(Model.CurrentUser.Diet);
-                // PaintLowerPanel();
+                PaintLowerPanel();
             }
             else
             {
                 ClearDiet();
+            }
+        }
+
+        private void PaintLowerPanel()
+        {
+            if (Model.CurrentUser.Diet == null)
+            {
+                ButtonsPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Name == "_deleteDietButton").Single().Enabled = false;
+            }
+            if (!(ManagerProvider.getModelManager<VersionManager>()).Allows(Versions.Feature.ADD_USER))
+            {
+                ButtonsPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Name == "_newDietButton").Single().Enabled = false;
             }
         }
 
@@ -94,107 +109,20 @@ namespace BeautifulWeight.Presenter
             ((System.ComponentModel.ISupportInitialize)DietPanel).EndInit();
             DietPanel.ResumeLayout(true);
         }
-
-        private void ResetBackColorHandler(object sender, EventArgs e)
-        {
-            RadButton salva = ButtonsPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Text == "Salva").Single();
-            ((Control)sender).BackColor = Color.White;
-        }
-
-        private void FieldChangedHandler(object sender, EventArgs e)
-        {
-            RadButton salva = ButtonsPanel.Controls[0].Controls.OfType<RadButton>().First(b => b.Text == "Salva");
-            Control field = (Control)sender;
-            salva.Enabled = true;
-            PropertyInfo pi = (PropertyInfo)field.Tag;
-            object o;
-            if (field.GetType() == typeof(GroupBox))
-                o = System.Enum.Parse(pi.PropertyType, field.Controls.OfType<RadioButton>()
-                                      .FirstOrDefault(r => r.Checked).Text);
-
-            else if (field.GetType() == typeof(RadRating))
-                o = (int)((RadRating)field).Value;
-
-            else
-                o = Convert.ChangeType(field.Text, pi.PropertyType);
-            try
-            {
-                pi.SetValue(Model.CurrentUser.Details, o);
-            }
-            catch (Exception)
-            {
-                salva.Enabled = false;
-                field.BackColor = Color.Red;
-            }
-        }
-
-        private void DeleteClickHandler(object sender, EventArgs e)
-        {
-            Model.DeleteUser();
-        }
-
-
+        
         private void ClearDiet()
         {
             DietPanel.Controls.Clear();
-            DietPanel.Controls.Clear();
         }
 
-        private void ModifyClickHandler(Object sender, EventArgs e)
+
+        private void NewDietClickHandler(object sender, EventArgs e)
         {
-            TableLayoutPanel detailsPanel = (TableLayoutPanel)DietPanel.Controls[0];
-            for (int i = 0; i < detailsPanel.RowCount; i++)
-            {
-                Control control = detailsPanel.GetControlFromPosition(1, i);
-                if (control.GetType() == typeof(RadRating))
-                {
-                    ((RadRating)control).ReadOnly = false;
-                }
-                else if (control.GetType() == typeof(GroupBox))
-                {
-                    (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
-                }
-                else
-                {
-                    control.Enabled = true;
-                }
-
-            }
-
-            TableLayoutPanel buttonPanel = new TableLayoutPanel();
-            buttonPanel.RowCount = 1;
-            buttonPanel.ColumnCount = 2;
-            RadButton salva = new RadButton();
-            salva.Text = "Salva";
-            salva.Click += SaveClickHandler;
-            RadButton annulla = new RadButton();
-            annulla.Text = "Annulla";
-            annulla.Click += CancelClickHandler;
-
-            salva.Dock = DockStyle.Fill;
-            annulla.Dock = DockStyle.Fill;
-            buttonPanel.Controls.Add(salva, 0, 0);
-            buttonPanel.Controls.Add(annulla, 1, 0);
-            buttonPanel.Dock = DockStyle.Fill;
-
-            for (int j = 0; j < buttonPanel.ColumnCount; j++)
-            {
-                buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-            }
-            ButtonsPanel.Controls.Clear();
-            ButtonsPanel.Controls.Add(buttonPanel);
-
-            Model.StartModify();
+            DeleteDietClickHandler(this, EventArgs.Empty);
         }
 
-        private void SaveClickHandler(object sender, EventArgs e)
-        {
-            Model.StopModify(true);
-        }
-
-        private void CancelClickHandler(object sender, EventArgs e)
-        {
-            Model.StopModify(false);
+        private void DeleteDietClickHandler(object sender, EventArgs e)
+        { 
         }
     }
 }

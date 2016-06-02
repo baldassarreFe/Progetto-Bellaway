@@ -15,9 +15,11 @@
     </personaldetails>
     <goal>WEIGHT_LOSS</goal>
     <preferences>
+    <!-- 
       <ingredient>pasta</ingredient>
       <ingredient>maiale</ingredient>
       <ingredient>pane</ingredient>
+    -->
     </preferences>
     <menu dietCalculator="BeautifilBeautifulWeight.DietCalculators.PointDietCalculator, TestDietCalculators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <day day="monday">
