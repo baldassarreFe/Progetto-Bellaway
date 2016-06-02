@@ -38,6 +38,8 @@ namespace BeautifulWeight.View
             this._aggiungiButton = new Telerik.WinControls.UI.RadButton();
             this._profile = new Telerik.WinControls.UI.SplitPanel();
             this._profilePanel = new System.Windows.Forms.Panel();
+            this._targetWeightLabel = new Telerik.WinControls.UI.RadLabel();
+            this._profileDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
             this._profileMenuPanel = new Telerik.WinControls.UI.RadPanel();
             this._diet = new Telerik.WinControls.UI.SplitPanel();
             this._dietPanel = new Telerik.WinControls.UI.RadPanel();
@@ -58,6 +60,8 @@ namespace BeautifulWeight.View
             ((System.ComponentModel.ISupportInitialize)(this._aggiungiButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._profile)).BeginInit();
             this._profile.SuspendLayout();
+            this._profilePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._targetWeightLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._profileMenuPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._diet)).BeginInit();
             this._diet.SuspendLayout();
@@ -117,8 +121,10 @@ namespace BeautifulWeight.View
             this._usersListView.AutoScroll = true;
             this._usersListView.CheckOnClickMode = Telerik.WinControls.UI.CheckOnClickMode.FirstClick;
             this._usersListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._usersListView.EnableAnalytics = false;
             this._usersListView.FullRowSelect = false;
             this._usersListView.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
+            this._usersListView.HotTracking = false;
             this._usersListView.ItemSize = new System.Drawing.Size(300, 100);
             this._usersListView.Location = new System.Drawing.Point(0, 0);
             this._usersListView.Name = "_usersListView";
@@ -166,11 +172,36 @@ namespace BeautifulWeight.View
             // 
             // _profilePanel
             // 
+            this._profilePanel.Controls.Add(this._targetWeightLabel);
+            this._profilePanel.Controls.Add(this._profileDetailsPanel);
             this._profilePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._profilePanel.Location = new System.Drawing.Point(0, 0);
             this._profilePanel.Name = "_profilePanel";
             this._profilePanel.Size = new System.Drawing.Size(538, 519);
             this._profilePanel.TabIndex = 2;
+            // 
+            // _targetWeightLabel
+            // 
+            this._targetWeightLabel.BackColor = System.Drawing.Color.Transparent;
+            this._targetWeightLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._targetWeightLabel.Location = new System.Drawing.Point(0, 517);
+            this._targetWeightLabel.Name = "_targetWeightLabel";
+            this._targetWeightLabel.Size = new System.Drawing.Size(2, 2);
+            this._targetWeightLabel.TabIndex = 1;
+            // 
+            // _profileDetailsPanel
+            // 
+            this._profileDetailsPanel.AutoSize = true;
+            this._profileDetailsPanel.ColumnCount = 2;
+            this._profileDetailsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this._profileDetailsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this._profileDetailsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this._profileDetailsPanel.Location = new System.Drawing.Point(0, 0);
+            this._profileDetailsPanel.Name = "_profileDetailsPanel";
+            this._profileDetailsPanel.RowCount = 1;
+            this._profileDetailsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._profileDetailsPanel.Size = new System.Drawing.Size(538, 0);
+            this._profileDetailsPanel.TabIndex = 0;
             // 
             // _profileMenuPanel
             // 
@@ -301,6 +332,9 @@ namespace BeautifulWeight.View
             ((System.ComponentModel.ISupportInitialize)(this._aggiungiButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._profile)).EndInit();
             this._profile.ResumeLayout(false);
+            this._profilePanel.ResumeLayout(false);
+            this._profilePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._targetWeightLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._profileMenuPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._diet)).EndInit();
             this._diet.ResumeLayout(false);
@@ -338,5 +372,7 @@ namespace BeautifulWeight.View
         private RadButton _aggiungiButton;
         private RadPanel _dietUpperPanel;
         private RadPanel _dietPanel;
+        private RadLabel _targetWeightLabel;
+        private TableLayoutPanel _profileDetailsPanel;
     }
 }

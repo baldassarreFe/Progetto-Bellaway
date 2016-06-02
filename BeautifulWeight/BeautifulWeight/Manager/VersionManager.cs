@@ -25,9 +25,14 @@ namespace BeautifulWeight.Versions
             private set
             {
                 _version = value;
-                if (VersionChanged != null)
-                    VersionChanged(this, EventArgs.Empty);
+                FireVersionChanged();
             }
+        }
+
+        private void FireVersionChanged()
+        {
+            if (VersionChanged != null)
+                VersionChanged(this, EventArgs.Empty);
         }
 
         public IEnumerable<Version> AllVersions
@@ -46,7 +51,7 @@ namespace BeautifulWeight.Versions
 
                 _allVersions = from type in Assembly.GetExecutingAssembly().GetTypes()
                                where typeof(Version).IsAssignableFrom(type) && !type.IsAbstract
-                               select (Version) Activator.CreateInstance(type);
+                               select (Version)Activator.CreateInstance(type);
                 return _allVersions;
             }
         }
@@ -56,12 +61,15 @@ namespace BeautifulWeight.Versions
             return CurrentVersion.Allows(feature);
         }
 
-        public void ChangeVersion(Version version, Code code)
+        public bool ChangeVersion(Version version, Code code)
         {
-            if (version.IsCodeValid(code)) { 
+            if (version.IsCodeValid(code))
+            {
                 CurrentVersion = version;
-                VersionChanged(this, EventArgs.Empty);
+                return true;
             }
+            else
+                return false;
         }
 
     }

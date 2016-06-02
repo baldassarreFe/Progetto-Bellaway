@@ -76,7 +76,7 @@ namespace BeautifulWeight.Versions
 
         override public bool IsCodeValid(Code code)
         {
-            throw new NotImplementedException();
+            return code.Campo1 == "0000";
         }
     }
 

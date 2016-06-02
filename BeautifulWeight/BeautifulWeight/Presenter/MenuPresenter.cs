@@ -142,13 +142,13 @@ namespace BeautifulWeight.Presenter
         private void ConfirmNewDietClick(object sender, EventArgs e)
         {
             ComboBox dietcalculators = (ComboBox)((RadButton)sender).Tag;
-            Model.CurrentUser.Diet = ((DietCalculator)dietcalculators.SelectedItem).NewMenu();
+            Model.CurrentUser.Diet = ((DietCalculator)dietcalculators.SelectedItem).NewMenu(Model.CurrentUser);
             PaintDiet(Model.CurrentUser.Diet);
             PaintUpperPanel(Model.CurrentUser.Diet);
             PaintLowerPanel();
             Random r = new Random();
             if (r.Next(10) == 8)
-                MessageBox.Show("Complimenti! Hai vinto un viaggio a Ibiza! Contattaci per ritirare il tuo premio.");
+                MessageBox.Show("Complimenti! Hai vinto un viaggio a Ibiza! Contattaci per ritirare il tuo premio.","BRAVOOOO");
         }
 
         private void DeleteDietClickHandler(object sender, EventArgs e)

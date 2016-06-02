@@ -8,9 +8,10 @@ namespace BeautifulWeight.Utils
 {
     public static class IEnumerableExtensione
     {
+        private static Random random = new Random();
         public static T RandomElement<T>(this IEnumerable<T> enumerable)
         {
-            return enumerable.RandomElementUsing(new Random());
+            return enumerable.RandomElementUsing(random);
         }
 
         public static T RandomElementUsing<T>(this IEnumerable<T> enumerable, Random rand)

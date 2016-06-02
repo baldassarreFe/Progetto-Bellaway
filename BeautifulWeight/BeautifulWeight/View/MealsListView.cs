@@ -19,6 +19,8 @@ namespace BeautifulWeight.View
             this.ItemSize = new System.Drawing.Size(350,100);
             this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowColumnHeaders = false;
+            this.HotTracking = false;
+            this.SelectLastAddedItem = false;
             this.VisualItemCreating += MealsListView_VisualItemCreating;
             this.VisualItemFormatting += MealsListView_VisualItemFormatting;
             this.CurrentItemChanged += MealsListView_CurrentItemChanged;

@@ -21,6 +21,8 @@ namespace BeautifulWeight.Presenter
             this.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
             this.Size = new System.Drawing.Size(400, 220);
             this.ItemSize = new System.Drawing.Size(400, 220);
+            this.HotTracking = false;
+            this.SelectLastAddedItem = false;
             //this.Location = new System.Drawing.Point(0, 0);
             //this.Name = "_usersListView";
             this.ShowColumnHeaders = false;

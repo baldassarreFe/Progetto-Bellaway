@@ -111,17 +111,22 @@ namespace BeautifulWeight.Presenter
                 // ignore
             }
             UsersListView.CurrentItem = null;
-            if ((ManagerProvider.getModelManager<VersionManager>()).Allows(Feature.ADD_USER) || Model.AllUsers.Count() == 0)
-            {
-                AddUserButton.Enabled = true;
-            }
-            else
-                AddUserButton.Enabled = false;
+            UpdateAddUserButtonState();
+        }
+
+        private void UpdateAddUserButtonState()
+        {
+                AddUserButton.Enabled =  Model.AllUsers.Count() == 0 || ManagerProvider.getModelManager<VersionManager>().Allows(Feature.ADD_USER);
         }
 
         private void AddUserHandler(object sender, EventArgs e)
         {
             Model.NewUser();
+        }
+
+        protected override void Presenter_VersionChanged(object sender, EventArgs e)
+        {
+            UpdateAddUserButtonState();
         }
     }
 }

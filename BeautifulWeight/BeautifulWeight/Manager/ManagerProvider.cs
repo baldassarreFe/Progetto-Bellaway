@@ -22,6 +22,7 @@ namespace BeautifulWeight.Model
             _managers.Add(new KitchenManager());
             _managers.Add(new UserProfileManager());
             _managers.Add(new VersionManager());
+            _managers.Add(new TargetWeightFormulaManager());
         }
 
         public static T getModelManager<T>() where T:Manager

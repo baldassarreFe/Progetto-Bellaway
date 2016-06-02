@@ -1,4 +1,5 @@
 ﻿using BeautifulWeight.Model;
+using BeautifulWeight.Versions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace BeautifulWeight.Presenter
         public Presenter(SingleProfileModel model)
         {
             this._model = model;
+            ManagerProvider.getModelManager<VersionManager>().VersionChanged += Presenter_VersionChanged;
+        }
+
+        protected virtual void Presenter_VersionChanged(object sender, EventArgs e)
+        {
+
         }
 
         public SingleProfileModel Model

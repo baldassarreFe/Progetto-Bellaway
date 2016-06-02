@@ -49,6 +49,7 @@
     <Reference Include="TelerikCommon, Version=2015.2.728.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\TargetWeightFormulaManager.cs" />
     <Compile Include="TargetWeight\KeyesFormula.cs" />
     <Compile Include="Manager\KitchenManager.cs" />
     <Compile Include="TargetWeight\TargetWeightFormula.cs" />
@@ -102,6 +103,9 @@
       <DependentUpon>PreferencesDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\DailyMenuVisualItem.cs" />
+    <Compile Include="View\ServingsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="View\UserStripVisualItem.cs" />
     <Compile Include="View\VersionDialog.cs">
       <SubType>Form</SubType>

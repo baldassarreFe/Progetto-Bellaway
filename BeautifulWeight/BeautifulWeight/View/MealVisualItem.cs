@@ -19,10 +19,8 @@ namespace BeautifulWeight.Presenter
             base.CreateChildElements();
             StackLayoutPanel stackLayoutPanel = new StackLayoutPanel();
             _descrLabel = new LightVisualElement();
-            _servingsListView = new RadListView();
-            _servingsListView.FullRowSelect = false;
-            _servingsListView.ItemSize = new Size(200,20);
-            _servingsListView.ViewType = ListViewType.ListView;
+            _servingsListView = new ServingsListView();
+            
 
             stackLayoutPanel.Children.Add(_servingsListView.RootElement);
             stackLayoutPanel.Children.Add(_descrLabel);
@@ -43,7 +41,6 @@ namespace BeautifulWeight.Presenter
             this.Text = "";
             DateTime time = (DateTime) Data["Time"];
             this._descrLabel.Text = "<html>" + Data["Name"] +" "+ time.Hour+":"+time.Minute + "</html>";
-            this._servingsListView.DisplayMember = "Dish.Name";
             this._servingsListView.DataSource = (IEnumerable<Serving>)Data["Servings"];
         }
 

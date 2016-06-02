@@ -20,10 +20,11 @@ namespace BeautifulWeight.Presenter
 {
     class PersonalDetailsPresenter : Presenter
     {
-        private readonly Panel _panel;
+        private readonly TableLayoutPanel _panel;
         private readonly RadPanel _menuPanel;
+        private readonly RadLabel _targetWeightLabel;
 
-        public Panel ProfilePanel
+        public TableLayoutPanel ProfilePanel
         {
             get
             {
@@ -39,12 +40,22 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public PersonalDetailsPresenter(Panel profilePanel, RadPanel profileMenuPanel, SingleProfileModel model) : base(model)
+        public RadLabel TargetWeightLabel
+        {
+            get
+            {
+                return _targetWeightLabel;
+            }
+
+        }
+
+        public PersonalDetailsPresenter(TableLayoutPanel profilePanel, RadPanel profileMenuPanel, RadLabel targetWeightLabel, SingleProfileModel model) : base(model)
         {
             if (profilePanel == null || profileMenuPanel == null)
                 throw new ArgumentNullException("control");
             _panel = profilePanel;
             _menuPanel = profileMenuPanel;
+            _targetWeightLabel = targetWeightLabel;
             Model.CurrentUserChanged += CurrentUserChangedHandler;
         }
 
@@ -66,23 +77,17 @@ namespace BeautifulWeight.Presenter
         {
             PersonalDetails personalDetails = up.Details;
             ProfilePanel.Controls.Clear();
-            TableLayoutPanel detailsPanel = new TableLayoutPanel();
-            detailsPanel.RowCount = personalDetails.GetType().GetProperties().Length + 2;
-            detailsPanel.ColumnCount = 2;
-            detailsPanel.Dock = DockStyle.Top;
-            detailsPanel.AutoSize = true;
 
 
-
-            int i = 0;
+            Label name = null;
             foreach (PropertyInfo pi in personalDetails.GetType().GetProperties())
             {
-                Label name = new Label();
+                name = new Label();
                 name.Text = pi.Name;
                 name.Dock = DockStyle.Fill;
                 name.TextAlign = ContentAlignment.MiddleCenter;
                 name.BorderStyle = BorderStyle.Fixed3D;
-                detailsPanel.Controls.Add(name, 0, i);
+                ProfilePanel.Controls.Add(name);
 
                 if (pi.PropertyType == typeof(Load))
                 {
@@ -103,7 +108,7 @@ namespace BeautifulWeight.Presenter
                     value.Anchor = AnchorStyles.None;
                     value.Tag = pi;
                     value.LostFocus += FieldChangedHandler;
-                    detailsPanel.Controls.Add(value, 1, i++);
+                    ProfilePanel.Controls.Add(value);
                 }
 
                 else if (pi.PropertyType == typeof(DateTime))
@@ -116,7 +121,7 @@ namespace BeautifulWeight.Presenter
                     value.DropDownAlign = LeftRightAlignment.Right;
                     value.Tag = pi;
                     value.Leave += FieldChangedHandler;
-                    detailsPanel.Controls.Add(value, 1, i++);
+                    ProfilePanel.Controls.Add(value);
                 }
 
                 else if (pi.PropertyType == typeof(int))
@@ -130,7 +135,7 @@ namespace BeautifulWeight.Presenter
                     value.TextAlign = HorizontalAlignment.Center;
                     value.Tag = pi;
                     value.Leave += FieldChangedHandler;
-                    detailsPanel.Controls.Add(value, 1, i++);
+                    ProfilePanel.Controls.Add(value);
                 }
 
                 else if (pi.PropertyType.IsEnum)
@@ -152,7 +157,7 @@ namespace BeautifulWeight.Presenter
                     }
                     value.Dock = DockStyle.Fill;
                     value.AutoSize = true;
-                    detailsPanel.Controls.Add(value, 1, i++);
+                    ProfilePanel.Controls.Add(value);
                 }
 
                 else {
@@ -164,8 +169,9 @@ namespace BeautifulWeight.Presenter
                     value.BorderStyle = BorderStyle.Fixed3D;
                     value.Tag = pi;
                     value.Leave += FieldChangedHandler;
-                    detailsPanel.Controls.Add(value, 1, i++);
+                    ProfilePanel.Controls.Add(value);
                 }
+                ProfilePanel.RowCount++;
             }
 
 
@@ -174,7 +180,7 @@ namespace BeautifulWeight.Presenter
             goalLabel.Dock = DockStyle.Fill;
             goalLabel.TextAlign = ContentAlignment.MiddleCenter;
             goalLabel.BorderStyle = BorderStyle.Fixed3D;
-            detailsPanel.Controls.Add(goalLabel, 0, i);
+            ProfilePanel.Controls.Add(goalLabel);
 
             GroupBox goal = new GroupBox();
             int k = 0;
@@ -193,47 +199,25 @@ namespace BeautifulWeight.Presenter
             }
             goal.Dock = DockStyle.Fill;
             goal.Tag = up.GetType().GetProperty("Goal");
-            detailsPanel.Controls.Add(goal, 1, i++);
+            ProfilePanel.Controls.Add(goal);
 
             Label prefLabel = new Label();
             prefLabel.Text = "Preferences";
             prefLabel.Dock = DockStyle.Fill;
             prefLabel.TextAlign = ContentAlignment.MiddleCenter;
             prefLabel.BorderStyle = BorderStyle.Fixed3D;
-            detailsPanel.Controls.Add(prefLabel, 0, i);
+            ProfilePanel.Controls.Add(prefLabel);
 
             Label preferences = new Label();
             string pref = "";
             if (up.Preferences.Any())
                 pref = (from p in up.Preferences select p.Name).Aggregate((x, y) => x + ", " + y);
-            //foreach (object o in up.Preferences)
-            //{
-            //    pref += o.ToString();
-            //    if (up.Preferences.IndexOf((Kitchen.Ingredient)o) != up.Preferences.Count - 1)
-            //        pref+= ", ";
-            //}
             preferences.Text = pref;
             preferences.Dock = DockStyle.Fill;
             preferences.TextAlign = ContentAlignment.MiddleCenter;
             preferences.BorderStyle = BorderStyle.Fixed3D;
             preferences.Tag = up.GetType().GetProperty("Preferences");
-            detailsPanel.Controls.Add(preferences, 1, i++);
-
-
-            //float percent = 100F / detailsPanel.RowCount;
-            //for (int j = 0; j < detailsPanel.RowCount; j++)
-            //{
-            //    detailsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, percent));
-            //}
-
-            for (int j = 0; j < detailsPanel.ColumnCount; j++)
-            {
-                detailsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-            }
-
-
-
-            ProfilePanel.Controls.Add(detailsPanel);
+            ProfilePanel.Controls.Add(preferences);
 
             TableLayoutPanel buttonPanel = new TableLayoutPanel();
             buttonPanel.RowCount = 1;
@@ -247,16 +231,14 @@ namespace BeautifulWeight.Presenter
 
             modifica.Dock = DockStyle.Fill;
             elimina.Dock = DockStyle.Fill;
-            buttonPanel.Controls.Add(modifica, 0, 0);
-            buttonPanel.Controls.Add(elimina, 1, 0);
+            buttonPanel.Controls.Add(modifica);
+            buttonPanel.Controls.Add(elimina);
             buttonPanel.Dock = DockStyle.Fill;
 
-            for (int j = 0; j < buttonPanel.ColumnCount; j++)
-            {
-                buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-            }
             MenuPanel.Controls.Clear();
             MenuPanel.Controls.Add(buttonPanel);
+
+            RecalculateTargetWeight();
         }
 
 
@@ -279,7 +261,10 @@ namespace BeautifulWeight.Presenter
             try
             {
                 if (typeof(PersonalDetails).GetProperties().Contains(pi))
+                {
                     pi.SetValue(Model.CurrentUser.Details, o);
+                    RecalculateTargetWeight();
+                }
                 else
                     pi.SetValue(Model.CurrentUser, o);
             }
@@ -295,19 +280,26 @@ namespace BeautifulWeight.Presenter
             Model.DeleteUser();
         }
 
+        private void RecalculateTargetWeight()
+        {
+            try { 
+                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getModelManager<TargetWeightFormulaManager>().Formula.calculate(Model.CurrentUser.Details);
+            } catch (Exception)
+            {
+                //ignore
+            }
+        }
 
         private void ClearUser()
         {
-            ProfilePanel.Controls.Clear();
             ProfilePanel.Controls.Clear();
         }
 
         private void ModifyClickHandler(Object sender, EventArgs e)
         {
-            TableLayoutPanel detailsPanel = (TableLayoutPanel)ProfilePanel.Controls[0];
-            for (int i = 0; i < detailsPanel.RowCount; i++)
+            for (int i = 0; i < ProfilePanel.RowCount; i++)
             {
-                Control control = detailsPanel.GetControlFromPosition(1, i);
+                Control control = ProfilePanel.GetControlFromPosition(1, i);
                 if (control.GetType() == typeof(RadRating))
                 {
                     ((RadRating)control).ReadOnly = false;

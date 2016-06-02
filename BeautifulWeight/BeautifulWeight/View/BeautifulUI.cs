@@ -26,7 +26,7 @@ namespace BeautifulWeight.View
             base.OnLoad(e);
             SingleProfileModel model = new SingleProfileModel();
             UserPresenter ulpresenter = new UserPresenter(this.UsersListView, this.AggiungiButton, model);
-            PersonalDetailsPresenter pdpresenter = new PersonalDetailsPresenter(this.ProfilePanel, this.ProfileMenuPanel, model);
+            PersonalDetailsPresenter pdpresenter = new PersonalDetailsPresenter(this.ProfileDetailsPanel, this.ProfileMenuPanel, this.TargetWeightLabel, model);
             VersionPresenter vpresenter = new VersionPresenter(this.VersionLabel);
             MenuPresenter mpresenter = new MenuPresenter(this.DietUpperPanel,this.DietPanel,this.DietButtonsPanel,model);
         }
@@ -237,6 +237,32 @@ namespace BeautifulWeight.View
             set
             {
                 _dietButtonsPanel = value;
+            }
+        }
+
+        public TableLayoutPanel ProfileDetailsPanel
+        {
+            get
+            {
+                return _profileDetailsPanel;
+            }
+
+            set
+            {
+                _profileDetailsPanel = value;
+            }
+        }
+
+        public RadLabel TargetWeightLabel
+        {
+            get
+            {
+                return _targetWeightLabel;
+            }
+
+            set
+            {
+                _targetWeightLabel = value;
             }
         }
     }

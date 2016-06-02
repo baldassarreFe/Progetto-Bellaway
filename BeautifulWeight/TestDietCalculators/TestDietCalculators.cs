@@ -24,7 +24,7 @@ namespace BeautifilBeautifulWeight.DietCalculators
 
         public PointDietCalculator()
         {
-            
+
             _kitchenManager = ManagerProvider.getModelManager<KitchenManager>();
         }
 
@@ -39,7 +39,7 @@ namespace BeautifilBeautifulWeight.DietCalculators
         public Serving GetEquivalent(Serving serving, UserProfile userProfile)
         {
             Serving s = new Serving(KitchenManager.Dishes.RandomElement(), new Random().Next(120));
-            return s; 
+            return s;
         }
 
         public bool IsCompatibleWith(Goal goal)
@@ -56,22 +56,23 @@ namespace BeautifilBeautifulWeight.DietCalculators
         {
             WeeklyMenu result = new WeeklyMenu(this);
             Random rnd = new Random();
-            foreach(DailyMenu dm in result)
+            foreach (DailyMenu dm in result)
             {
-                int num = rnd.Next(4);
-                for (int i = 0; i < num; i++) {
+                int num = rnd.Next(1, 4);
+                for (int i = 0; i < num; i++)
+                {
                     List<Serving> servings = new List<Serving>();
-                    int num2 = rnd.Next(3);
+                    int num2 = rnd.Next(1, 3);
                     for (int j = 0; j < num2; j++)
                     {
                         servings.Add(new Serving(KitchenManager.Dishes.RandomElement(), new Random().Next(120)));
                     }
                     NonEmptyList<Serving> nonempty = new NonEmptyList<Serving>(servings[0]);
-                    for(int j = 1; j < servings.Count; j++)
-        {
-                        nonempty.Add(servings[i]);
+                    for (int j = 1; j < servings.Count; j++)
+                    {
+                        nonempty.Add(servings[j]);
                     }
-                    dm.Meals.Add(new Meal("pasto " + i, new DateTime(0, 0, 0, rnd.Next(24), rnd.Next(60), 0), nonempty));
+                    dm.Meals.Add(new Meal("pasto " + i, new DateTime(2000, 1, 1, rnd.Next(24), rnd.Next(60), 0), nonempty));
                 }
             }
             return result;

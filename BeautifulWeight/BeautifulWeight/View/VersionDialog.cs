@@ -20,9 +20,54 @@ namespace BeautifulWeight.View
         {
             InitializeComponent();
             _versionsListView.VisualItemCreating += _preferencesList_VisualItemCreating;
-            _versionsListView.DataSource = ManagerProvider.getModelManager<VersionManager>().AllVersions;
+            _versionsListView.CurrentItemChanged += _versionsListView_CurrentItemChanged;
+            _versionsListView.DataSource = ManagerProvider.getModelManager<VersionManager>().AllVersions.Where(v => v.CompareTo(ManagerProvider.getModelManager<VersionManager>().CurrentVersion) > 0);
+            _versionsListView.CurrentItem = null;
+            _okButton.Click += _okButton_Click;
+            foreach (RichTextBox codeBox in _buttonPanel.Controls.OfType<RichTextBox>())
+            {
+                codeBox.KeyUp += CodeBox_KeyUp;
+            }
         }
 
+        private void _versionsListView_CurrentItemChanged(object sender, ListViewItemEventArgs e)
+        {
+            ValidateForm();
+        }
+
+        private void ValidateForm()
+        {
+            bool attivare = true;
+            foreach (RichTextBox codeBox in _buttonPanel.Controls.OfType<RichTextBox>())
+            {
+                attivare &= (codeBox.Text.Length == 4);
+            }
+            attivare &= (_versionsListView.CurrentItem != null);
+            _okButton.Enabled = attivare;
+        }
+
+        private void _okButton_Click(object sender, EventArgs e)
+        {
+            Code code = new Code(_codeBox1.Text, _codeBox2.Text, _codeBox3.Text, _codeBox4.Text);
+            Versions.Version attempt = (Versions.Version)_versionsListView.CurrentItem.DataBoundItem;
+            if (ManagerProvider.getModelManager<VersionManager>().ChangeVersion(attempt, code))
+            {
+                MessageBox.Show("Upgrade riuscito, ora puoi provare le nuove features", "AGGIORNAMENTO RIUSCITO", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                if (MessageBox.Show("E' IRRILEVANTE", "E' IRRILEVANTE", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                    this.DialogResult = DialogResult.None;
+                else
+                    this.DialogResult = DialogResult.Cancel;
+            }
+        }
+
+        private void CodeBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            ValidateForm();
+        }
 
         public Panel ButtonPanel
         {
@@ -46,7 +91,7 @@ namespace BeautifulWeight.View
         }
     }
 
-    internal class VersionVisualItem : BaseListViewVisualItem
+    internal class VersionVisualItem : SimpleListViewVisualItem
     {
         protected override void CreateChildElements()
         {
@@ -64,10 +109,9 @@ namespace BeautifulWeight.View
             base.SynchronizeProperties();
             this.Padding = new Padding(5);
             string name = ((Versions.Version)Data.DataBoundItem).Description;
-            IEnumerable<string> feats = from feature in ((IEnumerable<Feature>)Data["AllowedFeatures"])
-                                        select feature.ToString();
-            string features = feats.Any() ? feats.Aggregate((x, y) => x + ", " + y) : "";
-            this.Text = "<html>" + name + "\t\t" + "</html>";
+            IEnumerable<Feature> feats = ((Versions.Version)Data.DataBoundItem).AllowedFeatures;
+            string features = feats.Any() ? feats.Select(f => f.ToString()).Aggregate((x, y) => x + ", " + y) : "";
+            this.Text = "<html>" + name + "    " + features + "</html>";
         }
 
         protected override Type ThemeEffectiveType
