@@ -115,14 +115,14 @@ namespace BeautifulWeight.Persistence
             preferences.Add("pasta");
             preferences.Add("maiale");
             preferences.Add("pane");
-            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            _profiles.Add(new UserProfile(preferences, Goal.WEIGHT_LOSS, null, details));
 
             details = new PersonalDetails("Giro", "Ditalia", new DateTime(1994, 10, 11), 120, 178, Sex.MALE, 40, Load.LIGHT, 1, Load.LIGHT);
             preferences = new List<Ingredient>();
             preferences.Add("pasta");
             preferences.Add("maiale");
             preferences.Add("pane");
-            _profiles.Add(new UserProfile(preferences, DietCalculators.Goal.WEIGHT_LOSS, null, details));
+            _profiles.Add(new UserProfile(preferences, Goal.WEIGHT_LOSS, null, details));
             
         }
 

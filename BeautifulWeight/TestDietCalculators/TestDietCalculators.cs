@@ -68,7 +68,7 @@ namespace BeautifilBeautifulWeight.DietCalculators
                     }
                     NonEmptyList<Serving> nonempty = new NonEmptyList<Serving>(servings[0]);
                     for(int j = 1; j < servings.Count; j++)
-                    {
+        {
                         nonempty.Add(servings[i]);
                     }
                     dm.Meals.Add(new Meal("pasto " + i, new DateTime(0, 0, 0, rnd.Next(24), rnd.Next(60), 0), nonempty));

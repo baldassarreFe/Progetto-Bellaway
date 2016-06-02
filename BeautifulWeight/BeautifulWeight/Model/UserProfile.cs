@@ -26,6 +26,7 @@ namespace BeautifulWeight.Users
 
         public UserProfile() {
             _details = new PersonalDetails();
+            _preferences = new List<Ingredient>();
         }
 
         public List<Ingredient> Preferences
@@ -89,5 +90,10 @@ namespace BeautifulWeight.Users
         }
 
         
+    }
+
+    public enum Goal
+    {
+        WEIGHT_LOSS, MASS_GAIN, MAINTAINANCE, DEFINITION
     }
 }

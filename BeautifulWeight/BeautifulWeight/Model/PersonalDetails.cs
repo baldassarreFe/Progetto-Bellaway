@@ -181,4 +181,19 @@ namespace BeautifulWeight.Users
         }
 
     }
+
+    public enum Sex
+    {
+        MALE,
+        FEMALE
+    }
+
+    public enum Load
+    {
+        LIGHTER,
+        LIGHT,
+        NORMAL,
+        HEAVY,
+        HEAVIER
+    }
 }

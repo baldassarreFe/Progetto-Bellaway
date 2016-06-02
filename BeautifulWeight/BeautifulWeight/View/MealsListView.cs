@@ -15,11 +15,13 @@ namespace BeautifulWeight.View
             this.FullRowSelect = false;
             this.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AutoHide;
             this.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
-            this.ItemSize = new System.Drawing.Size(400, 200);
+            this.ItemSize = new System.Drawing.Size(300,100);
+            this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowColumnHeaders = false;
             this.VisualItemCreating += MealsListView_VisualItemCreating;
             this.VisualItemFormatting += MealsListView_VisualItemFormatting;
             this.CurrentItemChanged += MealsListView_CurrentItemChanged;
+            this.ViewType = ListViewType.IconsView;
         }
 
         private void MealsListView_CurrentItemChanged(object sender, ListViewItemEventArgs e)

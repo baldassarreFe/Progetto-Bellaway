@@ -15,11 +15,13 @@
     </personaldetails>
     <goal>WEIGHT_LOSS</goal>
     <preferences>
+    <!-- 
       <ingredient>pasta</ingredient>
       <ingredient>maiale</ingredient>
       <ingredient>pane</ingredient>
+    -->
     </preferences>
-    <menu dietCalculator="PointDietCalculator">
+    <menu dietCalculator="BeautifilBeautifulWeight.DietCalculators.PointDietCalculator, TestDietCalculators, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <day day="monday">
         <meal name="colazione" hour="09" minute="00">
           <serving dish="Nasello alla cipolla con pomodorini" quantity="100"></serving>
