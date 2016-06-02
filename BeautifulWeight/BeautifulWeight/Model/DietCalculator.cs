@@ -14,6 +14,7 @@ namespace BeautifulWeight.DietCalculators
         string Description { get; }
         WeeklyMenu NewMenu();
         Serving GetEquivalent(Serving serving);
+        bool IsCompatibleWith(Goal goal);
     }
 
     public static class DietCalculatorLoader
