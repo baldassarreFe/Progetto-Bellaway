@@ -2,7 +2,7 @@
 
 namespace BeautifulWeight.Users
 {
-    public struct PersonalDetails
+    public class PersonalDetails
     {
         private string _name;
         private string _surname;

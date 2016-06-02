@@ -206,7 +206,6 @@ namespace BeautifulWeight.Presenter
         {
             RadButton salva = MenuPanel.Controls[0].Controls.OfType<RadButton>().Where(o => o.Text == "Salva").Single();
             ((Control)sender).BackColor = Color.White;
-            salva.Enabled = false;
         }
 
         private void FieldChangedHandler(object sender, EventArgs e)
@@ -219,6 +218,9 @@ namespace BeautifulWeight.Presenter
             if (field.GetType() == typeof(GroupBox))
                 o = System.Enum.Parse(pi.PropertyType, field.Controls.OfType<RadioButton>()
                                       .FirstOrDefault(r => r.Checked).Text);
+
+            else if (field.GetType() == typeof(RadRating))
+                o = (int)((RadRating)field).Value;
 
             else
                 o = Convert.ChangeType(field.Text, pi.PropertyType);
