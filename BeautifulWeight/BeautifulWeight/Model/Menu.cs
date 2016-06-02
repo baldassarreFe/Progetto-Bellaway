@@ -94,7 +94,7 @@ namespace BeautifulWeight.Menu
     public class WeeklyMenu
     {
         private readonly DailyMenu[] _dailyMenu;
-        private readonly DietCalculator _dietCalculator;
+        private readonly String _dietCalculatorType;
 
         public DailyMenu this[DayOfWeek day]
         {
@@ -104,11 +104,22 @@ namespace BeautifulWeight.Menu
             }
         }
 
+        public WeeklyMenu(string dietCalculatorType)
+        {
+            _dietCalculatorType = dietCalculatorType;
+            _dailyMenu = new DailyMenu[7];
+        }
+
+        public WeeklyMenu(DietCalculator dietCalculator) : this(dietCalculator.GetType().AssemblyQualifiedName)
+        {
+        }
+
         public DietCalculator DietCalculator
         {
             get
             {
-                return _dietCalculator;
+                // si può fare di meglio
+                return DietCalculatorLoader.LoadedDietCalculators.FirstOrDefault(dc => dc.GetType().AssemblyQualifiedName == _dietCalculatorType);
             }
         }
     }

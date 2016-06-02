@@ -123,6 +123,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Users.xml" />
     <Content Include="Resources\Dishes.xml" />
     <Content Include="Resources\Ingredients.xml" />
   </ItemGroup>
