@@ -1,30 +1,25 @@
 ﻿using BeautifulWeight.Menu;
-using BeautifulWeight.Users;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telerik.WinControls;
-using Telerik.WinControls.Layouts;
 using Telerik.WinControls.UI;
 
-namespace BeautifulWeight.View
+namespace BeautifulWeight.Presenter
 {
-    class DailyMenuVisualItem : SimpleListViewVisualItem
+    internal class MealVisualItem : SimpleListViewVisualItem
     {
-        MealsListView _mealsListView;
-        LightVisualElement _dayLabel;
+        private LightVisualElement _descrLabel;
+        private RadListView _servingsListView;
 
         protected override void CreateChildElements()
         {
             base.CreateChildElements();
-            _mealsListView = new MealsListView();
-            _dayLabel = new LightVisualElement();
-            this.Container.Add(_dayLabel);
-            this.Container.Add(_mealsListView);
+            _descrLabel = new LightVisualElement();
+            _servingsListView = new RadListView();
+            this.Container.Add(_descrLabel);
+            this.Container.Add(_servingsListView);
             this.Padding = new Padding(5);
             this.DrawFill = true;
             this.BackColor = Color.Aqua;
@@ -37,8 +32,10 @@ namespace BeautifulWeight.View
         protected override void SynchronizeProperties()
         {
             base.SynchronizeProperties();
-            this._mealsListView.DataSource = (IEnumerable<Meal>)Data["Meals"];
-            this._dayLabel.Text = ((DayOfWeek) Data["Day"]).ToString();
+            DateTime time = (DateTime) Data["Time"];
+            this._descrLabel.Text = "<html>" + Data["Name"] +" "+ time.Hour+":"+time.Minute + "</html>";
+            this._servingsListView.DisplayMember = "Dish";
+            this._servingsListView.DataSource = (IEnumerable<Serving>)Data["Servings"];
         }
 
         protected override Type ThemeEffectiveType
