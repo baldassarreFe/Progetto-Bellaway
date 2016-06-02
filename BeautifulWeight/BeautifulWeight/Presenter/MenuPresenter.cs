@@ -17,6 +17,7 @@ namespace BeautifulWeight.Presenter
 {
     class MenuPresenter : Presenter
     {
+        private readonly RadPanel _upperPanel;
         private readonly RadPanel _dietPanel;
         private readonly RadPanel _buttonsPanel;
 
@@ -36,10 +37,19 @@ namespace BeautifulWeight.Presenter
             }
         }
 
-        public MenuPresenter(RadPanel dietPanel, RadPanel buttonsPanel, SingleProfileModel model) : base(model)
+        public RadPanel UpperPanel
+        {
+            get
+            {
+                return _upperPanel;
+            }
+        }
+
+        public MenuPresenter(RadPanel upperPanel, RadPanel dietPanel, RadPanel buttonsPanel, SingleProfileModel model) : base(model)
         {
             if (dietPanel == null || buttonsPanel == null)
                 throw new ArgumentNullException("control");
+            _upperPanel = upperPanel;
             _dietPanel = dietPanel;
             _buttonsPanel = buttonsPanel;
             Model.CurrentUserChanged += CurrentUserChangedHandler;
@@ -51,11 +61,20 @@ namespace BeautifulWeight.Presenter
             if (Model.CurrentUser != null && Model.CurrentUser.Diet!=null)
             {
                 PaintDiet(Model.CurrentUser.Diet);
+                PaintUpperPanel(Model.CurrentUser.Diet);
             }
             else
             {
                 ClearDiet();
             }
+        }
+
+        private void PaintUpperPanel(WeeklyMenu diet)
+        {
+            UpperPanel.Controls.Clear();
+            RadLabel radLabel = new RadLabel();
+            radLabel.Text = diet.DietCalculator.Description;
+            UpperPanel.Controls.Add(radLabel);
         }
 
         private void PaintDiet(WeeklyMenu diet)
