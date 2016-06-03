@@ -144,7 +144,7 @@ namespace BeautifulWeight.Presenter
         private void RecalculateTargetWeight()
         {
             try { 
-                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getModelManager<TargetWeightFormulaManager>().Formula.Calculate(Model.CurrentUser.Details);
+                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getManager<TargetWeightFormulaManager>().Formula.Calculate(Model.CurrentUser.Details);
             } catch (Exception)
             {
                 //ignore
@@ -190,7 +190,7 @@ namespace BeautifulWeight.Presenter
         private void ModificaPreferenzeClickHandler(object sender, EventArgs e)
         {
             PreferencesDialog dialog = new PreferencesDialog();
-            dialog.PreferencesList.DataSource = ManagerProvider.getModelManager<KitchenManager>().Ingredients;
+            dialog.PreferencesList.DataSource = ManagerProvider.getManager<KitchenManager>().Ingredients;
             dialog.PreferencesList.AllowColumnReorder = true;
             dialog.PreferencesList.FullRowSelect = false;
 

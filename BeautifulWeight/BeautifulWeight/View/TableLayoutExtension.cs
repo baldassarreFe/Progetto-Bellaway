@@ -282,7 +282,7 @@ namespace BeautifulWeight.View
             }
             else if (pi.PropertyType.GetInterfaces().Contains(typeof(IList)) && pi.PropertyType.IsGenericType)
             {
-                if (ManagerProvider.getModelManager<VersionManager>().Allows(Feature.CHANGE_PREFERENCES))
+                if (ManagerProvider.getManager<VersionManager>().Allows(Feature.CHANGE_PREFERENCES))
                 {
                     control.Click += ModificaPreferenzeClickHandler;
                     control.BackColor = Color.White;
@@ -300,7 +300,7 @@ namespace BeautifulWeight.View
             object obj = ((PropertyAndObject)((Control)sender).Tag).Object;
             IList<Ingredient> preferences = (IList<Ingredient>) pi.GetValue(obj);
             PreferencesDialog dialog = new PreferencesDialog();
-            dialog.PreferencesList.DataSource = ManagerProvider.getModelManager<KitchenManager>().Ingredients;
+            dialog.PreferencesList.DataSource = ManagerProvider.getManager<KitchenManager>().Ingredients;
             dialog.PreferencesList.AllowColumnReorder = false;
             dialog.PreferencesList.FullRowSelect = false;
 

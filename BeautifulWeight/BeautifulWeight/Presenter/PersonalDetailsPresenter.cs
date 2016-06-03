@@ -76,7 +76,7 @@ namespace BeautifulWeight.Presenter
         private void PaintUser(UserProfile up)
         {
             PersonalDetails personalDetails = up.Details;
-            ProfilePanel.Controls.Clear();
+            ClearUser();
 
 
             Label name = null;
@@ -200,6 +200,7 @@ namespace BeautifulWeight.Presenter
             goal.Dock = DockStyle.Fill;
             goal.Tag = up.GetType().GetProperty("Goal");
             ProfilePanel.Controls.Add(goal);
+            ProfilePanel.RowCount++;
 
             Label prefLabel = new Label();
             prefLabel.Text = "Preferences";
@@ -218,6 +219,7 @@ namespace BeautifulWeight.Presenter
             preferences.BorderStyle = BorderStyle.Fixed3D;
             preferences.Tag = up.GetType().GetProperty("Preferences");
             ProfilePanel.Controls.Add(preferences);
+            ProfilePanel.RowCount++;
 
             TableLayoutPanel buttonPanel = new TableLayoutPanel();
             buttonPanel.RowCount = 1;
@@ -284,7 +286,7 @@ namespace BeautifulWeight.Presenter
         {
             try
             {
-                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getModelManager<TargetWeightFormulaManager>().Formula.Calculate(Model.CurrentUser.Details);
+                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getManager<TargetWeightFormulaManager>().Formula.Calculate(Model.CurrentUser.Details);
             }
             catch (Exception)
             {
@@ -295,6 +297,7 @@ namespace BeautifulWeight.Presenter
         private void ClearUser()
         {
             ProfilePanel.Controls.Clear();
+            ProfilePanel.RowCount = 0;
         }
 
         private void ModifyClickHandler(Object sender, EventArgs e)
