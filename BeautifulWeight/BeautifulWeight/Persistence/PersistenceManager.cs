@@ -12,16 +12,16 @@ namespace BeautifulWeight.Persistence
     {
     }
 
-    public static class PersistenceManager
+    public static class PersistenceProvider
     {
         private static List<Persistor> _persistors;
 
-        static PersistenceManager() {
+        static PersistenceProvider() {
             _persistors = new List<Persistor>();
             _persistors.Add(new XmlPersistence());
         }
 
-        public static T getPersistenceManager<T>() where T:Persistor
+        public static T getPersistor<T>() where T:Persistor
         {
             IEnumerable<T> result = _persistors.OfType<T>();
             return (T)result.FirstOrDefault();

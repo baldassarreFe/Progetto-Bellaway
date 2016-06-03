@@ -18,7 +18,7 @@ namespace BeautifulWeight.Versions
             get
             {
                 if (_version == null)
-                    _version = PersistenceManager.getPersistenceManager<Persistence.VersionPersistor>().LoadVersion();
+                    _version = PersistenceProvider.getPersistor<Persistence.VersionPersistor>().LoadVersion();
                 return _version;
             }
 

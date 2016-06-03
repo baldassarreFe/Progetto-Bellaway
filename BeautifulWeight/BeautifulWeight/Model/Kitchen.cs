@@ -10,11 +10,11 @@ namespace BeautifulWeight.Kitchen
     public class Ingredient
     {
         private readonly string _name;
-        private static ISet<Ingredient> set;
+        private static ISet<Ingredient> _dictionary;
 
         static Ingredient() 
         {
-            set = new HashSet<Ingredient>();
+            _dictionary = new HashSet<Ingredient>();
             // persistence.LoadIngredients();
         }
 
@@ -34,10 +34,10 @@ namespace BeautifulWeight.Kitchen
         // TODO lo mettiamo internal perchè il gestore di persistenza che li crea è dentro questo assembly?
         public static implicit operator Ingredient(string name)
         {
-            Ingredient result = set.SingleOrDefault(ing => ing.Name == name.ToLower());
+            Ingredient result = _dictionary.SingleOrDefault(ing => ing.Name == name.ToLower());
             if (result == null) {
                 result = new Ingredient(name.ToLower());
-                set.Add(result);
+                _dictionary.Add(result);
             }
             return result;
         }

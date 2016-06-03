@@ -21,7 +21,7 @@ namespace BeautifulWeight.View
             InitializeComponent();
             _versionsListView.VisualItemCreating += _preferencesList_VisualItemCreating;
             _versionsListView.CurrentItemChanged += _versionsListView_CurrentItemChanged;
-            _versionsListView.DataSource = ManagerProvider.getModelManager<VersionManager>().AllVersions.Where(v => v.CompareTo(ManagerProvider.getModelManager<VersionManager>().CurrentVersion) > 0);
+            _versionsListView.DataSource = ManagerProvider.getManager<VersionManager>().AllVersions.Where(v => v.CompareTo(ManagerProvider.getManager<VersionManager>().CurrentVersion) > 0);
             _versionsListView.CurrentItem = null;
             _okButton.Click += _okButton_Click;
             foreach (RichTextBox codeBox in _buttonPanel.Controls.OfType<RichTextBox>())
@@ -50,7 +50,7 @@ namespace BeautifulWeight.View
         {
             Code code = new Code(_codeBox1.Text, _codeBox2.Text, _codeBox3.Text, _codeBox4.Text);
             Versions.Version attempt = (Versions.Version)_versionsListView.CurrentItem.DataBoundItem;
-            if (ManagerProvider.getModelManager<VersionManager>().ChangeVersion(attempt, code))
+            if (ManagerProvider.getManager<VersionManager>().ChangeVersion(attempt, code))
             {
                 MessageBox.Show("Upgrade riuscito, ora puoi provare le nuove features", "AGGIORNAMENTO RIUSCITO", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 this.DialogResult = DialogResult.OK;

@@ -180,9 +180,5 @@ namespace BeautifulWeight.Persistence.Xml
             // NOP
         }
 
-        public ISet<DietCalculator> loadDiets()
-        {
-            return null;
-        }
     }
 }

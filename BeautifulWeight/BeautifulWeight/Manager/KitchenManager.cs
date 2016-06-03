@@ -18,7 +18,7 @@ namespace BeautifulWeight.Model
             {
                 if (_ingredients != null)
                     return _ingredients;
-                _ingredients = PersistenceManager.getPersistenceManager<KitchenPersistor>().LoadIngredients();
+                _ingredients = PersistenceProvider.getPersistor<KitchenPersistor>().LoadIngredients();
                 return _ingredients;
             }
         }
@@ -31,7 +31,7 @@ namespace BeautifulWeight.Model
             {
                 if (_dishes != null)
                     return _dishes;
-                _dishes = PersistenceManager.getPersistenceManager<KitchenPersistor>().LoadDishes();
+                _dishes = PersistenceProvider.getPersistor<KitchenPersistor>().LoadDishes();
                 return _dishes;
             }
         }

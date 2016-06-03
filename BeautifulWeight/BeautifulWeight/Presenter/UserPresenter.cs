@@ -116,7 +116,7 @@ namespace BeautifulWeight.Presenter
 
         private void UpdateAddUserButtonState()
         {
-                AddUserButton.Enabled =  Model.AllUsers.Count() == 0 || ManagerProvider.getModelManager<VersionManager>().Allows(Feature.ADD_USER);
+                AddUserButton.Enabled =  Model.AllUsers.Count() == 0 || ManagerProvider.getManager<VersionManager>().Allows(Feature.ADD_USER);
         }
 
         private void AddUserHandler(object sender, EventArgs e)

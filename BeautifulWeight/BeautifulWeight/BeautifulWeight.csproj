@@ -78,7 +78,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\DietCalculators.cs" />
     <Compile Include="Persistence\KitchenPersistor.cs" />
-    <Compile Include="Persistence\MockPersistence.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Kitchen.cs" />

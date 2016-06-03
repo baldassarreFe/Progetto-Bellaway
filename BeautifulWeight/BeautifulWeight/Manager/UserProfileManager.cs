@@ -23,7 +23,7 @@ namespace BeautifulWeight.Model
             {
                 if (_allUsers != null)
                     return _allUsers;
-                _allUsers = PersistenceManager.getPersistenceManager<UserProfilePersistor>().LoadProfiles();
+                _allUsers = PersistenceProvider.getPersistor<UserProfilePersistor>().LoadProfiles();
                 return _allUsers;
             }
         }

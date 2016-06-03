@@ -15,7 +15,7 @@ namespace BeautifulWeight.Presenter
         public Presenter(SingleProfileModel model)
         {
             this._model = model;
-            ManagerProvider.getModelManager<VersionManager>().VersionChanged += Presenter_VersionChanged;
+            ManagerProvider.getManager<VersionManager>().VersionChanged += Presenter_VersionChanged;
         }
 
         protected virtual void Presenter_VersionChanged(object sender, EventArgs e)

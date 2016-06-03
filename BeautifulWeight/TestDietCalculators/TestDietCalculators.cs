@@ -25,7 +25,7 @@ namespace BeautifilBeautifulWeight.DietCalculators
         public PointDietCalculator()
         {
 
-            _kitchenManager = ManagerProvider.getModelManager<KitchenManager>();
+            _kitchenManager = ManagerProvider.getManager<KitchenManager>();
         }
 
         public string Description

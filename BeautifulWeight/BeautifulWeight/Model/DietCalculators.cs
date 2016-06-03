@@ -29,13 +29,13 @@ namespace BeautifulWeight.DietCalculators
             {
                 if (_loadedDietCalculators == null)
                 {
-                    load();
+                    Load();
                 }
                 return _loadedDietCalculators;
             }
         }
 
-        private static void load()
+        private static void Load()
         {
             // Check if user has access to requested .dll
             IEnumerable<String> dllFiles = Directory.EnumerateFiles("../Calculators", "*.dll");

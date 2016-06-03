@@ -18,7 +18,7 @@ namespace BeautifulWeight.Presenter
         {
             get
             {
-                return ManagerProvider.getModelManager<VersionManager>();
+                return ManagerProvider.getManager<VersionManager>();
             }
         }
 

@@ -53,7 +53,7 @@ namespace BeautifulWeight.Presenter
 
         public SingleProfileModel()
         {
-            _userProfileManager = ManagerProvider.getModelManager<UserProfileManager>();
+            _userProfileManager = ManagerProvider.getManager<UserProfileManager>();
             _userProfileManager.UserAdded += _userProfileManager_UserAdded;
             _userProfileManager.UserRemoved += _userProfileManager_UserRemoved;
             _userProfileManager.UserUpdated += _userProfileManager_UserUpdated;

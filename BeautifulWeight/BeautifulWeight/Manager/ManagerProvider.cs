@@ -25,7 +25,7 @@ namespace BeautifulWeight.Model
             _managers.Add(new TargetWeightFormulaManager());
         }
 
-        public static T getModelManager<T>() where T:Manager
+        public static T getManager<T>() where T:Manager
         {
             IEnumerable<T> result = _managers.OfType<T>();
             return (T)result.FirstOrDefault();

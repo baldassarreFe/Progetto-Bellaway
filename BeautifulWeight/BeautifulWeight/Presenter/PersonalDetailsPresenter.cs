@@ -283,7 +283,7 @@ namespace BeautifulWeight.Presenter
         private void RecalculateTargetWeight()
         {
             try { 
-                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getModelManager<TargetWeightFormulaManager>().Formula.calculate(Model.CurrentUser.Details);
+                TargetWeightLabel.Text = "Il tuo peso forma è: " + ManagerProvider.getManager<TargetWeightFormulaManager>().Formula.calculate(Model.CurrentUser.Details);
             } catch (Exception)
             {
                 //ignore
@@ -308,7 +308,7 @@ namespace BeautifulWeight.Presenter
                 {
                     if (((PropertyInfo)control.Tag).PropertyType == typeof(Goal))
                     {
-                        if (ManagerProvider.getModelManager<VersionManager>().Allows(Feature.CHANGE_GOAL))
+                        if (ManagerProvider.getManager<VersionManager>().Allows(Feature.CHANGE_GOAL))
                             (control.Controls.OfType<RadioButton>()).ToList<RadioButton>().ForEach(o => o.Enabled = true);
                     }
                     else
@@ -318,7 +318,7 @@ namespace BeautifulWeight.Presenter
                 }
                 else if (control.Tag is PropertyInfo && ((PropertyInfo)control.Tag).PropertyType.GetInterfaces().Contains(typeof(IList)) && ((PropertyInfo)control.Tag).PropertyType.IsGenericType)
                 {
-                    if (ManagerProvider.getModelManager<VersionManager>().Allows(Feature.CHANGE_PREFERENCES))
+                    if (ManagerProvider.getManager<VersionManager>().Allows(Feature.CHANGE_PREFERENCES))
                     {
                         control.Click += ModificaPreferenzeClickHandler;
                         control.BackColor = Color.White;
@@ -359,7 +359,7 @@ namespace BeautifulWeight.Presenter
         private void ModificaPreferenzeClickHandler(object sender, EventArgs e)
         {
             PreferencesDialog dialog = new PreferencesDialog();
-            dialog.PreferencesList.DataSource = ManagerProvider.getModelManager<KitchenManager>().Ingredients;
+            dialog.PreferencesList.DataSource = ManagerProvider.getManager<KitchenManager>().Ingredients;
             dialog.PreferencesList.AllowColumnReorder = true;
             dialog.PreferencesList.FullRowSelect = false;
 
