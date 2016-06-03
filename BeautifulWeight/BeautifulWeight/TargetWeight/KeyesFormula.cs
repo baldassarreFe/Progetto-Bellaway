@@ -13,7 +13,7 @@ namespace BeautifulWeight.Model
             }
         }
 
-        public double calculate(PersonalDetails pd)
+        public double Calculate(PersonalDetails pd)
         {
             double height_m = pd.Height * 1.0 / 100;
             double factor = Math.Pow(height_m, 2);
