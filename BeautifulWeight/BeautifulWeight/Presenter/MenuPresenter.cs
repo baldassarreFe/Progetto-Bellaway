@@ -122,7 +122,7 @@ namespace BeautifulWeight.Presenter
         {
             DeleteDietClickHandler(this, EventArgs.Empty);
             ComboBox dietcalculators = new ComboBox();
-            dietcalculators.DataSource = DietCalculatorLoader.LoadedDietCalculators.ToList();
+            dietcalculators.DataSource = DietCalculatorLoader.LoadedDietCalculators.Where(dc => dc.IsCompatibleWith(Model.CurrentUser.Goal));
             dietcalculators.Size = new Size(320, 100);
             dietcalculators.DisplayMember = "Description";
             dietcalculators.Dock = DockStyle.Left;

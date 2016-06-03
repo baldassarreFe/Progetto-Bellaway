@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager\TargetWeightFormulaManager.cs" />
+    <Compile Include="Presenter\PersonalDetailsPresenterBalda.cs" />
     <Compile Include="TargetWeight\KeyesFormula.cs" />
     <Compile Include="Manager\KitchenManager.cs" />
     <Compile Include="TargetWeight\TargetWeightFormula.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="View\ServingsListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\TableLayoutExtension.cs" />
     <Compile Include="View\UserStripVisualItem.cs" />
     <Compile Include="View\VersionDialog.cs">
       <SubType>Form</SubType>
