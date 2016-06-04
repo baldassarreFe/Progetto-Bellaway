@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{44F12D20-2A09-4CE8-84AE-EB22889C6443}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DomoticaPrototipo</RootNamespace>
+    <AssemblyName>DomoticaPrototipo</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionDialog.designer.cs">
+      <DependentUpon>ActionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Amministratore.cs" />
+    <Compile Include="Azione.cs" />
+    <Compile Include="AzioneSettimanale.cs" />
+    <Compile Include="CalendarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalendarForm.designer.cs">
+      <DependentUpon>CalendarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calendario.cs" />
+    <Compile Include="CalendarioPersister.cs" />
+    <Compile Include="ChangedUtentiArgs.cs" />
+    <Compile Include="ChangedDispositivoArgs.cs" />
+    <Compile Include="ChangePasswordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePasswordDialog.Designer.cs">
+      <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DispositivoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DispositivoControl.Designer.cs">
+      <DependentUpon>DispositivoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DispositivoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DispositivoDialog.Designer.cs">
+      <DependentUpon>DispositivoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DispositivoInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DispositivoInfoDialog.Designer.cs">
+      <DependentUpon>DispositivoInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditUtenteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditUtenteDialog.Designer.cs">
+      <DependentUpon>EditUtenteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunzionalitaAccensione.cs" />
+    <Compile Include="FunzionalitaAlzaAbbassa.cs" />
+    <Compile Include="FunzionalitaCuoci.cs" />
+    <Compile Include="FunzionalitaTemperatura.cs" />
+    <Compile Include="GestioneUtentiDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestioneUtentiDialog.Designer.cs">
+      <DependentUpon>GestioneUtentiDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ICalendarioPersister.cs" />
+    <Compile Include="ICalendarioSaver.cs" />
+    <Compile Include="IDispositivo.cs" />
+    <Compile Include="LogInDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogInDialog.designer.cs">
+      <DependentUpon>LogInDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SegnaleArgs.cs" />
+    <Compile Include="SegnaleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SegnaleDialog.Designer.cs">
+      <DependentUpon>SegnaleDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SegnaleListener.cs" />
+    <Compile Include="Discreto.cs" />
+    <Compile Include="DispositiviRepository.cs" />
+    <Compile Include="Dispositivo.cs" />
+    <Compile Include="DispositivoRegistratore.cs" />
+    <Compile Include="DispositivoRemoto.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Funzionalita.cs" />
+    <Compile Include="ICalendarioLoader.cs" />
+    <Compile Include="IDispositivoRemoto.cs" />
+    <Compile Include="IDispositivoRegistratore.cs" />
+    <Compile Include="IFunzionalita.cs" />
+    <Compile Include="InformazioniInterfaccia.cs" />
+    <Compile Include="IStatus.cs" />
+    <Compile Include="Limitato.cs" />
+    <Compile Include="Parametro.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrazioneListener.cs" />
+    <Compile Include="Standard.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="StatusAccensione.cs" />
+    <Compile Include="StatusAlzaAbbassa.cs" />
+    <Compile Include="StatusTemperatura.cs" />
+    <Compile Include="StatusTimer.cs" />
+    <Compile Include="TipoParametro.cs" />
+    <Compile Include="Utente.cs" />
+    <Compile Include="UtentiRepository.cs" />
+    <Compile Include="VistaParametro.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionDialog.resx">
+      <DependentUpon>ActionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalendarForm.resx">
+      <DependentUpon>CalendarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePasswordDialog.resx">
+      <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispositivoControl.resx">
+      <DependentUpon>DispositivoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispositivoDialog.resx">
+      <DependentUpon>DispositivoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispositivoInfoDialog.resx">
+      <DependentUpon>DispositivoInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditUtenteDialog.resx">
+      <DependentUpon>EditUtenteDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestioneUtentiDialog.resx">
+      <DependentUpon>GestioneUtentiDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogInDialog.resx">
+      <DependentUpon>LogInDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SegnaleDialog.resx">
+      <DependentUpon>SegnaleDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\accetta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\annulla.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\casa accesa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\casa freccia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\casa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\cristallo di neve.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\garage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\goccia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\lampadina.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\lucchetto chiuso.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\occhio.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\open.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\telecamera.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\telecomando.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\telecomando2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\termometro.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\tv.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\ventola.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Risorse\easterEgg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Risorse\favicon.ico" />
+    <Content Include="Risorse\immagine logo.gif" />
+    <Content Include="Risorse\logo.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
