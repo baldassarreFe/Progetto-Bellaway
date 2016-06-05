@@ -18,6 +18,7 @@ namespace BeautifulWeight.Persistence
 
         static PersistenceProvider() {
             _persistors = new List<Persistor>();
+            _persistors.Add(new MockPersistence());
             _persistors.Add(new XmlPersistence());
         }
 

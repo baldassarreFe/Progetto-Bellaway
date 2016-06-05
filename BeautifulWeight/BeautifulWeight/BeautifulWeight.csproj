@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager\TargetWeightFormulaManager.cs" />
+    <Compile Include="Persistence\MockPersistence.cs" />
     <Compile Include="Presenter\PersonalDetailsPresenterBalda.cs" />
     <Compile Include="TargetWeight\KeyesFormula.cs" />
     <Compile Include="Manager\KitchenManager.cs" />
