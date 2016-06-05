@@ -9,18 +9,14 @@ using BeautifulWeight.Menu;
 
 namespace BeautifulWeight.Persistence.Xml
 {
-    public class XmlPersistence : UserProfilePersistor, KitchenPersistor, VersionPersistor
+    public class XmlPersistence : UserProfilePersistor, KitchenPersistor
     {
         private IList<UserProfile> _profiles;
         private ISet<Dish> _dishes;
         private ISet<Ingredient> _ingredients;
-        private Version _version;
-
+    
         public XmlPersistence()
         {
-            //  TODO caricare da xml
-            _version = new StandardVersion();
-
             _ingredients = new HashSet<Ingredient>();
             LoadIngredientsFromXml("../../Resources/Ingredients.xml");
 
@@ -74,8 +70,8 @@ namespace BeautifulWeight.Persistence.Xml
                         string hour = mealNode.Attributes["hour"].InnerText;
                         string minute = mealNode.Attributes["minute"].InnerText;
                         DateTime time = new DateTime(2000, 1, 1, int.Parse(hour), int.Parse(minute), 0);
-                        List<Serving> servings = new List<Serving>();
 
+                        NonEmptyList<Serving> servings = new NonEmptyList<Serving>();
                         foreach (XmlElement servingNode in mealNode.SelectNodes("serving"))
                         {
                             Dish dish = null;
@@ -91,13 +87,7 @@ namespace BeautifulWeight.Persistence.Xml
                             int quantity = int.Parse(servingNode.Attributes["quantity"].InnerText);
                             servings.Add(new Serving(dish, quantity));
                         }
-
-                        NonEmptyList<Serving> nonEmpty = new NonEmptyList<Serving>(servings[0]);
-                        for (int i = 1; i < servings.Count; i++)
-                        {
-                            nonEmpty.Add(servings[i]);
-                        }
-                        dm.Meals.Add(new Meal(name, time, nonEmpty));
+                        dm.Meals.Add(new Meal(name, time, servings));
                     }
                 }
                 up.Diet = wm;
@@ -133,20 +123,13 @@ namespace BeautifulWeight.Persistence.Xml
                 double proteins = XmlConvert.ToDouble(dishNode.Attributes["proteins"].Value);
                 double fats = XmlConvert.ToDouble(dishNode.Attributes["fats"].Value);
 
-                XmlNodeList ingredientNodes = dishNode.SelectNodes("ingredient");
-                List<Ingredient> ingredients = new List<Ingredient>();
-                foreach (XmlElement ingredientNode in ingredientNodes)
+                NonEmptyList<Ingredient> ingredients = new NonEmptyList<Ingredient>();
+                foreach (XmlElement ingredientNode in dishNode.SelectNodes("ingredient"))
                 {
                     Ingredient ingredient = ingredientNode.InnerText;
                     ingredients.Add(name);
                 }
-                NonEmptyList<Ingredient> nonEmpty = new NonEmptyList<Ingredient>(ingredients[0]);
-                for (int i = 1; i < ingredients.Count; i++)
-                {
-                    nonEmpty.Add(ingredients[i]);
-                }
-
-                _dishes.Add(new Dish(name, calories, proteins, fats, carbohydrates, nonEmpty));
+                _dishes.Add(new Dish(name, calories, proteins, fats, carbohydrates, ingredients));
             }
         }
 
@@ -163,11 +146,6 @@ namespace BeautifulWeight.Persistence.Xml
         public IList<UserProfile> LoadProfiles()
         {
             return _profiles;
-        }
-
-        public Version LoadVersion()
-        {
-            return _version;
         }
 
         public void SaveProfiles()
