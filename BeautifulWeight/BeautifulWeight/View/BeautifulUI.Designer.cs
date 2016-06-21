@@ -50,6 +50,7 @@ namespace BeautifulWeight.View
             this._deleteDietButton = new Telerik.WinControls.UI.RadButton();
             this._versionStatusStrip = new Telerik.WinControls.UI.RadStatusStrip();
             this._versionLabel = new System.Windows.Forms.Label();
+            this.windows8Theme1 = new Telerik.WinControls.Themes.Windows8Theme();
             ((System.ComponentModel.ISupportInitialize)(this._UISplitContainer)).BeginInit();
             this._UISplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._users)).BeginInit();
@@ -89,7 +90,7 @@ namespace BeautifulWeight.View
             // 
             // 
             this._UISplitContainer.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this._UISplitContainer.Size = new System.Drawing.Size(1358, 555);
+            this._UISplitContainer.Size = new System.Drawing.Size(1207, 555);
             this._UISplitContainer.SplitterWidth = 2;
             this._UISplitContainer.TabIndex = 1;
             this._UISplitContainer.TabStop = false;
@@ -105,8 +106,8 @@ namespace BeautifulWeight.View
             // 
             // 
             this._users.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this._users.Size = new System.Drawing.Size(246, 555);
-            this._users.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(-0.1512869F, 0F);
+            this._users.Size = new System.Drawing.Size(219, 555);
+            this._users.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(-0.1512884F, 0F);
             this._users.SizeInfo.SplitterCorrection = new System.Drawing.Size(-114, 0);
             this._users.TabIndex = 0;
             this._users.TabStop = false;
@@ -130,9 +131,10 @@ namespace BeautifulWeight.View
             this._usersListView.Name = "_usersListView";
             this._usersListView.SelectLastAddedItem = false;
             this._usersListView.ShowColumnHeaders = false;
-            this._usersListView.Size = new System.Drawing.Size(246, 519);
+            this._usersListView.Size = new System.Drawing.Size(219, 519);
             this._usersListView.TabIndex = 1;
             this._usersListView.Text = "_usersListView";
+            this._usersListView.ThemeName = "Windows8";
             // 
             // _usersMenuPanel
             // 
@@ -140,7 +142,7 @@ namespace BeautifulWeight.View
             this._usersMenuPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._usersMenuPanel.Location = new System.Drawing.Point(0, 519);
             this._usersMenuPanel.Name = "_usersMenuPanel";
-            this._usersMenuPanel.Size = new System.Drawing.Size(246, 36);
+            this._usersMenuPanel.Size = new System.Drawing.Size(219, 36);
             this._usersMenuPanel.TabIndex = 0;
             // 
             // _aggiungiButton
@@ -149,7 +151,7 @@ namespace BeautifulWeight.View
             this._aggiungiButton.Enabled = false;
             this._aggiungiButton.Location = new System.Drawing.Point(0, 0);
             this._aggiungiButton.Name = "_aggiungiButton";
-            this._aggiungiButton.Size = new System.Drawing.Size(246, 36);
+            this._aggiungiButton.Size = new System.Drawing.Size(219, 36);
             this._aggiungiButton.TabIndex = 3;
             this._aggiungiButton.Text = "Aggiungi";
             // 
@@ -157,15 +159,15 @@ namespace BeautifulWeight.View
             // 
             this._profile.Controls.Add(this._profilePanel);
             this._profile.Controls.Add(this._profileMenuPanel);
-            this._profile.Location = new System.Drawing.Point(248, 0);
+            this._profile.Location = new System.Drawing.Point(221, 0);
             this._profile.Name = "_profile";
             // 
             // 
             // 
             this._profile.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this._profile.Size = new System.Drawing.Size(457, 555);
-            this._profile.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.004394203F, 0F);
-            this._profile.SizeInfo.SplitterCorrection = new System.Drawing.Size(-26, 0);
+            this._profile.Size = new System.Drawing.Size(320, 555);
+            this._profile.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(-0.06733167F, 0F);
+            this._profile.SizeInfo.SplitterCorrection = new System.Drawing.Size(-99, 0);
             this._profile.TabIndex = 1;
             this._profile.TabStop = false;
             this._profile.Text = "splitPanel2";
@@ -177,7 +179,7 @@ namespace BeautifulWeight.View
             this._profilePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._profilePanel.Location = new System.Drawing.Point(0, 0);
             this._profilePanel.Name = "_profilePanel";
-            this._profilePanel.Size = new System.Drawing.Size(457, 519);
+            this._profilePanel.Size = new System.Drawing.Size(320, 519);
             this._profilePanel.TabIndex = 2;
             // 
             // _targetWeightLabel
@@ -200,7 +202,7 @@ namespace BeautifulWeight.View
             this._profileDetailsPanel.Name = "_profileDetailsPanel";
             this._profileDetailsPanel.RowCount = 1;
             this._profileDetailsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this._profileDetailsPanel.Size = new System.Drawing.Size(457, 0);
+            this._profileDetailsPanel.Size = new System.Drawing.Size(320, 0);
             this._profileDetailsPanel.TabIndex = 0;
             // 
             // _profileMenuPanel
@@ -208,7 +210,7 @@ namespace BeautifulWeight.View
             this._profileMenuPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._profileMenuPanel.Location = new System.Drawing.Point(0, 519);
             this._profileMenuPanel.Name = "_profileMenuPanel";
-            this._profileMenuPanel.Size = new System.Drawing.Size(457, 36);
+            this._profileMenuPanel.Size = new System.Drawing.Size(320, 36);
             this._profileMenuPanel.TabIndex = 1;
             // 
             // _diet
@@ -216,15 +218,15 @@ namespace BeautifulWeight.View
             this._diet.Controls.Add(this._dietPanel);
             this._diet.Controls.Add(this._dietUpperPanel);
             this._diet.Controls.Add(this._dietButtonsPanel);
-            this._diet.Location = new System.Drawing.Point(707, 0);
+            this._diet.Location = new System.Drawing.Point(543, 0);
             this._diet.Name = "_diet";
             // 
             // 
             // 
             this._diet.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this._diet.Size = new System.Drawing.Size(651, 555);
-            this._diet.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.1468927F, 0F);
-            this._diet.SizeInfo.SplitterCorrection = new System.Drawing.Size(140, 0);
+            this._diet.Size = new System.Drawing.Size(664, 555);
+            this._diet.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.2186201F, 0F);
+            this._diet.SizeInfo.SplitterCorrection = new System.Drawing.Size(213, 0);
             this._diet.TabIndex = 2;
             this._diet.TabStop = false;
             this._diet.Text = "splitPanel3";
@@ -235,15 +237,16 @@ namespace BeautifulWeight.View
             this._dietPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._dietPanel.Location = new System.Drawing.Point(0, 46);
             this._dietPanel.Name = "_dietPanel";
-            this._dietPanel.Size = new System.Drawing.Size(651, 473);
+            this._dietPanel.Size = new System.Drawing.Size(664, 473);
             this._dietPanel.TabIndex = 3;
+            this._dietPanel.ThemeName = "Windows8";
             // 
             // _dietUpperPanel
             // 
             this._dietUpperPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this._dietUpperPanel.Location = new System.Drawing.Point(0, 0);
             this._dietUpperPanel.Name = "_dietUpperPanel";
-            this._dietUpperPanel.Size = new System.Drawing.Size(651, 46);
+            this._dietUpperPanel.Size = new System.Drawing.Size(664, 46);
             this._dietUpperPanel.TabIndex = 2;
             // 
             // _dietButtonsPanel
@@ -252,7 +255,7 @@ namespace BeautifulWeight.View
             this._dietButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._dietButtonsPanel.Location = new System.Drawing.Point(0, 519);
             this._dietButtonsPanel.Name = "_dietButtonsPanel";
-            this._dietButtonsPanel.Size = new System.Drawing.Size(651, 36);
+            this._dietButtonsPanel.Size = new System.Drawing.Size(664, 36);
             this._dietButtonsPanel.TabIndex = 1;
             // 
             // _dietButtons
@@ -267,18 +270,19 @@ namespace BeautifulWeight.View
             this._dietButtons.Name = "_dietButtons";
             this._dietButtons.RowCount = 1;
             this._dietButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this._dietButtons.Size = new System.Drawing.Size(651, 36);
+            this._dietButtons.Size = new System.Drawing.Size(664, 36);
             this._dietButtons.TabIndex = 0;
             // 
             // _newDietButton
             // 
             this._newDietButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this._newDietButton.Enabled = false;
-            this._newDietButton.Location = new System.Drawing.Point(328, 3);
+            this._newDietButton.Location = new System.Drawing.Point(335, 3);
             this._newDietButton.Name = "_newDietButton";
-            this._newDietButton.Size = new System.Drawing.Size(320, 30);
+            this._newDietButton.Size = new System.Drawing.Size(326, 30);
             this._newDietButton.TabIndex = 5;
             this._newDietButton.Text = "Nuova Dieta";
+            this._newDietButton.ThemeName = "ControlDefault";
             // 
             // _deleteDietButton
             // 
@@ -286,17 +290,19 @@ namespace BeautifulWeight.View
             this._deleteDietButton.Enabled = false;
             this._deleteDietButton.Location = new System.Drawing.Point(3, 3);
             this._deleteDietButton.Name = "_deleteDietButton";
-            this._deleteDietButton.Size = new System.Drawing.Size(319, 30);
+            this._deleteDietButton.Size = new System.Drawing.Size(326, 30);
             this._deleteDietButton.TabIndex = 4;
             this._deleteDietButton.Text = "Elimina Dieta";
+            this._deleteDietButton.ThemeName = "ControlDefault";
             // 
             // _versionStatusStrip
             // 
             this._versionStatusStrip.Controls.Add(this._versionLabel);
             this._versionStatusStrip.Location = new System.Drawing.Point(0, 555);
             this._versionStatusStrip.Name = "_versionStatusStrip";
-            this._versionStatusStrip.Size = new System.Drawing.Size(1358, 26);
+            this._versionStatusStrip.Size = new System.Drawing.Size(1207, 26);
             this._versionStatusStrip.TabIndex = 0;
+            this._versionStatusStrip.ThemeName = "Windows8";
             // 
             // _versionLabel
             // 
@@ -312,7 +318,7 @@ namespace BeautifulWeight.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1358, 581);
+            this.ClientSize = new System.Drawing.Size(1207, 581);
             this.Controls.Add(this._UISplitContainer);
             this.Controls.Add(this._versionStatusStrip);
             this.MaximizeBox = false;
@@ -322,6 +328,7 @@ namespace BeautifulWeight.View
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "BeautifulWeight";
+            this.ThemeName = "Windows8";
             ((System.ComponentModel.ISupportInitialize)(this._UISplitContainer)).EndInit();
             this._UISplitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._users)).EndInit();
@@ -374,5 +381,6 @@ namespace BeautifulWeight.View
         private RadPanel _dietPanel;
         private RadLabel _targetWeightLabel;
         private TableLayoutPanel _profileDetailsPanel;
+        private Telerik.WinControls.Themes.Windows8Theme windows8Theme1;
     }
 }

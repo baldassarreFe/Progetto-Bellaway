@@ -148,7 +148,7 @@ namespace BeautifulWeight.Presenter
             PaintLowerPanel();
             Random r = new Random();
             if (r.Next(10) == 8)
-                MessageBox.Show("Complimenti! Hai vinto un viaggio a Ibiza! Contattaci per ritirare il tuo premio.","BRAVOOOO");
+                MessageBox.Show("Viva la fortuna! Hai vinto un viaggio a Ibiza! Contattaci per ritirare il tuo premio.","COMPLIMENTI");
         }
 
         private void DeleteDietClickHandler(object sender, EventArgs e)
