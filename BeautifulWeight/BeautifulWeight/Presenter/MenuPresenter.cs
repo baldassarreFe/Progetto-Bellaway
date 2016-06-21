@@ -120,6 +120,12 @@ namespace BeautifulWeight.Presenter
 
         private void NewDietClickHandler(object sender, EventArgs e)
         {
+            if (Model.CurrentUser.Diet != null)
+            {
+                if (DialogResult.No == MessageBox.Show("Sei sicuro di voler sostituire la dieta attuale?",
+                                     "Nuova dieta", MessageBoxButtons.YesNo))
+                    return;
+            }
             DeleteDietClickHandler(this, EventArgs.Empty);
             ComboBox dietcalculators = new ComboBox();
             dietcalculators.DataSource = DietCalculatorLoader.LoadedDietCalculators.Where(dc => dc.IsCompatibleWith(Model.CurrentUser.Goal)).ToList();
@@ -148,11 +154,14 @@ namespace BeautifulWeight.Presenter
             PaintLowerPanel();
             Random r = new Random();
             if (r.Next(10) == 8)
-                MessageBox.Show("Viva la fortuna! Hai vinto un viaggio a Ibiza! Contattaci per ritirare il tuo premio.","COMPLIMENTI");
+                MessageBox.Show("Viva la fortuna! Hai vinto un viaggio a Ibiza! Contattaci per ritirare il tuo premio.", "COMPLIMENTI");
         }
 
         private void DeleteDietClickHandler(object sender, EventArgs e)
         {
+            if (DialogResult.No == MessageBox.Show("Sei sicuro di voler cancellare la dieta attuale?",
+                                     "Cancella dieta", MessageBoxButtons.YesNo))
+                return;
             Model.CurrentUser.Diet = null;
             ClearDiet();
         }

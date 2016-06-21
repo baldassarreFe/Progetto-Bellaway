@@ -57,7 +57,7 @@ namespace BeautifulWeight.View
             }
             else
             {
-                if (MessageBox.Show("E' IRRILEVANTE", "E' IRRILEVANTE", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                if (MessageBox.Show("Il codice inserito non è valido per la versione selezionata", "CODICE NON VALIDO", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                     this.DialogResult = DialogResult.None;
                 else
                     this.DialogResult = DialogResult.Cancel;

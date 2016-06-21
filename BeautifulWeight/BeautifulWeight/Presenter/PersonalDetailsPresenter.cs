@@ -279,6 +279,9 @@ namespace BeautifulWeight.Presenter
 
         private void DeleteClickHandler(object sender, EventArgs e)
         {
+            if (DialogResult.No == MessageBox.Show("Sei sicuro di voler cancellare l'utente?",
+                                     "Cancella utente", MessageBoxButtons.YesNo))
+                return;
             Model.DeleteUser();
         }
 
@@ -388,11 +391,17 @@ namespace BeautifulWeight.Presenter
 
         private void SaveClickHandler(object sender, EventArgs e)
         {
+            if (DialogResult.No == MessageBox.Show("Sei sicuro di voler salvare le modifiche?",
+                                     "Conferma modifica", MessageBoxButtons.YesNo))
+                return;
             Model.StopModify(true);
         }
 
         private void CancelClickHandler(object sender, EventArgs e)
         {
+            if (DialogResult.No == MessageBox.Show("Sei sicuro di voler annullare la modifica?",
+                                     "Annulla modifica", MessageBoxButtons.YesNo))
+                return;
             Model.StopModify(false);
         }
     }
