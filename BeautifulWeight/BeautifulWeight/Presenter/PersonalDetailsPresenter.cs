@@ -70,6 +70,10 @@ namespace BeautifulWeight.Presenter
             else
             {
                 PaintUser(current);
+                if (string.IsNullOrEmpty(current.Details.Name))
+                {
+                    ModifyClickHandler(null, null);
+                }
             }
         }
 
@@ -107,7 +111,7 @@ namespace BeautifulWeight.Presenter
                     value.Dock = DockStyle.Fill;
                     value.Anchor = AnchorStyles.None;
                     value.Tag = pi;
-                    value.LostFocus += FieldChangedHandler;
+                    value.LostFocus += FormChangedHandler;
                     ProfilePanel.Controls.Add(value);
                 }
 
@@ -120,7 +124,7 @@ namespace BeautifulWeight.Presenter
                     value.Dock = DockStyle.Fill;
                     value.DropDownAlign = LeftRightAlignment.Right;
                     value.Tag = pi;
-                    value.Leave += FieldChangedHandler;
+                    value.Leave += FormChangedHandler;
                     ProfilePanel.Controls.Add(value);
                 }
 
@@ -134,7 +138,7 @@ namespace BeautifulWeight.Presenter
                     value.Dock = DockStyle.Fill;
                     value.TextAlign = HorizontalAlignment.Center;
                     value.Tag = pi;
-                    value.Leave += FieldChangedHandler;
+                    value.Leave += FormChangedHandler;
                     ProfilePanel.Controls.Add(value);
                 }
 
@@ -152,7 +156,7 @@ namespace BeautifulWeight.Presenter
                         r.Location = new Point(0, y);
                         y += r.Size.Height;
                         value.Tag = pi;
-                        value.Leave += FieldChangedHandler;
+                        value.Leave += FormChangedHandler;
                         value.Controls.Add(r);
                     }
                     value.Dock = DockStyle.Fill;
@@ -168,7 +172,7 @@ namespace BeautifulWeight.Presenter
                     value.Enabled = false;
                     value.BorderStyle = BorderStyle.Fixed3D;
                     value.Tag = pi;
-                    value.Leave += FieldChangedHandler;
+                    value.Leave += FormChangedHandler;
                     ProfilePanel.Controls.Add(value);
                 }
                 ProfilePanel.RowCount++;
@@ -194,7 +198,7 @@ namespace BeautifulWeight.Presenter
                 r.Location = new Point(0, k);
                 k += r.Size.Height;
                 goal.Tag = typeof(Goal);
-                goal.Leave += FieldChangedHandler;
+                goal.Leave += FormChangedHandler;
                 goal.Controls.Add(r);
             }
             goal.Dock = DockStyle.Fill;
@@ -244,37 +248,47 @@ namespace BeautifulWeight.Presenter
         }
 
 
-        private void FieldChangedHandler(object sender, EventArgs e)
+        private void FormChangedHandler(object sender, EventArgs e)
         {
             RadButton salva = MenuPanel.Controls[0].Controls.OfType<RadButton>().First(b => b.Text == "Salva");
-            Control field = (Control)sender;
-            salva.Enabled = true;
-            PropertyInfo pi = (PropertyInfo)field.Tag;
-            object o;
-            if (field.GetType() == typeof(GroupBox))
-                o = System.Enum.Parse(pi.PropertyType, field.Controls.OfType<RadioButton>()
-                                      .FirstOrDefault(r => r.Checked).Text);
+            bool formValid = true;
 
-            else if (field.GetType() == typeof(RadRating))
-                o = (int)((RadRating)field).Value;
-
-            else
-                o = Convert.ChangeType(field.Text, pi.PropertyType);
-            try
+            foreach (Control control in ProfilePanel.Controls)
             {
-                if (typeof(PersonalDetails).GetProperties().Contains(pi))
+                if (!(control is Label))
                 {
-                    pi.SetValue(Model.CurrentUser.Details, o);
-                    RecalculateTargetWeight();
+                    PropertyInfo pi = (PropertyInfo)control.Tag;
+                    object o;
+                    if (control.GetType() == typeof(GroupBox))
+                        o = System.Enum.Parse(pi.PropertyType, control.Controls.OfType<RadioButton>()
+                                              .FirstOrDefault(r => r.Checked).Text);
+
+                    else if (control.GetType() == typeof(RadRating))
+                        o = (int)((RadRating)control).Value;
+
+                    else
+                        o = Convert.ChangeType(control.Text, pi.PropertyType);
+                    try
+                    {
+                        if (typeof(PersonalDetails).GetProperties().Contains(pi))
+                        {
+                            pi.SetValue(Model.CurrentUser.Details, o);
+                            RecalculateTargetWeight();
+                        }
+                        else
+                        {
+                            pi.SetValue(Model.CurrentUser, o);
+                        }
+                        control.BackColor = Color.White;
+                    }
+                    catch (Exception)
+                    {
+                        formValid = false;
+                        control.BackColor = Color.Orange;
+                    }
                 }
-                else
-                    pi.SetValue(Model.CurrentUser, o);
             }
-            catch (Exception)
-            {
-                salva.Enabled = false;
-                field.BackColor = Color.Orange;
-            }
+            salva.Enabled = formValid;
         }
 
         private void DeleteClickHandler(object sender, EventArgs e)
@@ -335,12 +349,15 @@ namespace BeautifulWeight.Presenter
                 }
 
             }
+
+
             TableLayoutPanel buttonPanel = new TableLayoutPanel();
             buttonPanel.RowCount = 1;
             buttonPanel.ColumnCount = 2;
             RadButton salva = new RadButton();
             salva.Text = "Salva";
             salva.Click += SaveClickHandler;
+            salva.Enabled = false;
             RadButton annulla = new RadButton();
             annulla.Text = "Annulla";
             annulla.Click += CancelClickHandler;
@@ -358,6 +375,7 @@ namespace BeautifulWeight.Presenter
             MenuPanel.Controls.Clear();
             MenuPanel.Controls.Add(buttonPanel);
 
+            FormChangedHandler(null, null);
             Model.StartModify();
         }
 
