@@ -29,6 +29,20 @@ namespace BeautifulWeight.Users
             _sportLoad = sportLoad;
         }
 
+        public PersonalDetails(PersonalDetails other)
+        {
+            _name = other._name;
+            _surname = other._surname;
+            _birthdate = other._birthdate;
+            _weight = other._weight;
+            _height = other._height;
+            _sex = other._sex;
+            _workHours = other._workHours;
+            _workLoad = other._workLoad;
+            _sportHours = other._sportHours;
+            _sportLoad = other._sportLoad;
+        }
+
         public PersonalDetails()
         {
             _birthdate = DateTime.Today;

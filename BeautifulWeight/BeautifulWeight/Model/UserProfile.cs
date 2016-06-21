@@ -16,12 +16,12 @@ namespace BeautifulWeight.Users
         private WeeklyMenu _diet;
         private PersonalDetails _details;
 
-        public UserProfile(List<Ingredient> preferences, Goal goal, WeeklyMenu diet, PersonalDetails details)
+        public UserProfile(UserProfile other)
         {
-            _preferences = preferences;
-            _goal = goal;
-            _diet = diet;
-            _details = details;
+            _preferences = new List<Ingredient>(other._preferences);
+            _goal = other._goal;
+            _diet = new WeeklyMenu(other._diet);
+            _details = new PersonalDetails(other._details);
         }
 
         public UserProfile() {

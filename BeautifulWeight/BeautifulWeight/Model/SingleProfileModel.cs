@@ -99,7 +99,7 @@ namespace BeautifulWeight.Presenter
 
         public void StartModify()
         {
-            _temp = CurrentUser;
+            _temp = new UserProfile(CurrentUser);
         }
 
         public void StopModify(bool save)

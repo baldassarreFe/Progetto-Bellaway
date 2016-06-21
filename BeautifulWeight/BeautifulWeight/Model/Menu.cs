@@ -156,6 +156,13 @@ namespace BeautifulWeight.Menu
         {
         }
 
+        public WeeklyMenu(WeeklyMenu other)
+        {
+            this._dietCalculatorType = other._dietCalculatorType;
+            this._dailyMenus = new DailyMenu[7];
+            Array.Copy(other._dailyMenus, this._dailyMenus, other._dailyMenus.Length);
+        }
+
         public DietCalculator DietCalculator
         {
             get
