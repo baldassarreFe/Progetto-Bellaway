@@ -217,6 +217,7 @@ namespace BeautifulWeight.Presenter
             string pref = "";
             if (up.Preferences.Any())
                 pref = (from p in up.Preferences select p.Name).Aggregate((x, y) => x + ", " + y);
+            preferences.Name = "Preferences";
             preferences.Text = pref;
             preferences.Dock = DockStyle.Fill;
             preferences.TextAlign = ContentAlignment.MiddleCenter;
@@ -386,8 +387,15 @@ namespace BeautifulWeight.Presenter
         {
             PreferencesDialog dialog = new PreferencesDialog();
             dialog.PreferencesList.DataSource = ManagerProvider.getManager<KitchenManager>().Ingredients;
-            dialog.PreferencesList.AllowColumnReorder = true;
+            dialog.PreferencesList.AllowColumnReorder = false;
+            dialog.PreferencesList.AllowDragDrop = false;
+            dialog.PreferencesList.AllowDrop = false;
             dialog.PreferencesList.FullRowSelect = false;
+            dialog.PreferencesList.AllowEdit = false;
+            dialog.PreferencesList.AllowRemove = false;
+            dialog.PreferencesList.CheckOnClickMode = CheckOnClickMode.FirstClick;
+            dialog.PreferencesList.HotTracking = true;
+
 
             foreach (Ingredient i in Model.CurrentUser.Preferences)
             {
@@ -404,6 +412,10 @@ namespace BeautifulWeight.Presenter
                     newPrefs.Add(i);
                 }
                 Model.CurrentUser.Preferences = newPrefs;
+                string pref = "";
+                if (newPrefs.Any())
+                    pref = (from p in newPrefs select p.Name).Aggregate((x, y) => x + ", " + y);
+                ProfilePanel.Controls.OfType<Label>().First(c => c.Name == "Preferences").Text = pref;
             }
         }
 
